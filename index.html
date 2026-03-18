@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Buying Daily Checklist</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #3730a3;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg: #f0f2ff;
+            --card: #ffffff;
+            --text: #1e1b4b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --radius: 16px;
+            --shadow: 0 4px 24px rgba(79,70,229,0.09);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 36px 16px 80px;
+        }
+
+        .app { width: 100%; max-width: 660px; }
+
+        /* ── Brand ── */
+        .brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .brand-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            padding: 7px 16px;
+            border-radius: 99px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+        .brand h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -.5px;
+        }
+        .brand p { font-size: 14px; color: var(--muted); margin-top: 5px; }
+
+        /* ── Card ── */
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 32px;
+            margin-bottom: 14px;
+        }
+
+        /* ── Initial Form ── */
+        .field { margin-bottom: 18px; }
+        .field:last-of-type { margin-bottom: 0; }
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+        .field input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--text);
+            background: #fafbff;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .field input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(99,102,241,.1);
+        }
+        .btn-start {
+            width: 100%;
+            margin-top: 22px;
+            padding: 13px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s, transform .15s, box-shadow .2s;
+        }
+        .btn-start:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(79,70,229,.28);
+        }
+
+        /* ── Progress ── */
+        .progress-wrap { margin-bottom: 22px; }
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .progress-track {
+            height: 5px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 99px;
+            transition: width .4s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ── Checklist item ── */
+        .checklist-item { display: none; }
+        .checklist-item.active { display: block; animation: fadeUp .3s ease-out; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .q-num {
+            display: inline-block;
+            background: #eef2ff;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 99px;
+            margin-bottom: 10px;
+        }
+        .q-text {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 22px;
+            line-height: 1.4;
+        }
+
+        /* ── Yes / No ── */
+        .answer-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        .btn-answer {
+            padding: 13px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: #fafbff;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .btn-answer:hover { border-color: var(--primary-light); color: var(--primary); }
+        .btn-answer.sel-yes { background: #d1fae5; border-color: var(--success); color: #065f46; }
+        .btn-answer.sel-no  { background: #fee2e2; border-color: var(--danger);  color: #991b1b; }
+
+        /* ── Chat-style input box ── */
+        .chat-box-wrap {
+            display: none;
+            margin-bottom: 16px;
+        }
+        .chat-box-wrap.show { display: block; animation: fadeUp .25s ease-out; }
+
+        .chat-box-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .chat-box-label .req { color: var(--danger); }
+
+        .chat-box {
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            background: #fafbff;
+            transition: border-color .2s, box-shadow .2s;
+            overflow: hidden;
+            cursor: text;
+        }
+        .chat-box:focus-within {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(99,102,241,.1);
+        }
+        .chat-box.has-image { border-color: var(--success); }
+        .chat-box.issue-style { background: #fffbeb; border-color: #fcd34d; }
+        .chat-box.issue-style:focus-within { border-color: var(--warning); box-shadow: 0 0 0 3px rgba(245,158,11,.1); }
+
+        /* Image preview inside box */
+        .chat-img-preview {
+            display: none;
+            position: relative;
+            padding: 10px 10px 0;
+        }
+        .chat-img-preview.show { display: block; }
+        .chat-img-preview img {
+            max-width: 100%;
+            max-height: 220px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: block;
+        }
+        .chat-img-remove {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 22px;
+            height: 22px;
+            background: rgba(0,0,0,.55);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .chat-img-remove:hover { background: var(--danger); }
+
+        /* Text area inside box */
+        .chat-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text);
+            resize: none;
+            outline: none;
+            min-height: 90px;
+            line-height: 1.6;
+        }
+        .chat-textarea::placeholder { color: #b0b7c3; }
+
+        /* Toolbar inside box */
+        .chat-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-top: 1px solid var(--border);
+            background: rgba(0,0,0,.02);
+        }
+        .chat-box.issue-style .chat-toolbar { border-top-color: #fde68a; background: rgba(251,191,36,.06); }
+
+        .btn-attach {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            background: var(--card);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .btn-attach:hover { border-color: var(--primary-light); color: var(--primary); background: #f0f4ff; }
+        input[type="file"] { display: none; }
+
+        .paste-hint {
+            font-size: 11px;
+            color: #b0b7c3;
+            margin-left: 4px;
+        }
+        .paste-hint kbd {
+            display: inline-block;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 1px 5px;
+            font-family: monospace;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        /* ── Spend box ── */
+        .spend-box {
+            display: none;
+            background: #eff6ff;
+            border: 2px solid #93c5fd;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+        .spend-box.show { display: block; animation: fadeUp .25s ease-out; }
+        .spend-box label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1d4ed8;
+            letter-spacing: .4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .spend-box input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #93c5fd;
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--text);
+            background: #fff;
+            outline: none;
+            transition: border-color .2s;
+        }
+        .spend-box input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.1); }
+
+        /* ── Item footer ── */
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1px solid #f3f4f6;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .chip-ok   { background: #d1fae5; color: #065f46; }
+        .chip-warn { background: #fef3c7; color: #92400e; }
+
+        /* ── Error banner ── */
+        .error-banner {
+            display: none;
+            background: #fee2e2;
+            border: 2px solid #fca5a5;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #991b1b;
+            margin-bottom: 18px;
+        }
+        .error-banner.show { display: block; animation: fadeUp .2s; }
+
+        /* ── Nav ── */
+        .nav-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 26px;
+            padding-top: 20px;
+            border-top: 1px solid #f3f4f6;
+        }
+        .btn-nav {
+            padding: 11px 26px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .btn-nav:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+        .btn-nav:disabled { opacity: .35; cursor: not-allowed; }
+        .btn-next {
+            padding: 11px 26px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .btn-next:hover:not(:disabled) { background: var(--primary-dark); box-shadow: 0 4px 16px rgba(79,70,229,.28); }
+        .btn-next:disabled { opacity: .35; cursor: not-allowed; }
+        .btn-submit {
+            padding: 11px 26px;
+            background: var(--success);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: none;
+            transition: all .2s;
+        }
+        .btn-submit:hover:not(:disabled) { background: #059669; box-shadow: 0 4px 16px rgba(16,185,129,.28); }
+        .btn-submit:disabled { opacity: .35; cursor: not-allowed; }
+
+        /* ── Success ── */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 16px 0 8px;
+        }
+        .success-screen.show { display: block; animation: fadeUp .3s; }
+        .success-icon-wrap {
+            width: 68px; height: 68px;
+            background: #d1fae5;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 32px;
+        }
+        .success-screen h2 { font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+        .success-screen p  { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+        .btn-reset {
+            padding: 12px 28px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .btn-reset:hover { background: var(--primary-dark); }
+
+        @media (max-width: 480px) {
+            .card { padding: 22px 18px; }
+            .q-text { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+
+    <div class="brand">
+        <div class="brand-pill">📊 Media Buying Ops</div>
+        <h1>Daily System Checklist</h1>
+        <p>Facebook Ads &amp; GoHighLevel Monitor</p>
+    </div>
+
+    <!-- ── Initial Form ── -->
+    <div class="card" id="initialForm">
+        <div class="field">
+            <label>Media Buyer Name</label>
+            <input type="text" id="buyerName" placeholder="Your full name" autocomplete="off">
+        </div>
+        <div class="field">
+            <label>Date</label>
+            <input type="date" id="checkDate">
+        </div>
+        <div class="field">
+            <label>Facebook Ad Account</label>
+            <input type="text" id="adAccount" placeholder="Account name or ID" autocomplete="off">
+        </div>
+        <button class="btn-start" onclick="startChecklist()">Start Checklist →</button>
+    </div>
+
+    <!-- ── Checklist ── -->
+    <div id="checklistWrap" style="display:none">
+
+        <div class="progress-wrap">
+            <div class="progress-meta">
+                <span id="progressLabel">Question 1 of 7</span>
+                <span id="progressPct">14%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width:14%"></div>
+            </div>
+        </div>
+
+        <div class="card" id="mainCard">
+            <div class="error-banner" id="errorBanner"></div>
+
+            <!-- Q1 -->
+            <div class="checklist-item" id="item-0">
+                <div class="q-num">Question 1 of 7</div>
+                <div class="q-text">Is the ad account active?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-0" onclick="selectAnswer(0,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-0"  onclick="selectAnswer(0,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-0">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-0" onclick="focusChatText(0)">
+                        <div class="chat-img-preview" id="imgprev-0">
+                            <img id="previmg-0" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(0,false,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="chattext-0" placeholder="Describe what you verified…" oninput="syncChat(0)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="file-0" accept="image/*" onchange="handleFile(0,false)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-0">
+                    <div class="chat-box-label" style="color:#92400e">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-0" onclick="focusIssueText(0)">
+                        <div class="chat-img-preview" id="issueprev-0">
+                            <img id="issueimg-0" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(0,true,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="issuetext-0" placeholder="What was the issue and how did you resolve it?" oninput="syncIssue(0)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="issuefile-0" accept="image/*" onchange="handleFile(0,true)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q1</span><span id="chip-0"></span></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="checklist-item" id="item-1">
+                <div class="q-num">Question 2 of 7</div>
+                <div class="q-text">Are there any rejected ads?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-1" onclick="selectAnswer(1,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-1"  onclick="selectAnswer(1,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-1">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-1" onclick="focusChatText(1)">
+                        <div class="chat-img-preview" id="imgprev-1">
+                            <img id="previmg-1" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(1,false,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="chattext-1" placeholder="Describe what you verified…" oninput="syncChat(1)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="file-1" accept="image/*" onchange="handleFile(1,false)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-1">
+                    <div class="chat-box-label" style="color:#92400e">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-1" onclick="focusIssueText(1)">
+                        <div class="chat-img-preview" id="issueprev-1">
+                            <img id="issueimg-1" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(1,true,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="issuetext-1" placeholder="Which ads were rejected and how did you resolve it?" oninput="syncIssue(1)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="issuefile-1" accept="image/*" onchange="handleFile(1,true)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q2</span><span id="chip-1"></span></div>
+            </div>
+
+            <!-- Q3 — spend only, no upload -->
+            <div class="checklist-item" id="item-2">
+                <div class="q-num">Question 3 of 7</div>
+                <div class="q-text">Did the account hit its daily budget yesterday?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-2" onclick="selectAnswer(2,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-2"  onclick="selectAnswer(2,'No')">✗ No</button>
+                </div>
+                <div class="spend-box" id="spendBox-2">
+                    <label>Amount Spent <span class="req" style="color:var(--danger)">*</span></label>
+                    <input type="text" id="spendAmount-2" placeholder="e.g. $500.00" oninput="syncSpend()">
+                </div>
+                <div class="item-footer"><span>Q3</span><span id="chip-2"></span></div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="checklist-item" id="item-3">
+                <div class="q-num">Question 4 of 7</div>
+                <div class="q-text">Are leads syncing from Facebook to GHL correctly?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-3" onclick="selectAnswer(3,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-3"  onclick="selectAnswer(3,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-3">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-3" onclick="focusChatText(3)">
+                        <div class="chat-img-preview" id="imgprev-3">
+                            <img id="previmg-3" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(3,false,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="chattext-3" placeholder="Describe what you verified…" oninput="syncChat(3)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="file-3" accept="image/*" onchange="handleFile(3,false)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-3">
+                    <div class="chat-box-label" style="color:#92400e">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-3" onclick="focusIssueText(3)">
+                        <div class="chat-img-preview" id="issueprev-3">
+                            <img id="issueimg-3" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(3,true,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="issuetext-3" placeholder="What was the sync issue and how did you resolve it?" oninput="syncIssue(3)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="issuefile-3" accept="image/*" onchange="handleFile(3,true)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q4</span><span id="chip-3"></span></div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="checklist-item" id="item-4">
+                <div class="q-num">Question 5 of 7</div>
+                <div class="q-text">Are the Lead Connector app permissions still active?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-4" onclick="selectAnswer(4,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-4"  onclick="selectAnswer(4,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-4">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-4" onclick="focusChatText(4)">
+                        <div class="chat-img-preview" id="imgprev-4">
+                            <img id="previmg-4" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(4,false,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="chattext-4" placeholder="Describe what you verified…" oninput="syncChat(4)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="file-4" accept="image/*" onchange="handleFile(4,false)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-4">
+                    <div class="chat-box-label" style="color:#92400e">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-4" onclick="focusIssueText(4)">
+                        <div class="chat-img-preview" id="issueprev-4">
+                            <img id="issueimg-4" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(4,true,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="issuetext-4" placeholder="What permissions were missing and how did you fix it?" oninput="syncIssue(4)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="issuefile-4" accept="image/*" onchange="handleFile(4,true)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q5</span><span id="chip-4"></span></div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="checklist-item" id="item-5">
+                <div class="q-num">Question 6 of 7</div>
+                <div class="q-text">Are Workflows triggering for new leads?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-5" onclick="selectAnswer(5,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-5"  onclick="selectAnswer(5,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-5">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-5" onclick="focusChatText(5)">
+                        <div class="chat-img-preview" id="imgprev-5">
+                            <img id="previmg-5" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(5,false,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="chattext-5" placeholder="Describe what you verified…" oninput="syncChat(5)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="file-5" accept="image/*" onchange="handleFile(5,false)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-5">
+                    <div class="chat-box-label" style="color:#92400e">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-5" onclick="focusIssueText(5)">
+                        <div class="chat-img-preview" id="issueprev-5">
+                            <img id="issueimg-5" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(5,true,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="issuetext-5" placeholder="Which workflows failed and how did you resolve it?" oninput="syncIssue(5)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="issuefile-5" accept="image/*" onchange="handleFile(5,true)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q6</span><span id="chip-5"></span></div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="checklist-item" id="item-6">
+                <div class="q-num">Question 7 of 7</div>
+                <div class="q-text">Are the new leads populating in the pipelines?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-6" onclick="selectAnswer(6,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-6"  onclick="selectAnswer(6,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-6">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-6" onclick="focusChatText(6)">
+                        <div class="chat-img-preview" id="imgprev-6">
+                            <img id="previmg-6" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(6,false,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="chattext-6" placeholder="Describe what you verified…" oninput="syncChat(6)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="file-6" accept="image/*" onchange="handleFile(6,false)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-6">
+                    <div class="chat-box-label" style="color:#92400e">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-6" onclick="focusIssueText(6)">
+                        <div class="chat-img-preview" id="issueprev-6">
+                            <img id="issueimg-6" src="" alt="">
+                            <button class="chat-img-remove" onclick="removeImage(6,true,event)">✕</button>
+                        </div>
+                        <textarea class="chat-textarea" id="issuetext-6" placeholder="What was missing and how did you resolve it?" oninput="syncIssue(6)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">
+                                📎 Attach
+                                <input type="file" id="issuefile-6" accept="image/*" onchange="handleFile(6,true)">
+                            </label>
+                            <span class="paste-hint">or paste with <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q7</span><span id="chip-6"></span></div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-row">
+                <button class="btn-nav"    id="prevBtn"   onclick="goPrev()" disabled>← Prev</button>
+                <button class="btn-next"   id="nextBtn"   onclick="goNext()" disabled>Next →</button>
+                <button class="btn-submit" id="submitBtn" onclick="doSubmit()" disabled>✓ Submit</button>
+            </div>
+        </div>
+
+        <!-- Success card -->
+        <div class="card" id="successCard" style="display:none">
+            <div class="success-screen show">
+                <div class="success-icon-wrap">✅</div>
+                <h2>Checklist Submitted!</h2>
+                <p>Your daily report has been compiled and downloaded as a PDF.</p>
+                <button class="btn-reset" onclick="doReset()">Start New Checklist</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ── Config ────────────────────────────────────────
+const TOTAL = 7;
+// true = "Yes" triggers issue box, false = "No" triggers issue box
+const ISSUE_ON_YES = [false, true, false, false, false, false, false];
+
+// ── State ─────────────────────────────────────────
+const mk = () => ({
+    answer: null,
+    chatText: '',  image: null,
+    hasIssue: false,
+    issueText: '', issueImage: null,
+    spendAmount: ''
+});
+
+let S = {
+    buyer: '', date: '', account: '',
+    cur: 0,
+    items: Array.from({length: TOTAL}, mk)
+};
+
+// ── Init ──────────────────────────────────────────
+document.getElementById('checkDate').valueAsDate = new Date();
+
+// Global paste: Ctrl/Cmd+V
+document.addEventListener('paste', (e) => {
+    if (document.getElementById('checklistWrap').style.display === 'none') return;
+    // If user is pasting into a textarea, skip (let the textarea handle text paste)
+    const active = document.activeElement;
+    if (active && active.tagName === 'TEXTAREA') {
+        // only intercept if it's an image
+        for (let item of e.clipboardData.items) {
+            if (item.type.startsWith('image/')) {
+                e.preventDefault();
+                const blob = item.getAsFile();
+                const isIssue = active.id.startsWith('issuetext-');
+                const idx = parseInt(active.id.split('-').pop());
+                readBlob(blob, idx, isIssue);
+                return;
+            }
+        }
+        return; // let text paste go through normally
+    }
+    // If no textarea focused, paste into current question's main box
+    for (let item of e.clipboardData.items) {
+        if (item.type.startsWith('image/')) {
+            e.preventDefault();
+            readBlob(item.getAsFile(), S.cur, false);
+            return;
+        }
+    }
+});
+
+// ── Start ─────────────────────────────────────────
+function startChecklist() {
+    const b = document.getElementById('buyerName').value.trim();
+    const d = document.getElementById('checkDate').value;
+    const a = document.getElementById('adAccount').value.trim();
+    if (!b || !d || !a) { alert('Please fill in all fields.'); return; }
+    S.buyer = b; S.date = d; S.account = a;
+    document.getElementById('initialForm').style.display = 'none';
+    document.getElementById('checklistWrap').style.display = 'block';
+    showItem(0);
+}
+
+// ── Navigation ────────────────────────────────────
+function showItem(idx) {
+    document.querySelectorAll('.checklist-item').forEach(el => el.classList.remove('active'));
+    document.getElementById(`item-${idx}`).classList.add('active');
+    S.cur = idx;
+
+    const pct = Math.round(((idx + 1) / TOTAL) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `Question ${idx + 1} of ${TOTAL}`;
+    document.getElementById('progressPct').textContent = pct + '%';
+
+    document.getElementById('prevBtn').disabled = idx === 0;
+    document.getElementById('nextBtn').style.display   = idx < 6 ? 'inline-block' : 'none';
+    document.getElementById('submitBtn').style.display = idx === 6 ? 'inline-block' : 'none';
+
+    refreshNav();
+    document.getElementById('errorBanner').classList.remove('show');
+}
+
+function goPrev() { if (S.cur > 0) showItem(S.cur - 1); }
+
+function goNext() {
+    if (!isComplete(S.cur)) { showErr('Please complete all required fields.'); return; }
+    if (S.cur < 6) showItem(S.cur + 1);
+}
+
+function refreshNav() {
+    const ok = isComplete(S.cur);
+    document.getElementById('nextBtn').disabled   = !ok;
+    document.getElementById('submitBtn').disabled = !ok;
+}
+
+function showErr(msg) {
+    const b = document.getElementById('errorBanner');
+    b.textContent = msg; b.classList.add('show');
+    b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── Completion ────────────────────────────────────
+function isComplete(idx) {
+    const it = S.items[idx];
+    if (!it.answer) return false;
+    if (idx === 2) return it.spendAmount.trim() !== '';
+    if (it.hasIssue) {
+        // Issue box must have text or image
+        return !!(it.issueText.trim() || it.issueImage);
+    } else {
+        // Verification box must have text or image
+        return !!(it.chatText.trim() || it.image);
+    }
+}
+
+// ── Answer selection ──────────────────────────────
+function selectAnswer(idx, answer) {
+    const prevHadIssue = S.items[idx].hasIssue;
+    S.items[idx].answer = answer;
+
+    ['yes','no'].forEach(k => document.getElementById(`${k}-${idx}`).classList.remove('sel-yes','sel-no'));
+    document.getElementById(`yes-${idx}`).classList.toggle('sel-yes', answer === 'Yes');
+    document.getElementById(`no-${idx}`).classList.toggle('sel-no',  answer === 'No');
+
+    if (idx === 2) {
+        document.getElementById('spendBox-2').classList.add('show');
+        refreshNav(); updateChip(idx); return;
+    }
+
+    const bad = ISSUE_ON_YES[idx] ? answer === 'Yes' : answer === 'No';
+    S.items[idx].hasIssue = bad;
+
+    const uploadEl = document.getElementById(`upload-${idx}`);
+    const issueEl  = document.getElementById(`issue-${idx}`);
+
+    if (bad) {
+        // Show ONLY the issue box — hide verification and clear its data
+        uploadEl.classList.remove('show');
+        issueEl.classList.add('show');
+        if (!prevHadIssue) clearVerification(idx);
+    } else {
+        // Show ONLY the verification box — hide issue box and clear its data
+        issueEl.classList.remove('show');
+        uploadEl.classList.add('show');
+        if (prevHadIssue) clearIssueData(idx);
+    }
+
+    refreshNav(); updateChip(idx);
+}
+
+function clearVerification(idx) {
+    S.items[idx].chatText = ''; S.items[idx].image = null;
+    const ta = document.getElementById(`chattext-${idx}`); if (ta) ta.value = '';
+    const fi = document.getElementById(`file-${idx}`);     if (fi) fi.value = '';
+    const pi = document.getElementById(`previmg-${idx}`);  if (pi) pi.src = '';
+    document.getElementById(`imgprev-${idx}`)?.classList.remove('show');
+    document.getElementById(`chatbox-${idx}`)?.classList.remove('has-image');
+}
+
+function clearIssueData(idx) {
+    S.items[idx].issueText = ''; S.items[idx].issueImage = null;
+    const ta = document.getElementById(`issuetext-${idx}`); if (ta) ta.value = '';
+    const fi = document.getElementById(`issuefile-${idx}`); if (fi) fi.value = '';
+    const pi = document.getElementById(`issueimg-${idx}`);  if (pi) pi.src = '';
+    document.getElementById(`issueprev-${idx}`)?.classList.remove('show');
+    document.getElementById(`issuebox-${idx}`)?.classList.remove('has-image');
+}
+
+// ── Focus helpers ─────────────────────────────────
+function focusChatText(idx)  { document.getElementById(`chattext-${idx}`).focus(); }
+function focusIssueText(idx) { document.getElementById(`issuetext-${idx}`).focus(); }
+
+// ── File / image handling ─────────────────────────
+function handleFile(idx, isIssue) {
+    const fileEl = document.getElementById(isIssue ? `issuefile-${idx}` : `file-${idx}`);
+    if (!fileEl.files[0]) return;
+    readBlob(fileEl.files[0], idx, isIssue);
+}
+
+function readBlob(blob, idx, isIssue) {
+    const reader = new FileReader();
+    reader.onload = (e) => applyImage(idx, e.target.result, isIssue);
+    reader.readAsDataURL(blob);
+}
+
+function applyImage(idx, data, isIssue) {
+    if (isIssue) {
+        S.items[idx].issueImage = data;
+        const img  = document.getElementById(`issueimg-${idx}`);
+        const prev = document.getElementById(`issueprev-${idx}`);
+        img.src = data; prev.classList.add('show');
+        document.getElementById(`issuebox-${idx}`).classList.add('has-image');
+    } else {
+        S.items[idx].image = data;
+        const img  = document.getElementById(`previmg-${idx}`);
+        const prev = document.getElementById(`imgprev-${idx}`);
+        img.src = data; prev.classList.add('show');
+        document.getElementById(`chatbox-${idx}`).classList.add('has-image');
+    }
+    refreshNav(); updateChip(idx);
+}
+
+function removeImage(idx, isIssue, e) {
+    e.stopPropagation();
+    if (isIssue) {
+        S.items[idx].issueImage = null;
+        document.getElementById(`issueimg-${idx}`).src = '';
+        document.getElementById(`issueprev-${idx}`).classList.remove('show');
+        document.getElementById(`issuebox-${idx}`).classList.remove('has-image');
+        document.getElementById(`issuefile-${idx}`).value = '';
+    } else {
+        S.items[idx].image = null;
+        document.getElementById(`previmg-${idx}`).src = '';
+        document.getElementById(`imgprev-${idx}`).classList.remove('show');
+        document.getElementById(`chatbox-${idx}`).classList.remove('has-image');
+        document.getElementById(`file-${idx}`).value = '';
+    }
+    refreshNav(); updateChip(idx);
+}
+
+// ── Text sync ─────────────────────────────────────
+function syncChat(idx) {
+    S.items[idx].chatText = document.getElementById(`chattext-${idx}`).value;
+    refreshNav(); updateChip(idx);
+}
+function syncIssue(idx) {
+    S.items[idx].issueText = document.getElementById(`issuetext-${idx}`).value;
+    refreshNav(); updateChip(idx);
+}
+function syncSpend() {
+    S.items[2].spendAmount = document.getElementById('spendAmount-2').value;
+    refreshNav(); updateChip(2);
+}
+
+// ── Status chip ───────────────────────────────────
+function updateChip(idx) {
+    const el = document.getElementById(`chip-${idx}`);
+    if (!el) return;
+    if (isComplete(idx))
+        el.innerHTML = `<span class="status-chip chip-ok">✓ Complete</span>`;
+    else if (S.items[idx].answer)
+        el.innerHTML = `<span class="status-chip chip-warn">⚠ Incomplete</span>`;
+    else
+        el.innerHTML = '';
+}
+
+// ── Submit ────────────────────────────────────────
+function doSubmit() {
+    const errs = [];
+    for (let i = 0; i < TOTAL; i++) if (!isComplete(i)) errs.push(`Q${i+1} is incomplete.`);
+    if (errs.length) { showErr(errs.join(' ')); return; }
+    generatePDF();
+    document.getElementById('mainCard').style.display = 'none';
+    document.getElementById('successCard').style.display = 'block';
+}
+
+// ── PDF ───────────────────────────────────────────
+function fmtDate(str) {
+    return new Date(str + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+function esc(t) {
+    return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+const QUESTIONS = [
+    'Is the ad account active?',
+    'Are there any rejected ads?',
+    'Did the account hit its daily budget yesterday?',
+    'Are leads syncing from Facebook to GHL correctly?',
+    'Are the Lead Connector app permissions still active?',
+    'Are Workflows triggering for new leads?',
+    'Are the new leads populating in the pipelines?'
+];
+
+function generatePDF() {
+    let rows = '';
+    S.items.forEach((it, i) => {
+        const good = (i === 1) ? it.answer === 'No' : it.answer === 'Yes';
+        const ac = good ? '#10b981' : '#ef4444';
+        rows += `
+        <div style="margin-bottom:20px;padding:16px;border-left:4px solid ${ac};background:#fafafa;border-radius:8px;">
+            <p style="font-size:11px;font-weight:800;color:#6366f1;margin-bottom:4px;letter-spacing:.5px;">Q${i+1}</p>
+            <p style="font-size:14px;font-weight:700;color:#1e1b4b;margin-bottom:8px;">${esc(QUESTIONS[i])}</p>
+            <p style="font-size:13px;margin-bottom:6px;">
+                <strong>Answer:</strong>
+                <span style="color:${ac};font-weight:700;">${it.answer}</span>
+                ${it.hasIssue ? '<span style="color:#f59e0b;font-weight:700;margin-left:8px;">⚠ Issue Reported</span>' : ''}
+            </p>`;
+
+        if (i === 2) {
+            rows += `<p style="font-size:13px;"><strong>Amount Spent:</strong> ${esc(it.spendAmount)}</p>`;
+        } else {
+            if (it.chatText) rows += `<p style="font-size:13px;margin-bottom:6px;"><strong>Notes:</strong> ${esc(it.chatText)}</p>`;
+            if (it.image)    rows += `<div style="margin-top:8px;"><p style="font-size:11px;font-weight:700;color:#6b7280;margin-bottom:4px;">SCREENSHOT</p><img src="${it.image}" style="max-width:100%;border-radius:6px;border:1px solid #e5e7eb;"></div>`;
+            if (it.hasIssue) {
+                rows += `<div style="margin-top:12px;background:#fffbeb;border:1px solid #fbbf24;border-radius:6px;padding:12px;">
+                    <p style="font-size:11px;font-weight:800;color:#92400e;margin-bottom:6px;letter-spacing:.5px;">ISSUE &amp; RESOLUTION</p>
+                    ${it.issueText ? `<p style="font-size:13px;white-space:pre-wrap;margin-bottom:8px;">${esc(it.issueText)}</p>` : ''}
+                    ${it.issueImage ? `<img src="${it.issueImage}" style="max-width:100%;border-radius:6px;border:1px solid #fbbf24;">` : ''}
+                </div>`;
+            }
+        }
+        rows += `</div>`;
+    });
+
+    const el = document.createElement('div');
+    el.style.cssText = 'padding:36px;font-family:Arial,sans-serif;color:#1e1b4b;';
+    el.innerHTML = `
+        <div style="border-bottom:3px solid #4f46e5;padding-bottom:18px;margin-bottom:22px;">
+            <h1 style="font-size:22px;font-weight:800;color:#4f46e5;margin-bottom:4px;">Daily Media Buying Checklist</h1>
+            <p style="font-size:13px;color:#6b7280;">Facebook Ads &amp; GoHighLevel System Monitor</p>
+        </div>
+        <table style="width:100%;font-size:13px;margin-bottom:26px;border-collapse:collapse;">
+            <tr>
+                <td style="padding:4px 12px 4px 0;color:#6b7280;font-weight:700;width:33%">MEDIA BUYER</td>
+                <td style="padding:4px 12px 4px 0;color:#6b7280;font-weight:700;width:33%">DATE</td>
+                <td style="padding:4px 0;color:#6b7280;font-weight:700;">AD ACCOUNT</td>
+            </tr>
+            <tr>
+                <td style="padding:2px 12px 2px 0;font-weight:800;font-size:14px;">${esc(S.buyer)}</td>
+                <td style="padding:2px 12px 2px 0;font-weight:800;font-size:14px;">${fmtDate(S.date)}</td>
+                <td style="padding:2px 0;font-weight:800;font-size:14px;">${esc(S.account)}</td>
+            </tr>
+        </table>
+        <h2 style="font-size:14px;font-weight:800;color:#4f46e5;margin-bottom:14px;border-bottom:2px solid #e5e7eb;padding-bottom:8px;letter-spacing:.5px;">CHECKLIST RESULTS</h2>
+        ${rows}
+        <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:24px;">Generated ${new Date().toLocaleString()}</p>
+    `;
+
+    html2pdf().set({
+        margin: 10,
+        filename: `${S.account} ${fmtDate(S.date)}.pdf`,
+        image: { type: 'jpeg', quality: 0.97 },
+        html2canvas: { scale: 2 },
+        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+    }).from(el).save();
+}
+
+// ── Reset ─────────────────────────────────────────
+function doReset() {
+    S = { buyer:'', date:'', account:'', cur:0, items: Array.from({length:TOTAL}, mk) };
+
+    ['buyerName','adAccount'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('checkDate').valueAsDate = new Date();
+
+    for (let i = 0; i < TOTAL; i++) {
+        ['yes','no'].forEach(k => document.getElementById(`${k}-${i}`)?.classList.remove('sel-yes','sel-no'));
+        const chip = document.getElementById(`chip-${i}`);
+        if (chip) chip.innerHTML = '';
+
+        if (i === 2) {
+            document.getElementById('spendBox-2').classList.remove('show');
+            document.getElementById('spendAmount-2').value = '';
+        } else {
+            ['upload','issue'].forEach(type => document.getElementById(`${type}-${i}`)?.classList.remove('show'));
+            [`chattext-${i}`,`issuetext-${i}`].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            [`imgprev-${i}`,`issueprev-${i}`].forEach(id => document.getElementById(id)?.classList.remove('show'));
+            [`previmg-${i}`,`issueimg-${i}`].forEach(id => { const el = document.getElementById(id); if (el) el.src = ''; });
+            [`chatbox-${i}`,`issuebox-${i}`].forEach(id => document.getElementById(id)?.classList.remove('has-image'));
+            [`file-${i}`,`issuefile-${i}`].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        }
+    }
+
+    document.getElementById('successCard').style.display = 'none';
+    document.getElementById('mainCard').style.display = 'block';
+    document.getElementById('checklistWrap').style.display = 'none';
+    document.getElementById('initialForm').style.display = 'block';
+}
+</script>
+</body>
+</html>
