@@ -991,7 +991,7 @@ function showItem(idx) {
 function goPrev() { if (S.cur > 0) showItem(S.cur - 1); }
 function goNext() {
     if (!isComplete(S.cur)) { showErr('Please complete all required fields.'); return; }
-    if (S.cur < 6) showItem(S.cur + 1);
+    if (S.cur < TOTAL - 1) showItem(S.cur + 1);
 }
 function refreshNav() {
     const ok = isComplete(S.cur);
