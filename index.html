@@ -951,9 +951,16 @@ function selectAnswer(idx, answer) {
     const prevHadIssue = S.items[idx].hasIssue;
     S.items[idx].answer = answer;
     ['yes','no'].forEach(k => document.getElementById(`${k}-${idx}`).classList.remove('sel-yes','sel-no'));
-    document.getElementById(`yes-${idx}`).classList.toggle('sel-yes', answer === 'Yes');
-    document.getElementById(`no-${idx}`).classList.toggle('sel-no',  answer === 'No');
-    if (idx === 2) { document.getElementById('spendBox-2').classList.add('show'); refreshNav(); updateChip(idx); return; }
+    if (idx === 2) {
+        // Q3: neutral — just highlight selected in green
+        document.getElementById(`yes-${idx}`).classList.toggle('sel-yes', answer === 'Yes');
+        document.getElementById(`no-${idx}`).classList.toggle('sel-yes', answer === 'No');
+        document.getElementById('spendBox-2').classList.add('show'); refreshNav(); updateChip(idx); return;
+    }
+    // For other questions: bad answer = red (sel-no), good answer = green (sel-yes)
+    const yesIsBad = ISSUE_ON_YES[idx];
+    document.getElementById(`yes-${idx}`).classList.toggle(yesIsBad ? 'sel-no' : 'sel-yes', answer === 'Yes');
+    document.getElementById(`no-${idx}`).classList.toggle(yesIsBad ? 'sel-yes' : 'sel-no',  answer === 'No');
     const bad = ISSUE_ON_YES[idx] ? answer === 'Yes' : answer === 'No';
     S.items[idx].hasIssue = bad;
     const uploadEl = document.getElementById(`upload-${idx}`);
