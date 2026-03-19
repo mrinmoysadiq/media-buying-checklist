@@ -590,7 +590,7 @@
     <div id="checklistWrap" style="display:none">
         <div class="progress-wrap">
             <div class="progress-meta">
-                <span id="progressLabel">Question 1 of 7</span>
+                <span id="progressLabel">Question 1 of 9</span>
                 <span id="progressPct">14%</span>
             </div>
             <div class="progress-track">
@@ -603,7 +603,7 @@
 
             <!-- Q1 -->
             <div class="checklist-item" id="item-0">
-                <div class="q-num">Question 1 of 7</div>
+                <div class="q-num">Question 1 of 9</div>
                 <div class="q-text">Is the ad account active?</div>
                 <div class="answer-group">
                     <button class="btn-answer" id="yes-0" onclick="selectAnswer(0,'Yes')">✓ Yes</button>
@@ -636,7 +636,7 @@
 
             <!-- Q2 -->
             <div class="checklist-item" id="item-1">
-                <div class="q-num">Question 2 of 7</div>
+                <div class="q-num">Question 2 of 9</div>
                 <div class="q-text">Are there any rejected ads?</div>
                 <div class="answer-group">
                     <button class="btn-answer" id="yes-1" onclick="selectAnswer(1,'Yes')">✓ Yes</button>
@@ -669,7 +669,7 @@
 
             <!-- Q3 -->
             <div class="checklist-item" id="item-2">
-                <div class="q-num">Question 3 of 7</div>
+                <div class="q-num">Question 3 of 9</div>
                 <div class="q-text">Did the account hit its daily budget yesterday?</div>
                 <div class="answer-group">
                     <button class="btn-answer" id="yes-2" onclick="selectAnswer(2,'Yes')">✓ Yes</button>
@@ -684,7 +684,7 @@
 
             <!-- Q4 -->
             <div class="checklist-item" id="item-3">
-                <div class="q-num">Question 4 of 7</div>
+                <div class="q-num">Question 4 of 9</div>
                 <div class="q-text">Are leads syncing from Facebook to GHL correctly?</div>
                 <div class="answer-group">
                     <button class="btn-answer" id="yes-3" onclick="selectAnswer(3,'Yes')">✓ Yes</button>
@@ -717,7 +717,7 @@
 
             <!-- Q5 -->
             <div class="checklist-item" id="item-4">
-                <div class="q-num">Question 5 of 7</div>
+                <div class="q-num">Question 5 of 9</div>
                 <div class="q-text">Are the Lead Connector app permissions still active?</div>
                 <div class="answer-group">
                     <button class="btn-answer" id="yes-4" onclick="selectAnswer(4,'Yes')">✓ Yes</button>
@@ -750,7 +750,7 @@
 
             <!-- Q6 -->
             <div class="checklist-item" id="item-5">
-                <div class="q-num">Question 6 of 7</div>
+                <div class="q-num">Question 6 of 9</div>
                 <div class="q-text">Are Workflows triggering for new leads?</div>
                 <div class="answer-group">
                     <button class="btn-answer" id="yes-5" onclick="selectAnswer(5,'Yes')">✓ Yes</button>
@@ -783,7 +783,7 @@
 
             <!-- Q7 -->
             <div class="checklist-item" id="item-6">
-                <div class="q-num">Question 7 of 7</div>
+                <div class="q-num">Question 7 of 9</div>
                 <div class="q-text">Are the new leads populating in the pipelines?</div>
                 <div class="answer-group">
                     <button class="btn-answer" id="yes-6" onclick="selectAnswer(6,'Yes')">✓ Yes</button>
@@ -812,6 +812,73 @@
                     </div>
                 </div>
                 <div class="item-footer"><span>Q7</span><span id="chip-6"></span></div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="checklist-item" id="item-7">
+                <div class="q-num">Question 8 of 9</div>
+                <div class="q-text">Are all ad destinations correct and functional?</div>
+                <div class="q-sub">Landing pages should be live and matched to the right ad sets and ads.</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-7" onclick="selectAnswer(7,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-7"  onclick="selectAnswer(7,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-7">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-7" onclick="focusChatText(7)">
+                        <div class="chat-img-preview" id="imgprev-7"><img id="previmg-7" src="" alt=""><button class="chat-img-remove" onclick="removeImage(7,false,event)">✕</button></div>
+                        <textarea class="chat-textarea" id="chattext-7" placeholder="Describe what you verified…" oninput="syncChat(7)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">📎 Attach<input type="file" id="file-7" accept="image/*" onchange="handleFile(7,false)"></label>
+                            <span class="paste-hint">or <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-7">
+                    <div class="chat-box-label" style="color:#fbbf24">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-7" onclick="focusIssueText(7)">
+                        <div class="chat-img-preview" id="issueprev-7"><img id="issueimg-7" src="" alt=""><button class="chat-img-remove" onclick="removeImage(7,true,event)">✕</button></div>
+                        <textarea class="chat-textarea" id="issuetext-7" placeholder="Which destination was wrong or broken and how did you fix it?" oninput="syncIssue(7)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">📎 Attach<input type="file" id="issuefile-7" accept="image/*" onchange="handleFile(7,true)"></label>
+                            <span class="paste-hint">or <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q8</span><span id="chip-7"></span></div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="checklist-item" id="item-8">
+                <div class="q-num">Question 9 of 9</div>
+                <div class="q-text">Are the correct Facebook Pages and Instagram accounts linked to the campaigns?</div>
+                <div class="answer-group">
+                    <button class="btn-answer" id="yes-8" onclick="selectAnswer(8,'Yes')">✓ Yes</button>
+                    <button class="btn-answer" id="no-8"  onclick="selectAnswer(8,'No')">✗ No</button>
+                </div>
+                <div class="chat-box-wrap" id="upload-8">
+                    <div class="chat-box-label">Verification <span class="req">*</span></div>
+                    <div class="chat-box" id="chatbox-8" onclick="focusChatText(8)">
+                        <div class="chat-img-preview" id="imgprev-8"><img id="previmg-8" src="" alt=""><button class="chat-img-remove" onclick="removeImage(8,false,event)">✕</button></div>
+                        <textarea class="chat-textarea" id="chattext-8" placeholder="Describe what you verified…" oninput="syncChat(8)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">📎 Attach<input type="file" id="file-8" accept="image/*" onchange="handleFile(8,false)"></label>
+                            <span class="paste-hint">or <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-box-wrap" id="issue-8">
+                    <div class="chat-box-label" style="color:#fbbf24">⚠️ Issue &amp; Resolution <span class="req">*</span></div>
+                    <div class="chat-box issue-style" id="issuebox-8" onclick="focusIssueText(8)">
+                        <div class="chat-img-preview" id="issueprev-8"><img id="issueimg-8" src="" alt=""><button class="chat-img-remove" onclick="removeImage(8,true,event)">✕</button></div>
+                        <textarea class="chat-textarea" id="issuetext-8" placeholder="Which page or IG account was wrong and how did you correct it?" oninput="syncIssue(8)"></textarea>
+                        <div class="chat-toolbar">
+                            <label class="btn-attach">📎 Attach<input type="file" id="issuefile-8" accept="image/*" onchange="handleFile(8,true)"></label>
+                            <span class="paste-hint">or <kbd>⌘V</kbd> / <kbd>Ctrl+V</kbd></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer"><span>Q9</span><span id="chip-8"></span></div>
             </div>
 
             <!-- Navigation -->
@@ -855,8 +922,8 @@
 
 <script>
 // ── Config ────────────────────────────────────────
-const TOTAL = 7;
-const ISSUE_ON_YES = [false, true, false, false, false, false, false];
+const TOTAL = 9;
+const ISSUE_ON_YES = [false, true, false, false, false, false, false, false, false];
 
 // ── State ─────────────────────────────────────────
 const mk = () => ({
@@ -915,8 +982,8 @@ function showItem(idx) {
     document.getElementById('progressLabel').textContent = `Question ${idx + 1} of ${TOTAL}`;
     document.getElementById('progressPct').textContent = pct + '%';
     document.getElementById('prevBtn').disabled = idx === 0;
-    document.getElementById('nextBtn').style.display   = idx < 6 ? 'inline-block' : 'none';
-    document.getElementById('submitBtn').style.display = idx === 6 ? 'inline-block' : 'none';
+    document.getElementById('nextBtn').style.display   = idx < TOTAL - 1 ? 'inline-block' : 'none';
+    document.getElementById('submitBtn').style.display = idx === TOTAL - 1 ? 'inline-block' : 'none';
     refreshNav();
     document.getElementById('errorBanner').classList.remove('show');
 }
