@@ -691,6 +691,277 @@
     .footer-legal a { font-size: 13px; color: var(--muted-d); text-decoration: none; transition: color .2s; }
     .footer-legal a:hover { color: var(--muted); }
 
+    /* ─────────────── INTRO / ABOUT ─────────────── */
+    .intro-section { background: var(--bg); }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 0;
+    }
+    .intro-visual {
+      position: relative;
+    }
+    .intro-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(139,92,246,.2), transparent 70%);
+      border-radius: 50%;
+    }
+    .intro-avatar {
+      width: 72px; height: 72px;
+      background: var(--grad);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 20px;
+      box-shadow: 0 0 30px rgba(109,40,217,.4);
+    }
+    .intro-card-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .intro-card-title {
+      font-size: 13px;
+      color: var(--primary-l);
+      font-weight: 600;
+      letter-spacing: .5px;
+      margin-bottom: 20px;
+    }
+    .intro-card-bio {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .intro-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .intro-badge {
+      background: rgba(139,92,246,.1);
+      border: 1px solid rgba(139,92,246,.2);
+      color: var(--primary-l);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      padding: 5px 12px;
+      border-radius: 99px;
+    }
+    .intro-float-stat {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(12px);
+    }
+    .intro-float-stat.top-right {
+      top: -20px; right: -20px;
+    }
+    .intro-float-stat.bottom-left {
+      bottom: -20px; left: -20px;
+    }
+    .float-stat-num {
+      font-size: 22px;
+      font-weight: 900;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .float-stat-label {
+      font-size: 11px;
+      color: var(--muted-d);
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .intro-content { }
+    .intro-content .sec-sub { max-width: 100%; margin-bottom: 28px; }
+    .intro-points {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .intro-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .intro-point-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(59,130,246,.15));
+      border: 1px solid rgba(139,92,246,.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .intro-point-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .intro-point-text span {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─────────────── COMPARISON ─────────────── */
+    .compare-section { background: var(--surface); }
+    .compare-table-wrap {
+      margin-top: 64px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+    .compare-header {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .compare-header-cell {
+      padding: 20px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted-d);
+      letter-spacing: .5px;
+    }
+    .compare-header-cell.highlight {
+      background: linear-gradient(180deg, rgba(109,40,217,.15), rgba(59,130,246,.1));
+      color: var(--primary-l);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      border-left: 1px solid rgba(139,92,246,.25);
+      border-right: 1px solid rgba(139,92,246,.25);
+    }
+    .compare-header-cell.highlight .best-badge {
+      background: var(--grad);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--card-border);
+      transition: background .2s;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row:hover { background: rgba(255,255,255,.02); }
+    .compare-cell {
+      padding: 16px 24px;
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .compare-cell.feature {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .compare-cell.highlight-col {
+      background: rgba(109,40,217,.06);
+      border-left: 1px solid rgba(139,92,246,.15);
+      border-right: 1px solid rgba(139,92,246,.15);
+      justify-content: center;
+    }
+    .compare-cell.last-highlight {
+      border-radius: 0 0 0 0;
+    }
+    .c-yes {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: rgba(16,185,129,.15);
+      border: 1px solid rgba(16,185,129,.3);
+      border-radius: 50%;
+      color: #10b981;
+      font-size: 11px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .c-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: rgba(239,68,68,.1);
+      border: 1px solid rgba(239,68,68,.2);
+      border-radius: 50%;
+      color: #ef4444;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .c-maybe {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: rgba(245,158,11,.1);
+      border: 1px solid rgba(245,158,11,.2);
+      border-radius: 50%;
+      color: #f59e0b;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .intro-grid { grid-template-columns: 1fr; gap: 48px; }
+      .intro-visual { order: -1; }
+      .intro-float-stat.top-right { top: -10px; right: 10px; }
+      .intro-float-stat.bottom-left { display: none; }
+      .compare-header { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+      .compare-row { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+      .compare-cell { padding: 14px 12px; font-size: 13px; }
+      .compare-header-cell { padding: 16px 12px; font-size: 12px; }
+    }
+    @media (max-width: 600px) {
+      .compare-table-wrap { overflow-x: auto; }
+      .compare-header, .compare-row { min-width: 520px; }
+    }
+
     /* ─────────────── SCROLL REVEAL ─────────────── */
     .reveal {
       opacity: 0;
@@ -846,6 +1117,75 @@
   </div>
 </section>
 
+<!-- ─── INTRODUCTION / ABOUT ─── -->
+<section class="intro-section" id="about">
+  <div class="container">
+    <div class="intro-grid">
+
+      <div class="intro-content reveal">
+        <div class="sec-tag">Who We Are</div>
+        <h2 class="sec-title">Built by a Media Buyer Who's Been in the Trenches</h2>
+        <p class="sec-sub">Infinix Online was founded by Mrinmoy — a specialist media buyer and paid ads expert with hands-on experience scaling service businesses through smart advertising and AI-driven automation.</p>
+
+        <div class="intro-points">
+          <div class="intro-point">
+            <div class="intro-point-icon">🎯</div>
+            <div class="intro-point-text">
+              <strong>Specialist, Not a Generalist</strong>
+              <span>We focus exclusively on service businesses — HVAC, roofing, cleaning, painting, and more. Deep focus means better results.</span>
+            </div>
+          </div>
+          <div class="intro-point">
+            <div class="intro-point-icon">🤖</div>
+            <div class="intro-point-text">
+              <strong>AI-First Approach</strong>
+              <span>We don't just run ads — we build the AI systems that ensure every lead gets followed up instantly, so no opportunity slips by.</span>
+            </div>
+          </div>
+          <div class="intro-point">
+            <div class="intro-point-icon">📈</div>
+            <div class="intro-point-text">
+              <strong>Results You Can Measure</strong>
+              <span>We track everything that matters — booked appointments, cost per lead, and ROI. No vanity metrics, no fluff.</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn-primary">Work With Us →</a>
+      </div>
+
+      <div class="intro-visual reveal">
+        <div class="intro-float-stat top-right">
+          <div>
+            <div class="float-stat-num">5★</div>
+            <div class="float-stat-label">Client Rating</div>
+          </div>
+        </div>
+        <div class="intro-card">
+          <div class="intro-avatar">M</div>
+          <div class="intro-card-name">Mrinmoy</div>
+          <div class="intro-card-title">Founder & Lead Media Buyer</div>
+          <p class="intro-card-bio">A seasoned paid ads specialist with a track record of helping service businesses generate high-quality leads through Google and Meta advertising — combined with AI automation that converts those leads into booked appointments around the clock.</p>
+          <div class="intro-badges">
+            <span class="intro-badge">Google Ads</span>
+            <span class="intro-badge">Meta Ads</span>
+            <span class="intro-badge">AI Automation</span>
+            <span class="intro-badge">Lead Generation</span>
+            <span class="intro-badge">Service Businesses</span>
+          </div>
+        </div>
+        <div class="intro-float-stat bottom-left">
+          <div>
+            <div class="float-stat-num">7–14d</div>
+            <div class="float-stat-label">Avg. time to first results</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ─── SOLUTION / SERVICES ─── -->
 <section id="services">
   <div class="container">
@@ -938,6 +1278,72 @@
       <div class="reveal">
         <div class="stat-num">100%</div>
         <div class="stat-label">Transparent reporting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPARISON ─── -->
+<section class="compare-section" id="compare">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width:640px; margin:0 auto 0;">
+      <div class="sec-tag" style="justify-content:center;">Why Infinix Online</div>
+      <h2 class="sec-title">How We Stack Up</h2>
+      <p class="sec-sub" style="margin:0 auto;">See why service businesses choose us over traditional agencies and in-house teams.</p>
+    </div>
+
+    <div class="compare-table-wrap reveal">
+      <div class="compare-header">
+        <div class="compare-header-cell">Feature</div>
+        <div class="compare-header-cell">In-House Team</div>
+        <div class="compare-header-cell">Traditional Agency</div>
+        <div class="compare-header-cell highlight">
+          <span>Infinix Online</span>
+          <span class="best-badge">Best Choice</span>
+        </div>
+      </div>
+
+      <div class="compare-row">
+        <div class="compare-cell feature">24/7 AI Lead Follow-Up</div>
+        <div class="compare-cell"><span class="c-no">✕</span> Never</div>
+        <div class="compare-cell"><span class="c-no">✕</span> Never</div>
+        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Always on</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell feature">Results Within 7–14 Days</div>
+        <div class="compare-cell"><span class="c-no">✕</span> Months to ramp</div>
+        <div class="compare-cell"><span class="c-maybe">~</span> 60–90 days</div>
+        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> 7–14 days</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell feature">No Extra Staff Required</div>
+        <div class="compare-cell"><span class="c-no">✕</span> Multiple hires</div>
+        <div class="compare-cell"><span class="c-maybe">~</span> Coordinator needed</div>
+        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Zero</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell feature">Precision Ad Targeting</div>
+        <div class="compare-cell"><span class="c-maybe">~</span> Limited expertise</div>
+        <div class="compare-cell"><span class="c-maybe">~</span> Generic approach</div>
+        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Service business specialist</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell feature">Automatic Appointment Booking</div>
+        <div class="compare-cell"><span class="c-no">✕</span> Manual only</div>
+        <div class="compare-cell"><span class="c-no">✕</span> Not included</div>
+        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Fully automated</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell feature">Full Transparent Reporting</div>
+        <div class="compare-cell"><span class="c-maybe">~</span> Inconsistent</div>
+        <div class="compare-cell"><span class="c-maybe">~</span> Vanity metrics</div>
+        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Real ROI tracking</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell feature">Predictable Monthly Cost</div>
+        <div class="compare-cell"><span class="c-no">✕</span> High &amp; variable</div>
+        <div class="compare-cell"><span class="c-maybe">~</span> Retainer + extras</div>
+        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Clear &amp; fixed</div>
       </div>
     </div>
   </div>
