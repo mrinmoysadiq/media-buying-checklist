@@ -721,17 +721,14 @@
       border-radius: 50%;
     }
     .intro-avatar {
-      width: 72px; height: 72px;
-      background: var(--grad);
+      width: 88px; height: 88px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: 900;
-      color: #fff;
       margin-bottom: 20px;
-      box-shadow: 0 0 30px rgba(109,40,217,.4);
+      object-fit: cover;
+      border: 3px solid transparent;
+      background: var(--grad) border-box;
+      outline: 3px solid transparent;
+      box-shadow: 0 0 0 3px rgba(139,92,246,.4), 0 8px 32px rgba(0,0,0,.5);
     }
     .intro-card-name {
       font-size: 20px;
@@ -1162,7 +1159,7 @@
           </div>
         </div>
         <div class="intro-card">
-          <div class="intro-avatar">M</div>
+          <img src="mrinmoy.jpg" alt="Mrinmoy — Founder, Infinix Online" class="intro-avatar">
           <div class="intro-card-name">Mrinmoy</div>
           <div class="intro-card-title">Founder & Lead Media Buyer</div>
           <p class="intro-card-bio">A seasoned paid ads specialist with a track record of helping service businesses generate high-quality leads through Google and Meta advertising — combined with AI automation that converts those leads into booked appointments around the clock.</p>
