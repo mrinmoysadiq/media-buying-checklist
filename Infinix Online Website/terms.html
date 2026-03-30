@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Infinix Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #07070f; --surface: #0d0d1e;
+      --card-bg: rgba(255,255,255,.035); --card-border: rgba(255,255,255,.07);
+      --primary: #8b5cf6; --primary-l: #a78bfa; --primary-d: #6d28d9;
+      --blue: #3b82f6; --blue-l: #60a5fa;
+      --text: #eeeeff; --muted: #94a3b8; --muted-d: #475569;
+      --grad: linear-gradient(135deg,#6d28d9,#3b82f6);
+      --grad-text: linear-gradient(135deg,#a78bfa,#60a5fa);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+    /* NAV */
+    nav {
+      position: fixed; inset: 0 0 auto; z-index: 200;
+      padding: 18px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(7,7,15,.88); backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+    .logo-icon { flex-shrink: 0; filter: drop-shadow(0 0 10px rgba(139,92,246,.5)); }
+    .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
+    .logo-name { font-size: 17px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: #fff; }
+    .logo-name em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo-sub { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted-d); }
+    .nav-home { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-home:hover { color: #fff; }
+
+    /* PAGE */
+    .page-wrap { max-width: 780px; margin: 0 auto; padding: 140px 24px 100px; }
+    .page-header { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--card-border); }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--primary-l); margin-bottom: 18px;
+    }
+    .page-tag::before { content: ''; width: 22px; height: 2px; background: var(--primary-l); border-radius: 99px; }
+    .page-title {
+      font-size: clamp(32px, 5vw, 52px); font-weight: 900; letter-spacing: -1.5px;
+      line-height: 1.08; color: #fff; margin-bottom: 18px;
+    }
+    .page-meta { font-size: 13px; color: var(--muted-d); }
+    .page-meta span { color: var(--muted); }
+
+    /* LEGAL CONTENT */
+    .legal-body { display: flex; flex-direction: column; gap: 40px; }
+    .legal-section {}
+    .legal-section h2 {
+      font-size: 18px; font-weight: 700; color: #fff;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .legal-section p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 14px; }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .legal-section ul li {
+      font-size: 15px; color: var(--muted); line-height: 1.75;
+      padding-left: 18px; position: relative;
+    }
+    .legal-section ul li::before {
+      content: '–'; position: absolute; left: 0; color: var(--primary-l);
+    }
+
+    /* FOOTER */
+    .page-footer {
+      margin-top: 80px; padding-top: 36px;
+      border-top: 1px solid var(--card-border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+    }
+    .page-footer p { font-size: 13px; color: var(--muted-d); }
+    .page-footer-links { display: flex; gap: 20px; }
+    .page-footer-links a { font-size: 13px; color: var(--muted-d); text-decoration: none; transition: color .2s; }
+    .page-footer-links a:hover { color: var(--muted); }
+    @media (max-width: 600px) { nav { padding: 16px 20px; } .page-wrap { padding: 110px 20px 80px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo-wrap">
+    <svg class="logo-icon" width="38" height="22" viewBox="-26 -14 52 28" fill="none">
+      <defs>
+        <linearGradient id="lg" x1="-26" y1="-14" x2="26" y2="14" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#a78bfa"/><stop offset="1" stop-color="#60a5fa"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,-3 C2,-12 20,-13 22,0 C20,13 2,12 0,3 C-2,-12 -20,-13 -22,0 C-20,13 -2,12 0,3 C-2,-12 -20,-13 -22,0"
+            stroke="url(#lg)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-name">INFIN<em>IX</em></span>
+      <span class="logo-sub">ONLINE</span>
+    </div>
+  </a>
+  <a href="/" class="nav-home">← Back to Home</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="page-tag">Legal</div>
+    <h1 class="page-title">Terms of Service</h1>
+    <p class="page-meta">Last updated: <span>12 March 2025</span> &nbsp;·&nbsp; Infinix Online d/b/a "Infinix Online"</p>
+  </div>
+
+  <div class="legal-body">
+
+    <div class="legal-section">
+      <h2>1. Agreement to Terms</h2>
+      <p>By accessing or using the website at infinixonline.com (the "Site") or any services offered by Infinix Online, you agree to be bound by these Terms of Service, our Privacy Policy, and any additional terms and conditions that may apply to specific sections of the Site or to products and services available through it.</p>
+      <p>If you do not agree to these Terms, please do not use our Site or services. We may update these Terms at any time by posting revised terms on the Site. Your continued use of the Site after such changes constitutes your acceptance of the modified Terms.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>2. About Our Services</h2>
+      <p>Infinix Online provides digital marketing services including, but not limited to, paid advertising management (Google Ads, Meta Ads), AI-powered lead automation, appointment booking systems, and related consulting services for service businesses.</p>
+      <p>We reserve the right to modify, suspend, or discontinue any service at any time with or without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuation of services.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>3. Use of the Site</h2>
+      <p>You agree to use the Site only for lawful purposes and in a manner that does not infringe the rights of others. You must not:</p>
+      <ul>
+        <li>Use the Site in any way that breaches applicable local, national, or international laws or regulations</li>
+        <li>Transmit unsolicited or unauthorised advertising or promotional material</li>
+        <li>Knowingly transmit any data or material that contains viruses, Trojan horses, or other harmful software</li>
+        <li>Attempt to gain unauthorised access to any part of the Site or its related systems</li>
+        <li>Reproduce, duplicate, copy, or resell any part of the Site without our express written permission</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>4. Intellectual Property</h2>
+      <p>The Site and its original content, features, and functionality are owned by Infinix Online and are protected by applicable copyright, trademark, and other intellectual property laws. You may not use, reproduce, or distribute our content without prior written permission.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>5. Third-Party Products and Services</h2>
+      <p>Certain sections of the Site may contain links to or information about products and services provided by third parties. Infinix Online is not responsible for the quality, accuracy, timeliness, reliability, or any other aspect of those products and services.</p>
+      <p>A third-party merchant or service provider may have privacy and data collection practices different from ours. We have no responsibility or liability for those independent policies. We encourage you to review the terms and privacy policies of any third-party service you use.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>6. Client Responsibilities</h2>
+      <p>As a client, you agree to:</p>
+      <ul>
+        <li>Provide accurate, complete, and up-to-date information required for us to deliver our services</li>
+        <li>Ensure any advertising accounts, pages, or assets you grant us access to are owned by you or you have authorisation to manage</li>
+        <li>Comply with the advertising policies of relevant platforms (Google, Meta, etc.)</li>
+        <li>Respond to reasonable requests for information or approvals in a timely manner</li>
+      </ul>
+    </div>
+
+    <div class="legal-section">
+      <h2>7. Disclaimer of Warranties</h2>
+      <p>Our services are provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. We do not warrant that results from our advertising or automation services will meet specific targets or expectations, as performance depends on factors outside our control including market conditions, platform algorithm changes, and competition.</p>
+      <p>While we aim for the best possible outcomes, any results mentioned on our Site (including the "7–14 day" timeline) represent typical client experiences and are not guaranteed for every engagement.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>8. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, Infinix Online shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill, arising from your use of our Site or services.</p>
+      <p>Infinix Online shall not be responsible or liable for any loss, damage, or other matters incurred as a result of dealings with third parties found on or through the Site.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>9. Refund Policy</h2>
+      <p>Your purchase of a service may or may not provide for any refund. Each specific service engagement will specify its own refund terms at the time of purchase or agreement. Please refer to our <a href="refund.html" style="color:var(--primary-l);text-decoration:none;">Refund Policy</a> for full details.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>10. Governing Law</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of England and Wales. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>11. Contact</h2>
+      <p>If you have any questions about these Terms, please contact us:</p>
+      <p><strong style="color:#fff;">Infinix Online</strong><br>
+      Suite A, 82 James Carter Road<br>
+      Mildenhall, Bury St. Edmunds<br>
+      England, United Kingdom, IP28 7DE<br>
+      Email: <a href="mailto:hello@infinixonline.com" style="color:var(--primary-l);text-decoration:none;">hello@infinixonline.com</a></p>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <p>© 2025 Infinix Online. All rights reserved.</p>
+    <div class="page-footer-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="refund.html">Refund</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
