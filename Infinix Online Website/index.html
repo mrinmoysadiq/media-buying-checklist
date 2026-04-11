@@ -3,1394 +3,1669 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinix Online | Paid Ads & AI Automation for Service Businesses</title>
-  <meta name="description" content="We combine precision paid ads with AI automation to fill your calendar 24/7, without extra staff. Most clients see results within 7–14 days.">
+  <title>Infinix Online | Paid Ads &amp; GHL Automation for Service Businesses</title>
+  <meta name="description" content="Precision paid ads + GHL automation that fill your calendar 24/7. Facebook Ads, Google Ads, and GoHighLevel CRM setup for service businesses.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-    /* ─────────────── RESET & BASE ─────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══════════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg:          #07070f;
-      --surface:     #0d0d1e;
-      --card-bg:     rgba(255,255,255,.035);
-      --card-border: rgba(255,255,255,.07);
-      --primary:     #8b5cf6;
-      --primary-l:   #a78bfa;
-      --primary-d:   #6d28d9;
-      --blue:        #3b82f6;
-      --blue-l:      #60a5fa;
-      --cyan:        #22d3ee;
-      --green:       #65db38;
-      --green-l:     #86efac;
-      --green-d:     #4ade80;
-      --text:        #eeeeff;
-      --muted:       #94a3b8;
-      --muted-d:     #475569;
-      --radius:      14px;
-      --radius-lg:   22px;
-      --grad:        linear-gradient(135deg,var(--primary-d),var(--blue));
-      --grad-text:   linear-gradient(135deg,var(--primary-l) 0%,var(--blue-l) 100%);
-    }
+:root {
+  --bg:        #07090f;
+  --surface:   #0d1020;
+  --card:      #111526;
+  --border:    #1e2440;
+  --purple:    #6c4ef2;
+  --purple-lt: #8b6ff7;
+  --lime:      #b6ef45;
+  --lime-dk:   #9fd936;
+  --text:      #e8eaf6;
+  --muted:     #7c84a8;
+  --radius:    12px;
+  --nav-h:     70px;
+}
 
-    html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+ul { list-style: none; }
 
-    /* ─────────────── LOGO ─────────────── */
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .logo-img {
-      height: 40px;
-      width: auto;
-    }
-    .logo-img-footer {
-      height: 34px;
-    }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 100px 0; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--lime); margin-bottom: 16px;
+}
+.section-label::before {
+  content: '';
+  display: block; width: 20px; height: 2px; background: var(--lime);
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800; line-height: 1.15; color: var(--text);
+}
+.section-sub {
+  font-size: 17px; color: var(--muted); margin-top: 12px; max-width: 560px;
+}
 
-    /* ─────────────── NAV ─────────────── */
-    nav {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 200;
-      padding: 22px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background .3s, padding .3s, border-color .3s;
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      background: rgba(7,7,15,.88);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      padding: 16px 48px;
-      border-color: var(--card-border);
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color .2s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -3px;
-      height: 1.5px; width: 0;
-      background: var(--grad-text) var(--primary-l);
-      border-radius: 99px;
-      transition: width .25s ease;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a:hover::after { width: 100%; }
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 8px;
+  font-size: 15px; font-weight: 600; transition: all .2s;
+}
+.btn-primary {
+  background: var(--purple); color: #fff;
+}
+.btn-primary:hover { background: var(--purple-lt); transform: translateY(-1px); }
+.btn-lime {
+  background: var(--lime); color: #07090f;
+}
+.btn-lime:hover { background: var(--lime-dk); transform: translateY(-1px); }
+.btn-outline {
+  border: 1.5px solid var(--border); color: var(--text);
+}
+.btn-outline:hover { border-color: var(--purple-lt); color: var(--purple-lt); }
 
-    .nav-cta {
-      background: var(--grad);
-      color: #fff;
-      text-decoration: none;
-      padding: 11px 26px;
-      border-radius: 99px;
-      font-size: 14px;
-      font-weight: 700;
-      transition: opacity .2s, transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 24px rgba(109,40,217,.35);
-      white-space: nowrap;
-    }
-    .nav-cta:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 8px 32px rgba(109,40,217,.5); }
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  background: rgba(7,9,15,.85); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s;
+}
+.nav-inner {
+  width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo-img { height: 40px; width: auto; }
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--muted);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta .btn { padding: 10px 22px; font-size: 14px; }
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  width: 30px; padding: 4px 0;
+}
+.nav-toggle span {
+  display: block; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s;
+}
+.mobile-menu {
+  display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 24px; z-index: 999; flex-direction: column; gap: 20px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 16px; font-weight: 500; color: var(--muted); padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:hover { color: var(--text); }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block; width: 24px; height: 2px;
-      background: #fff; border-radius: 2px;
-      transition: all .3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+.hero {
+  padding-top: calc(var(--nav-h) + 100px);
+  padding-bottom: 100px;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -160px; left: 50%; transform: translateX(-50%);
+  width: 1000px; height: 700px;
+  background: radial-gradient(ellipse, rgba(108,78,242,.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(182,239,69,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* side glows */
+.hero-glow-l {
+  position: absolute; top: 30%; left: -120px;
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(108,78,242,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-glow-r {
+  position: absolute; top: 40%; right: -120px;
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(182,239,69,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(108,78,242,.12); border: 1px solid rgba(108,78,242,.3);
+  color: var(--purple-lt); font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 100px; margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--lime);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.6; transform:scale(1.3); } }
+.hero h1 {
+  font-size: clamp(40px, 6vw, 76px);
+  font-weight: 900; line-height: 1.05; letter-spacing: -.03em;
+  margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;
+}
+.hero h1 em { font-style: normal; color: var(--lime); }
+.hero h1 span { color: var(--purple-lt); }
+.hero-sub {
+  font-size: 19px; color: var(--muted); line-height: 1.65; margin-bottom: 36px;
+  max-width: 580px; margin-left: auto; margin-right: auto;
+}
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px;
+  justify-content: center;
+}
+.hero-stats {
+  display: flex; gap: 0; padding-top: 48px;
+  border-top: 1px solid var(--border);
+  justify-content: center; max-width: 600px; margin: 0 auto;
+}
+.hero-stat {
+  flex: 1; padding: 0 32px;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-val {
+  font-size: 32px; font-weight: 900; color: var(--text);
+}
+.hero-stat-val span { color: var(--lime); }
+.hero-stat-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+/* Service cards below hero stats */
+.hero-services {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 60px; text-align: left;
+}
+.hero-service-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px;
+  transition: border-color .25s, transform .25s;
+}
+.hero-service-card:hover { border-color: var(--purple); transform: translateY(-3px); }
+.hs-icon {
+  width: 44px; height: 44px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px; font-size: 20px;
+}
+.hs-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.hs-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.dot-green { background: #22c55e; }
+.dot-purple { background: var(--purple); }
 
-    /* ─────────────── MOBILE MENU ─────────────── */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 199;
-      background: rgba(7,7,15,.97);
-      backdrop-filter: blur(24px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s;
-    }
-    .mobile-menu.open { display: flex; opacity: 1; pointer-events: all; }
-    .mobile-menu a {
-      font-size: 26px;
-      font-weight: 700;
-      color: #fff;
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .mobile-menu a:hover { color: var(--primary-l); }
-    .mobile-menu .mobile-cta {
-      background: var(--grad);
-      padding: 14px 36px;
-      border-radius: 99px;
-      font-size: 16px;
-    }
+/* ═══════════════════════════════════════════════
+   CLIENT LOGOS
+═══════════════════════════════════════════════ */
+.logos-section {
+  padding: 72px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.logos-label {
+  text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 48px;
+}
+.logos-track-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.logos-track {
+  display: flex; gap: 0; align-items: center;
+  animation: logos-scroll 32s linear infinite;
+  width: max-content;
+}
+.logos-track:hover { animation-play-state: paused; }
+.logos-track + .logos-track { margin-top: 28px; animation-direction: reverse; }
+.logo-item {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  width: 160px; height: 72px; margin: 0 12px;
+  padding: 12px 20px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color .25s, transform .25s;
+}
+.logo-item:hover { border-color: var(--purple); transform: translateY(-2px); }
+.logo-item img {
+  max-width: 100%; max-height: 44px;
+  width: auto; height: auto;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.8);
+  opacity: .7;
+  transition: filter .25s, opacity .25s;
+}
+.logo-item:hover img { filter: none; opacity: 1; }
+@keyframes logos-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* ─────────────── HERO ─────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 130px 24px 90px;
-      position: relative;
-      overflow: hidden;
-    }
+/* ═══════════════════════════════════════════════
+   CAMPAIGN RESULTS
+═══════════════════════════════════════════════ */
+.results-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px; margin-bottom: 40px;
+}
+.tabs {
+  display: flex; gap: 4px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 4px;
+}
+.tab-btn {
+  padding: 9px 20px; border-radius: 7px;
+  font-size: 14px; font-weight: 600; color: var(--muted);
+  transition: all .2s;
+}
+.tab-btn.active {
+  background: var(--purple); color: #fff;
+}
+.tab-btn:hover:not(.active) { color: var(--text); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.results-gallery {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+}
+.result-card {
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); background: var(--card);
+  cursor: pointer; transition: transform .2s, border-color .2s;
+}
+.result-card:hover { transform: translateY(-4px); border-color: var(--purple); }
+.result-card img { width: 100%; height: 220px; object-fit: cover; }
+.result-card-label {
+  padding: 10px 14px; font-size: 12px; font-weight: 600; color: var(--muted);
+}
 
-    /* Animated mesh blobs */
-    .hero-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: .55;
-      pointer-events: none;
-    }
-    .hero-blob-1 {
-      width: 650px; height: 650px;
-      background: radial-gradient(circle, rgba(109,40,217,.5), transparent 70%);
-      top: -150px; left: -200px;
-      animation: blobFloat 10s ease-in-out infinite alternate;
-    }
-    .hero-blob-2 {
-      width: 550px; height: 550px;
-      background: radial-gradient(circle, rgba(59,130,246,.45), transparent 70%);
-      bottom: -100px; right: -100px;
-      animation: blobFloat 13s ease-in-out infinite alternate-reverse;
-    }
-    .hero-blob-3 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(34,211,238,.25), transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      animation: blobFloat 8s ease-in-out infinite alternate;
-    }
-    @keyframes blobFloat {
-      from { transform: translate(0,0) scale(1); }
-      to   { transform: translate(30px,20px) scale(1.08); }
-    }
+/* ═══════════════════════════════════════════════
+   LANDING PAGES
+═══════════════════════════════════════════════ */
+.lp-gallery {
+  display: flex; gap: 20px; overflow-x: auto; padding-bottom: 16px;
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+.lp-gallery::-webkit-scrollbar { height: 4px; }
+.lp-gallery::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.lp-card {
+  flex: 0 0 260px; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); background: var(--card);
+  cursor: pointer; transition: transform .2s, border-color .2s;
+}
+.lp-card:hover { transform: translateY(-4px); border-color: var(--lime); }
+.lp-card img { width: 100%; height: 340px; object-fit: cover; object-position: top; }
+.lp-card-label {
+  padding: 10px 14px; font-size: 12px; font-weight: 600; color: var(--muted);
+}
 
-    /* Subtle grid lines */
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
-      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
-      pointer-events: none;
-    }
+/* ═══════════════════════════════════════════════
+   AD CREATIVES
+═══════════════════════════════════════════════ */
+.creatives-grid {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.creatives-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.creative-item {
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer; transition: transform .2s, border-color .2s;
+}
+.creative-item:hover { transform: scale(1.02); border-color: var(--purple-lt); }
+.creative-item img { width: 100%; height: auto; display: block; }
 
-    .hero-inner { position: relative; z-index: 1; max-width: 860px; }
+/* ═══════════════════════════════════════════════
+   VIDEO TESTIMONIALS
+═══════════════════════════════════════════════ */
+.video-section { background: var(--surface); }
+.video-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  margin-top: 48px;
+}
+.video-card {
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); background: var(--card);
+  transition: transform .2s, border-color .2s;
+}
+.video-card:hover { transform: translateY(-4px); border-color: var(--purple); }
+.video-embed {
+  position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+}
+.video-embed iframe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  border: none;
+}
+.video-card-body { padding: 16px; display: flex; align-items: center; gap: 10px; }
+.video-card-info { flex: 1; }
+.video-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.video-card-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.verified-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(182,239,69,.1); border: 1px solid rgba(182,239,69,.25);
+  color: var(--lime); font-size: 11px; font-weight: 700;
+  padding: 3px 9px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+}
+.verified-badge svg { flex-shrink: 0; }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      background: rgba(139,92,246,.1);
-      border: 1px solid rgba(139,92,246,.28);
-      color: var(--primary-l);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      padding: 8px 20px;
-      border-radius: 99px;
-      margin-bottom: 32px;
-    }
-    .hero-badge .dot {
-      width: 7px; height: 7px;
-      background: var(--primary-l);
-      border-radius: 50%;
-      animation: pulseDot 2.5s ease-in-out infinite;
-    }
-    @keyframes pulseDot {
-      0%,100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(167,139,250,.6); }
-      50%      { opacity: .7; transform: scale(1.3); box-shadow: 0 0 0 6px rgba(167,139,250,0); }
-    }
+/* ═══════════════════════════════════════════════
+   WRITTEN TESTIMONIALS
+═══════════════════════════════════════════════ */
+.testi-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-top: 48px;
+}
+.testi-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  transition: border-color .2s, transform .2s;
+}
+.testi-card:hover { border-color: var(--purple); transform: translateY(-3px); }
+.testi-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+.testi-stars span { color: var(--lime); font-size: 16px; }
+.testi-quote {
+  font-size: 15px; line-height: 1.7; color: var(--muted);
+  margin-bottom: 20px;
+}
+.testi-author {
+  display: flex; align-items: center; gap: 12px;
+  border-top: 1px solid var(--border); padding-top: 16px;
+}
+.testi-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), var(--purple-lt));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0;
+  overflow: hidden;
+}
+.testi-avatar img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.testi-name {
+  font-size: 14px; font-weight: 700; color: var(--text);
+  display: flex; align-items: center; gap: 6px;
+}
+.testi-name::after {
+  content: '✓';
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(182,239,69,.15); border: 1px solid rgba(182,239,69,.35);
+  color: var(--lime); font-size: 9px; font-weight: 900;
+  flex-shrink: 0;
+}
+.testi-biz { font-size: 12px; color: var(--muted); }
+.platform-badge {
+  margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--lime); background: rgba(182,239,69,.1);
+  border: 1px solid rgba(182,239,69,.2); padding: 3px 8px; border-radius: 5px;
+}
 
-    .hero h1 {
-      font-size: clamp(42px, 7.5vw, 78px);
-      font-weight: 900;
-      letter-spacing: -2.5px;
-      line-height: 1.02;
-      color: #fff;
-      margin-bottom: 26px;
-    }
-    .grad-text {
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+/* ═══════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════ */
+.about-inner {
+  display: grid; grid-template-columns: 420px 1fr; gap: 80px; align-items: center;
+}
+.about-visual { position: relative; }
+.about-photo-wrap {
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 40px 80px rgba(0,0,0,.4), 0 0 0 1px rgba(108,78,242,.1);
+}
+.about-photo-wrap img { width: 100%; display: block; }
+.about-stats-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-top: 20px;
+}
+.about-stat {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  text-align: center;
+}
+.about-stat-val { font-size: 28px; font-weight: 800; color: var(--text); }
+.about-stat-val em { font-style: normal; color: var(--lime); }
+.about-stat-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.about-content h2 { margin-bottom: 20px; }
+.about-content p {
+  font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 16px;
+}
+.about-content p strong { color: var(--text); }
+.about-highlights { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+.about-highlight {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 15px; color: var(--text);
+}
+.hl-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(108,78,242,.15); border: 1px solid rgba(108,78,242,.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
 
-    .hero-sub {
-      font-size: clamp(16px, 2.2vw, 20px);
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 620px;
-      margin: 0 auto 44px;
-    }
+/* ═══════════════════════════════════════════════
+   TOOL STACK
+═══════════════════════════════════════════════ */
+.tools-section { background: #ffffff; }
+.tools-section .section-label { color: var(--purple); }
+.tools-section .section-label::before { background: var(--purple); }
+.tools-section .section-title { color: #0d1020; }
+.tools-section .section-sub { color: #4a5270; }
+.tools-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px;
+  margin-top: 48px;
+}
+.tool-card {
+  background: #f7f8fc; border: 1px solid #e2e5f0;
+  border-radius: var(--radius); padding: 24px 16px;
+  text-align: center; transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.tool-card:hover { border-color: var(--purple); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(108,78,242,.12); }
+.tool-icon {
+  width: 52px; height: 52px; border-radius: 14px; margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+.tool-name { font-size: 14px; font-weight: 700; color: #0d1020; }
+.tool-cat { font-size: 11px; color: #6b7599; margin-top: 3px; }
 
-    .hero-ctas {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 52px;
-    }
+/* ═══════════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════════ */
+.cta-section {
+  padding: 120px 0;
+  position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(108,78,242,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner {
+  text-align: center; position: relative; z-index: 1;
+}
+.cta-inner h2 {
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 900; line-height: 1.1; margin-bottom: 16px;
+}
+.cta-inner h2 em { font-style: normal; color: var(--lime); }
+.cta-inner p {
+  font-size: 18px; color: var(--muted); max-width: 520px;
+  margin: 0 auto 40px;
+}
+.cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.cta-note {
+  margin-top: 20px; font-size: 13px; color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.cta-note::before { content: '✓'; color: var(--lime); font-weight: 700; }
 
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      background: var(--grad);
-      color: #fff;
-      text-decoration: none;
-      padding: 17px 34px;
-      border-radius: 99px;
-      font-size: 16px;
-      font-weight: 700;
-      transition: all .25s;
-      box-shadow: 0 4px 40px rgba(109,40,217,.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 56px rgba(109,40,217,.55);
-    }
-    .btn-primary svg { transition: transform .2s; }
-    .btn-primary:hover svg { transform: translateX(3px); }
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 60px 0 32px;
+}
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  padding-bottom: 48px; border-bottom: 1px solid var(--border);
+}
+.footer-brand .logo-img { height: 34px; margin-bottom: 14px; }
+.footer-brand p {
+  font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 280px;
+}
+.footer-col h4 {
+  font-size: 13px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--text); margin-bottom: 16px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a { font-size: 14px; color: var(--muted); transition: color .2s; }
+.footer-col ul a:hover { color: var(--text); }
+.footer-address { font-size: 13px; color: var(--muted); line-height: 1.8; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; padding-top: 28px;
+  font-size: 13px; color: var(--muted);
+}
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { color: var(--muted); transition: color .2s; }
+.footer-legal a:hover { color: var(--text); }
 
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      padding: 17px 20px;
-      border-radius: 99px;
-      transition: color .2s;
-    }
-    .btn-ghost:hover { color: #fff; }
+/* ═══════════════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════════════ */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(7,9,15,.95); align-items: center; justify-content: center;
+  padding: 24px;
+}
+.lightbox.open { display: flex; }
+.lb-inner {
+  position: relative; max-width: 1100px; width: 100%; max-height: 90vh;
+}
+.lb-inner img {
+  max-width: 100%; max-height: 90vh; object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 40px 100px rgba(0,0,0,.7);
+  margin: 0 auto;
+}
+.lb-close {
+  position: absolute; top: -48px; right: 0;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.lb-nav:hover { background: var(--purple); }
+.lb-prev { left: -56px; }
+.lb-next { right: -56px; }
 
-    .hero-proof {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-    .proof-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--muted-d);
-      font-weight: 500;
-    }
-    .proof-pill .tick {
-      width: 20px; height: 20px;
-      background: rgba(101,219,56,.15);
-      border: 1px solid rgba(101,219,56,.35);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--green);
-      font-size: 10px;
-      font-weight: 900;
-    }
+/* ═══════════════════════════════════════════════
+   PAGE VIEWER MODAL (Landing Pages)
+═══════════════════════════════════════════════ */
+.pv-modal {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(7,9,15,.97); align-items: flex-start; justify-content: center;
+  padding: 60px 24px 24px;
+  overflow-y: auto;
+}
+.pv-modal.open { display: flex; }
+.pv-inner {
+  position: relative; max-width: 1400px; width: 100%;
+  border-radius: 16px; border: 1px solid var(--border);
+  margin: 0 auto;
+}
+.pv-inner img { width: 100%; display: block; border-radius: 16px; }
+.pv-close {
+  position: fixed; top: 16px; right: 16px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000;
+}
+.pv-nav {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s; z-index: 10000;
+}
+.pv-nav:hover { background: var(--purple); }
+.pv-prev { left: 20px; }
+.pv-next { right: 20px; }
 
-    /* ─────────────── SECTION COMMONS ─────────────── */
-    section { padding: 110px 24px; }
+/* ═══════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .container { max-width: 1120px; margin: 0 auto; }
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════════ */
+/* ── TEAM ── */
+.team-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px;
+  margin-top: 56px;
+}
+.team-card {
+  position: relative;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden;
+  text-align: center;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .3s, box-shadow .35s;
+  cursor: default;
+}
+.team-card::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(108,78,242,.08) 0%, rgba(182,239,69,.04) 100%);
+  opacity: 0; transition: opacity .35s;
+  pointer-events: none; z-index: 1;
+}
+.team-card:hover { transform: translateY(-8px); border-color: rgba(108,78,242,.5); box-shadow: 0 0 40px rgba(108,78,242,.25), 0 20px 60px rgba(0,0,0,.4); }
+.team-card:hover::before { opacity: 1; }
 
-    .sec-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 18px;
-    }
-    .sec-tag::before {
-      content: '';
-      width: 22px; height: 2px;
-      background: var(--green);
-      border-radius: 99px;
-    }
+/* Photo wrapper with glow */
+.team-photo-wrap {
+  position: relative;
+  width: 100%; aspect-ratio: 3/4; overflow: hidden;
+}
+.team-photo-wrap::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+  background: linear-gradient(to top, var(--card) 0%, transparent 100%);
+  z-index: 2; pointer-events: none;
+}
+.team-photo-glow {
+  position: absolute; inset: -20px;
+  background: radial-gradient(ellipse at 50% 80%, rgba(108,78,242,.35) 0%, transparent 70%);
+  opacity: 0; transition: opacity .4s; z-index: 0;
+  pointer-events: none;
+}
+.team-card:hover .team-photo-glow { opacity: 1; }
+.team-photo {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  position: relative; z-index: 1;
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.team-card:hover .team-photo { transform: scale(1.04); }
+.team-photo-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, #131830 0%, #1e2550 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.team-photo-placeholder svg { opacity: .2; }
 
-    .sec-title {
-      font-size: clamp(30px, 4.5vw, 52px);
-      font-weight: 900;
-      letter-spacing: -1.2px;
-      line-height: 1.1;
-      color: #fff;
-      margin-bottom: 18px;
-    }
-    .sec-sub {
-      font-size: 17px;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 580px;
-    }
+/* Body */
+.team-body {
+  padding: 16px 18px 22px; position: relative; z-index: 3;
+}
+.team-name {
+  font-size: 15px; font-weight: 700; color: var(--text);
+  margin-bottom: 5px; letter-spacing: .01em;
+}
+.team-role {
+  font-size: 11px; color: var(--lime); font-weight: 600;
+  letter-spacing: .05em; text-transform: uppercase;
+  line-height: 1.55;
+}
+.founder-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: linear-gradient(135deg, rgba(108,78,242,.2) 0%, rgba(139,111,247,.15) 100%);
+  border: 1px solid rgba(108,78,242,.4);
+  color: var(--purple-lt); font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px; margin-top: 8px;
+  letter-spacing: .07em; text-transform: uppercase;
+}
 
-    /* ─────────────── PAIN SECTION ─────────────── */
-    .pain-section { background: var(--surface); }
+/* slide-up stagger animation */
+@keyframes teamReveal {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.team-card.in-view {
+  animation: teamReveal .6s cubic-bezier(.22,1,.36,1) both;
+}
 
-    .pain-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
-      margin-top: 64px;
-    }
-    .pain-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 30px;
-      backdrop-filter: blur(12px);
-      transition: border-color .3s, transform .3s;
-    }
-    .pain-card:hover {
-      border-color: rgba(239,68,68,.25);
-      transform: translateY(-4px);
-    }
-    .pain-icon {
-      width: 46px; height: 46px;
-      background: rgba(239,68,68,.1);
-      border: 1px solid rgba(239,68,68,.15);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-bottom: 18px;
-    }
-    .pain-card h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 9px; }
-    .pain-card p  { font-size: 14px; color: var(--muted); line-height: 1.7; }
-
-    /* ─────────────── SOLUTION SECTION ─────────────── */
-    .solution-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 24px;
-      margin-top: 64px;
-    }
-    .solution-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 38px 30px;
-      backdrop-filter: blur(12px);
-      transition: all .3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .solution-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(139,92,246,.07) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity .3s;
-    }
-    .solution-card:hover { border-color: rgba(139,92,246,.28); transform: translateY(-5px); }
-    .solution-card:hover::after { opacity: 1; }
-
-    .solution-icon {
-      width: 54px; height: 54px;
-      background: linear-gradient(135deg, rgba(139,92,246,.22), rgba(59,130,246,.18));
-      border: 1px solid rgba(139,92,246,.2);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      margin-bottom: 22px;
-      position: relative;
-      z-index: 1;
-    }
-    .solution-card h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 11px; position: relative; z-index: 1; }
-    .solution-card p  { font-size: 14px; color: var(--muted); line-height: 1.75; position: relative; z-index: 1; }
-
-    /* ─────────────── HOW IT WORKS ─────────────── */
-    .how-section { background: var(--surface); }
-
-    .steps-wrap {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 40px 28px;
-      margin-top: 68px;
-      position: relative;
-    }
-    /* Connecting line */
-    .steps-wrap::before {
-      content: '';
-      position: absolute;
-      top: 28px;
-      left: calc(12.5% + 28px);
-      right: calc(12.5% + 28px);
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(139,92,246,.4), transparent);
-    }
-
-    .step { text-align: center; }
-    .step-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px; height: 56px;
-      background: var(--grad);
-      border-radius: 50%;
-      font-size: 20px;
-      font-weight: 900;
-      color: #fff;
-      margin: 0 auto 22px;
-      box-shadow: 0 0 32px rgba(109,40,217,.35), 0 0 16px rgba(101,219,56,.2);
-      position: relative;
-    }
-    .step-num::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-d), var(--green-d));
-      opacity: .25;
-      filter: blur(6px);
-    }
-    .step h3 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 11px; }
-    .step p  { font-size: 14px; color: var(--muted); line-height: 1.7; }
-
-    /* ─────────────── STATS ─────────────── */
-    .stats-section {
-      padding: 80px 24px;
-      background: linear-gradient(135deg, rgba(109,40,217,.08), rgba(59,130,246,.06));
-      border-top: 1px solid var(--card-border);
-      border-bottom: 1px solid var(--card-border);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 48px;
-      text-align: center;
-    }
-    .stat-num {
-      font-size: 52px;
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1;
-      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 10px;
-    }
-    .stat-label { font-size: 14px; color: var(--muted); font-weight: 500; line-height: 1.4; }
-
-    /* ─────────────── TESTIMONIALS ─────────────── */
-    .testimonials-section { background: var(--surface); }
-
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 24px;
-      margin-top: 64px;
-    }
-    .testi-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 34px;
-      backdrop-filter: blur(12px);
-      transition: border-color .3s, transform .3s;
-    }
-    .testi-card:hover { border-color: rgba(139,92,246,.3); transform: translateY(-4px); }
-    .testi-card.featured {
-      background: linear-gradient(var(--bg),var(--bg)) padding-box,
-                  var(--grad) border-box;
-      border-color: transparent;
-    }
-
-    .stars { display: flex; gap: 3px; margin-bottom: 18px; font-size: 15px; }
-
-    .testi-text {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.75;
-      font-style: italic;
-      margin-bottom: 26px;
-    }
-    .testi-author { display: flex; align-items: center; gap: 13px; }
-    .testi-avatar {
-      width: 46px; height: 46px;
-      background: var(--grad);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      font-weight: 800;
-      color: #fff;
-      flex-shrink: 0;
-    }
-    .testi-name { font-size: 14px; font-weight: 700; color: #fff; }
-    .testi-role { font-size: 12px; color: var(--muted-d); margin-top: 2px; }
-
-    /* ─────────────── CTA SECTION ─────────────── */
-    .cta-section {
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 700px; height: 400px;
-      background: radial-gradient(ellipse, rgba(109,40,217,.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-inner { max-width: 720px; margin: 0 auto; position: relative; }
-
-    .cta-section h2 {
-      font-size: clamp(34px, 5.5vw, 60px);
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1.08;
-      color: #fff;
-      margin-bottom: 22px;
-    }
-    .cta-section p { font-size: 18px; color: var(--muted); line-height: 1.75; margin-bottom: 44px; }
-    .cta-note { margin-top: 22px; font-size: 13px; color: var(--muted-d); }
-    .cta-note span { color: var(--primary-l); }
-
-    /* ─────────────── FOOTER ─────────────── */
-    footer {
-      background: var(--surface);
-      border-top: 1px solid var(--card-border);
-      padding: 70px 24px 36px;
-    }
-    .footer-wrap { max-width: 1120px; margin: 0 auto; }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
-      gap: 48px;
-      margin-bottom: 56px;
-    }
-    .footer-brand p {
-      font-size: 14px;
-      color: var(--muted-d);
-      max-width: 280px;
-      margin-top: 20px;
-      line-height: 1.7;
-    }
-    .footer-col h4 {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted-d);
-      margin-bottom: 20px;
-    }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer-col a {
-      font-size: 14px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .footer-col a:hover { color: #fff; }
-    .footer-address { font-size: 13px; color: var(--muted-d); line-height: 1.9; }
-
-    .footer-bottom {
-      border-top: 1px solid var(--card-border);
-      padding-top: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-    .footer-bottom p { font-size: 13px; color: var(--muted-d); }
-    .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-size: 13px; color: var(--muted-d); text-decoration: none; transition: color .2s; }
-    .footer-legal a:hover { color: var(--muted); }
-
-    /* ─────────────── INTRO / ABOUT ─────────────── */
-    .intro-section { background: var(--bg); }
-    .intro-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 0;
-    }
-    .intro-visual {
-      position: relative;
-    }
-    .intro-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      backdrop-filter: blur(12px);
-      position: relative;
-    }
-    .intro-card::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(139,92,246,.2), transparent 70%);
-      border-radius: 50%;
-    }
-    .intro-avatar-wrap {
-      width: 88px; height: 88px;
-      border-radius: 50%;
-      margin-bottom: 20px;
-      padding: 3px;
-      background: var(--grad);
-      box-shadow: 0 8px 32px rgba(0,0,0,.5);
-      flex-shrink: 0;
-    }
-    .intro-avatar {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-    .intro-card-name {
-      font-size: 20px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .intro-card-title {
-      font-size: 13px;
-      color: var(--green);
-      font-weight: 600;
-      letter-spacing: .5px;
-      margin-bottom: 20px;
-    }
-    .intro-card-bio {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
-    .intro-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .intro-badge {
-      background: rgba(139,92,246,.1);
-      border: 1px solid rgba(139,92,246,.2);
-      color: var(--primary-l);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      padding: 5px 12px;
-      border-radius: 99px;
-    }
-    .intro-float-stat {
-      position: absolute;
-      background: var(--surface);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      backdrop-filter: blur(12px);
-    }
-    .intro-float-stat.top-right {
-      top: -20px; right: -20px;
-    }
-    .intro-float-stat.bottom-left {
-      bottom: -20px; left: -20px;
-    }
-    .float-stat-num {
-      font-size: 22px;
-      font-weight: 900;
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-    }
-    .float-stat-label {
-      font-size: 11px;
-      color: var(--muted-d);
-      font-weight: 500;
-      line-height: 1.3;
-    }
-    .intro-content { }
-    .intro-content .sec-sub { max-width: 100%; margin-bottom: 28px; }
-    .intro-points {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 36px;
-    }
-    .intro-point {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-    .intro-point-icon {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(59,130,246,.15));
-      border: 1px solid rgba(139,92,246,.2);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .intro-point-text strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 3px;
-    }
-    .intro-point-text span {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ─────────────── COMPARISON ─────────────── */
-    .compare-section { background: var(--surface); }
-    .compare-table-wrap {
-      margin-top: 64px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid var(--card-border);
-    }
-    .compare-header {
-      display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr 1fr;
-      background: rgba(255,255,255,.03);
-      border-bottom: 1px solid var(--card-border);
-    }
-    .compare-header-cell {
-      padding: 20px 24px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--muted-d);
-      letter-spacing: .5px;
-    }
-    .compare-header-cell.highlight {
-      background: linear-gradient(180deg, rgba(109,40,217,.15), rgba(59,130,246,.1));
-      color: var(--primary-l);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 6px;
-      border-left: 1px solid rgba(139,92,246,.25);
-      border-right: 1px solid rgba(139,92,246,.25);
-    }
-    .compare-header-cell.highlight .best-badge {
-      background: var(--grad);
-      color: #fff;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 99px;
-    }
-    .compare-row {
-      display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr 1fr;
-      border-bottom: 1px solid var(--card-border);
-      transition: background .2s;
-    }
-    .compare-row:last-child { border-bottom: none; }
-    .compare-row:hover { background: rgba(255,255,255,.02); }
-    .compare-cell {
-      padding: 16px 24px;
-      font-size: 14px;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .compare-cell.feature {
-      color: var(--text);
-      font-weight: 500;
-    }
-    .compare-cell.highlight-col {
-      background: rgba(109,40,217,.06);
-      border-left: 1px solid rgba(139,92,246,.15);
-      border-right: 1px solid rgba(139,92,246,.15);
-      justify-content: flex-start;
-      padding-left: 32px;
-    }
-    .compare-cell.last-highlight {
-      border-radius: 0 0 0 0;
-    }
-    .c-yes {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px; height: 22px;
-      background: rgba(101,219,56,.15);
-      border: 1px solid rgba(101,219,56,.35);
-      border-radius: 50%;
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 900;
-      flex-shrink: 0;
-    }
-    .c-no {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px; height: 22px;
-      background: rgba(239,68,68,.1);
-      border: 1px solid rgba(239,68,68,.2);
-      border-radius: 50%;
-      color: #ef4444;
-      font-size: 12px;
-      flex-shrink: 0;
-    }
-    .c-maybe {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px; height: 22px;
-      background: rgba(245,158,11,.1);
-      border: 1px solid rgba(245,158,11,.2);
-      border-radius: 50%;
-      color: #f59e0b;
-      font-size: 11px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    @media (max-width: 900px) {
-      .intro-grid { grid-template-columns: 1fr; gap: 48px; }
-      .intro-visual { order: -1; }
-      .intro-float-stat.top-right { top: -10px; right: 10px; }
-      .intro-float-stat.bottom-left { display: none; }
-      .compare-header { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
-      .compare-row { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
-      .compare-cell { padding: 14px 12px; font-size: 13px; }
-      .compare-header-cell { padding: 16px 12px; font-size: 12px; }
-    }
-    @media (max-width: 600px) {
-      .compare-table-wrap { overflow-x: auto; }
-      .compare-header, .compare-row { min-width: 520px; }
-    }
-
-    /* ─────────────── SCROLL REVEAL ─────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ─────────────── RESPONSIVE ─────────────── */
-    @media (max-width: 900px) {
-      nav { padding: 18px 28px; }
-      nav.scrolled { padding: 14px 28px; }
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .footer-brand { grid-column: 1 / -1; }
-    }
-    @media (max-width: 600px) {
-      section { padding: 72px 20px; }
-      .hero { padding: 110px 20px 72px; }
-      .hero-proof { flex-direction: column; gap: 10px; }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; }
-      .steps-wrap::before { display: none; }
-      nav { padding: 16px 20px; }
-      nav.scrolled { padding: 13px 20px; }
-    }
+@media (max-width: 1024px) {
+  .about-inner { grid-template-columns: 1fr; gap: 48px; }
+  .about-visual { max-width: 480px; }
+  .testi-grid { grid-template-columns: 1fr 1fr; }
+  .video-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .creatives-col:last-child { display: none; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-services { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .section { padding: 72px 0; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .video-grid { grid-template-columns: 1fr; }
+  .creatives-col:nth-child(3), .creatives-col:last-child { display: none; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .tools-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .lb-prev { left: -48px; }
+  .lb-next { right: -48px; }
+  .lb-prev, .lb-next { width: 36px; height: 36px; font-size: 16px; }
+  .pv-prev { left: 8px; }
+  .pv-next { right: 8px; }
+  .hero-stats { flex-wrap: wrap; }
+  .hero-stat { flex: 0 0 50%; border-right: none; border-bottom: 1px solid var(--border); padding: 16px 0; }
+  .hero-stat:nth-child(2n) { border-right: none; }
+  .hero-services { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 36px; }
+  .creatives-col:nth-child(3), .creatives-col:last-child { display: none; }
+  .about-stats-row { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+}
   </style>
 </head>
 <body>
 
-<!-- ─── MOBILE MENU ─── -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#problem"      onclick="closeMenu()">The Problem</a>
-  <a href="#services"     onclick="closeMenu()">Services</a>
-  <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
-  <a href="#testimonials" onclick="closeMenu()">Testimonials</a>
-  <a href="#contact" class="mobile-cta btn-primary" onclick="closeMenu()">Book Free Strategy Call</a>
-</div>
-
-<!-- ─── NAV ─── -->
-<nav id="navbar">
-  <a href="/" class="logo-wrap">
-    <img src="logo.svg" alt="Infinix Online" class="logo-img">
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="#problem">The Problem</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#how-it-works">How It Works</a></li>
-    <li><a href="#testimonials">Testimonials</a></li>
-  </ul>
-
-  <a href="#contact" class="nav-cta">Book Free Strategy Call</a>
-
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html">
+      <img src="logo.svg" alt="Infinix Online" class="logo-img">
+    </a>
+    <div class="nav-links">
+      <a href="#results">Results</a>
+      <a href="#landing-pages">Landing Pages</a>
+      <a href="#creatives">Creatives</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#about">About</a>
+      <a href="#team">Team</a>
+    </div>
+    <div class="nav-cta">
+      <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="btn btn-lime">Book a Call</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<!-- ─── HERO ─── -->
-<section class="hero" id="home">
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
-  <div class="hero-blob hero-blob-3"></div>
-  <div class="hero-grid"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#results">Results</a>
+  <a href="#landing-pages">Landing Pages</a>
+  <a href="#creatives">Creatives</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#about">About</a>
+  <a href="#team">Team</a>
+  <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="btn btn-lime" style="width:fit-content">Book a Call</a>
+</div>
 
-  <div class="hero-inner reveal">
-    <div class="hero-badge"><span class="dot"></span>Paid Ads + AI Automation</div>
-
-    <h1>More Booked Appointments.<br><span class="grad-text">Zero Extra Staff.</span></h1>
-
-    <p class="hero-sub">
-      We combine precision paid ads with intelligent AI automation to fill your
-      calendar — 24/7, without the overhead.
-    </p>
-
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-primary">
-        Get Your Free Strategy Session
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <a href="#how-it-works" class="btn-ghost">
-        See how it works
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-
-    <div class="hero-proof">
-      <div class="proof-pill"><span class="tick">✓</span>Results in 7–14 days</div>
-      <div class="proof-pill"><span class="tick">✓</span>AI follow-up 24/7</div>
-      <div class="proof-pill"><span class="tick">✓</span>No extra staff needed</div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PROBLEM ─── -->
-<section class="pain-section" id="problem">
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-glow-l"></div>
+  <div class="hero-glow-r"></div>
   <div class="container">
-    <div class="reveal">
-      <div class="sec-tag">The Problem</div>
-      <h2 class="sec-title">Sound Familiar?</h2>
-      <p class="sec-sub">Service businesses lose thousands every month to these avoidable problems.</p>
-    </div>
-
-    <div class="pain-grid">
-      <div class="pain-card reveal">
-        <div class="pain-icon">🕳️</div>
-        <h3>Leads Slip Through the Cracks</h3>
-        <p>You follow up with some leads but miss others. Revenue walks out the door every single day.</p>
+    <div class="hero-inner reveal">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Top-Rated on Upwork · 5★ Rated Team
       </div>
-      <div class="pain-card reveal">
-        <div class="pain-icon">⏱️</div>
-        <h3>Manual Follow-Up Drains Your Team</h3>
-        <p>Your staff spends hours chasing cold leads instead of serving hot ones. Time and money, wasted.</p>
+      <h1>Ads That <em>Fill Calendars.</em><br>Not Just <span>Impressions.</span></h1>
+      <p class="hero-sub">We run Facebook Ads, Google Ads, and GoHighLevel automation for service businesses that are serious about growth — not vanity metrics.</p>
+      <div class="hero-actions">
+        <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="btn btn-lime">Book a Free Strategy Call</a>
+        <a href="#results" class="btn btn-outline">See Our Results</a>
       </div>
-      <div class="pain-card reveal">
-        <div class="pain-icon">💸</div>
-        <h3>High Staff Costs, Inconsistent Results</h3>
-        <p>Hiring more people doesn't guarantee more sales — and people get tired, distracted, and quit.</p>
-      </div>
-      <div class="pain-card reveal">
-        <div class="pain-icon">🎯</div>
-        <h3>Ad Spend Wasted on Bad Leads</h3>
-        <p>Without proper targeting and filtering, you're paying for clicks that never convert to booked jobs.</p>
-      </div>
-      <div class="pain-card reveal">
-        <div class="pain-icon">📉</div>
-        <h3>No System. No Scale.</h3>
-        <p>Everything depends on individual effort. Nothing is predictable, repeatable, or scalable.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── INTRODUCTION / ABOUT ─── -->
-<section class="intro-section" id="about">
-  <div class="container">
-    <div class="intro-grid">
-
-      <div class="intro-content reveal">
-        <div class="sec-tag">Who We Are</div>
-        <h2 class="sec-title">Built by a Media Buyer Who's Been in the Trenches</h2>
-        <p class="sec-sub">Infinix Online was founded by Mrinmoy — a specialist media buyer and paid ads expert with hands-on experience scaling service businesses through smart advertising and AI-driven automation.</p>
-
-        <div class="intro-points">
-          <div class="intro-point">
-            <div class="intro-point-icon">🎯</div>
-            <div class="intro-point-text">
-              <strong>Specialist, Not a Generalist</strong>
-              <span>We focus exclusively on service businesses — HVAC, roofing, cleaning, painting, and more. Deep focus means better results.</span>
-            </div>
-          </div>
-          <div class="intro-point">
-            <div class="intro-point-icon">🤖</div>
-            <div class="intro-point-text">
-              <strong>AI-First Approach</strong>
-              <span>We don't just run ads — we build the AI systems that ensure every lead gets followed up instantly, so no opportunity slips by.</span>
-            </div>
-          </div>
-          <div class="intro-point">
-            <div class="intro-point-icon">📈</div>
-            <div class="intro-point-text">
-              <strong>Results You Can Measure</strong>
-              <span>We track everything that matters — booked appointments, cost per lead, and ROI. No vanity metrics, no fluff.</span>
-            </div>
-          </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">$2M<span>+</span></div>
+          <div class="hero-stat-lbl">Ad Spend Managed</div>
         </div>
-
-        <a href="#contact" class="btn-primary">Work With Us →</a>
-      </div>
-
-      <div class="intro-visual reveal">
-        <div class="intro-card">
-          <div class="intro-avatar-wrap">
-            <img src="mrinmoy.jpg" alt="Mrinmoy — Founder, Infinix Online" class="intro-avatar">
-          </div>
-          <div class="intro-card-name">Mrinmoy</div>
-          <div class="intro-card-title">Founder & Lead Media Buyer</div>
-          <p class="intro-card-bio">A seasoned paid ads specialist with a track record of helping service businesses generate high-quality leads through Google and Meta advertising — combined with AI automation that converts those leads into booked appointments around the clock.</p>
-          <div class="intro-badges">
-            <span class="intro-badge">Google Ads</span>
-            <span class="intro-badge">Meta Ads</span>
-            <span class="intro-badge">AI Automation</span>
-            <span class="intro-badge">Lead Generation</span>
-            <span class="intro-badge">Service Businesses</span>
-          </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">120<span>+</span></div>
+          <div class="hero-stat-lbl">Campaigns Launched</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">5<span>★</span></div>
+          <div class="hero-stat-lbl">Upwork Rating</div>
         </div>
       </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ─── SOLUTION / SERVICES ─── -->
-<section id="services">
-  <div class="container">
-    <div class="reveal">
-      <div class="sec-tag">The Solution</div>
-      <h2 class="sec-title">We Fix All of This — Automatically</h2>
-      <p class="sec-sub">
-        Infinix Online combines high-converting paid ads with AI-powered automation to generate,
-        qualify, and follow up with leads around the clock.
-      </p>
-    </div>
-
-    <div class="solution-grid">
-      <div class="solution-card reveal">
-        <div class="solution-icon">🎯</div>
-        <h3>Precision Paid Ads</h3>
-        <p>Google & Meta ads built for your ideal customer, optimised for booked appointments — not just clicks. Every pound works harder.</p>
-      </div>
-      <div class="solution-card reveal">
-        <div class="solution-icon">🤖</div>
-        <h3>AI Lead Follow-Up</h3>
-        <p>Our AI responds to every lead instantly, 24/7. No tired reps. No missed opportunities. No lead left behind.</p>
-      </div>
-      <div class="solution-card reveal">
-        <div class="solution-icon">📅</div>
-        <h3>Automatic Appointment Booking</h3>
-        <p>Qualified leads get booked directly into your calendar — without you lifting a finger. You show up and close.</p>
-      </div>
-      <div class="solution-card reveal">
-        <div class="solution-icon">📊</div>
-        <h3>Full Transparency</h3>
-        <p>You see exactly what's working, what's not, and where every pound goes. Clear reporting. No fluff, no guesswork.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── HOW IT WORKS ─── -->
-<section class="how-section" id="how-it-works">
-  <div class="container">
-    <div class="reveal" style="text-align:center; max-width:640px; margin:0 auto 68px;">
-      <div class="sec-tag" style="justify-content:center;">Process</div>
-      <h2 class="sec-title">How It Works</h2>
-      <p class="sec-sub" style="margin:0 auto;">
-        Up and running in days, not months. No tech headaches. No lengthy onboarding.
-      </p>
-    </div>
-
-    <div class="steps-wrap">
-      <div class="step reveal">
-        <div class="step-num">1</div>
-        <h3>Free Strategy Session</h3>
-        <p>We analyse your business, your market, and your goals. You get a clear, custom action plan — zero fluff, zero obligation.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">2</div>
-        <h3>We Build & Launch</h3>
-        <p>Your ads and AI follow-up system go live. Everything is custom-built for your specific business and audience.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">3</div>
-        <h3>Leads Come In. AI Follows Up.</h3>
-        <p>Our AI engages every lead instantly, filters out time-wasters, and books qualified prospects straight into your calendar.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">4</div>
-        <h3>You Show Up & Close</h3>
-        <p>Your calendar fills with ready-to-buy prospects. You focus on delivering great work — and growing your business.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── STATS ─── -->
-<section class="stats-section" id="results">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="reveal">
-        <div class="stat-num">7–14</div>
-        <div class="stat-label">Days to first booked appointments</div>
-      </div>
-      <div class="reveal">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">AI lead follow-up, zero downtime</div>
-      </div>
-      <div class="reveal">
-        <div class="stat-num">0</div>
-        <div class="stat-label">Extra staff required</div>
-      </div>
-      <div class="reveal">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Transparent reporting</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── COMPARISON ─── -->
-<section class="compare-section" id="compare">
-  <div class="container">
-    <div class="reveal" style="text-align:center; max-width:640px; margin:0 auto 0;">
-      <div class="sec-tag" style="justify-content:center;">Why Infinix Online</div>
-      <h2 class="sec-title">How We Stack Up</h2>
-      <p class="sec-sub" style="margin:0 auto;">See why service businesses choose us over traditional agencies and in-house teams.</p>
-    </div>
-
-    <div class="compare-table-wrap reveal">
-      <div class="compare-header">
-        <div class="compare-header-cell">Feature</div>
-        <div class="compare-header-cell">In-House Team</div>
-        <div class="compare-header-cell">Traditional Agency</div>
-        <div class="compare-header-cell highlight">
-          <span>Infinix Online</span>
-          <span class="best-badge">Best Choice</span>
+      <div class="hero-services">
+        <div class="hero-service-card">
+          <div class="hs-icon" style="background:rgba(24,119,242,.15)">
+            <!-- Meta / Facebook f logo -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+            </svg>
+          </div>
+          <div class="hs-title">Facebook &amp; Instagram Ads</div>
+          <div class="hs-desc">Scroll-stopping creatives and hyper-targeted campaigns that book appointments, not just clicks.</div>
+        </div>
+        <div class="hero-service-card">
+          <div class="hs-icon" style="background:rgba(66,133,244,.15)">
+            <!-- Google G logo -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+          </div>
+          <div class="hs-title">Google Ads</div>
+          <div class="hs-desc">Search, Display, and Remarketing campaigns built to capture high-intent buyers at the right moment.</div>
+        </div>
+        <div class="hero-service-card">
+          <div class="hs-icon" style="background:rgba(108,78,242,.15)">
+            <!-- Automation / workflow icon -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <div class="hs-title">GoHighLevel &amp; CRM Automation</div>
+          <div class="hs-desc">Full GHL setup, lead nurturing workflows, and calendar automation so no lead ever falls through the cracks.</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="compare-row">
-        <div class="compare-cell feature">24/7 AI Lead Follow-Up</div>
-        <div class="compare-cell"><span class="c-no">✕</span> Never</div>
-        <div class="compare-cell"><span class="c-no">✕</span> Never</div>
-        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Always on</div>
+<!-- ═══════════ CLIENT LOGOS ═══════════ -->
+<div class="logos-section">
+  <p class="logos-label">Trusted by Businesses Across Industries</p>
+  <div class="logos-track-wrap">
+    <div class="logos-track">
+      <div class="logo-item"><img src="images/logos/Skyeai.webp" alt="SkyeAI"></div>
+      <div class="logo-item"><img src="images/logos/mustard_growth.webp" alt="Mustard Growth"></div>
+      <div class="logo-item"><img src="images/logos/Brand_Clinic.webp" alt="Brand Clinic"></div>
+      <div class="logo-item"><img src="images/logos/Point_22.webp" alt="Point 22"></div>
+      <div class="logo-item"><img src="images/logos/ultimateshield.webp" alt="Ultimate Shield"></div>
+      <div class="logo-item"><img src="images/logos/OLV.webp" alt="Orlando Las Vegas"></div>
+      <div class="logo-item"><img src="images/logos/Guac_Digital.webp" alt="Guac Digital"></div>
+      <div class="logo-item"><img src="images/logos/Anywhere_Advisors.webp" alt="Anywhere Advisors"></div>
+      <div class="logo-item"><img src="images/logos/Elder_Answers.webp" alt="Elder Answers"></div>
+      <div class="logo-item"><img src="images/logos/BnB_Boost.webp" alt="BnB Boost"></div>
+      <div class="logo-item"><img src="images/logos/Proxel_Solutions.webp" alt="Proxel Solutions"></div>
+      <div class="logo-item"><img src="images/logos/Optrex_AI_Logo_Icon.webp" alt="Optrex AI"></div>
+      <div class="logo-item"><img src="images/logos/John_Mollura.webp" alt="John Mollura"></div>
+      <div class="logo-item"><img src="images/logos/The_Core_Room_Gold_logo.webp" alt="The Core Room"></div>
+      <div class="logo-item"><img src="images/logos/Creative_Vission.webp" alt="Creative Vision"></div>
+      <div class="logo-item"><img src="images/logos/HD_Transparent_Logo_e1567409676903.webp" alt="Client"></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="logo-item"><img src="images/logos/Skyeai.webp" alt="SkyeAI"></div>
+      <div class="logo-item"><img src="images/logos/mustard_growth.webp" alt="Mustard Growth"></div>
+      <div class="logo-item"><img src="images/logos/Brand_Clinic.webp" alt="Brand Clinic"></div>
+      <div class="logo-item"><img src="images/logos/Point_22.webp" alt="Point 22"></div>
+      <div class="logo-item"><img src="images/logos/ultimateshield.webp" alt="Ultimate Shield"></div>
+      <div class="logo-item"><img src="images/logos/OLV.webp" alt="Orlando Las Vegas"></div>
+      <div class="logo-item"><img src="images/logos/Guac_Digital.webp" alt="Guac Digital"></div>
+      <div class="logo-item"><img src="images/logos/Anywhere_Advisors.webp" alt="Anywhere Advisors"></div>
+      <div class="logo-item"><img src="images/logos/Elder_Answers.webp" alt="Elder Answers"></div>
+      <div class="logo-item"><img src="images/logos/BnB_Boost.webp" alt="BnB Boost"></div>
+      <div class="logo-item"><img src="images/logos/Proxel_Solutions.webp" alt="Proxel Solutions"></div>
+      <div class="logo-item"><img src="images/logos/Optrex_AI_Logo_Icon.webp" alt="Optrex AI"></div>
+      <div class="logo-item"><img src="images/logos/John_Mollura.webp" alt="John Mollura"></div>
+      <div class="logo-item"><img src="images/logos/The_Core_Room_Gold_logo.webp" alt="The Core Room"></div>
+      <div class="logo-item"><img src="images/logos/Creative_Vission.webp" alt="Creative Vision"></div>
+      <div class="logo-item"><img src="images/logos/HD_Transparent_Logo_e1567409676903.webp" alt="Client"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CAMPAIGN RESULTS ═══════════ -->
+<section class="section" id="results">
+  <div class="container">
+    <div class="results-header">
+      <div>
+        <div class="section-label reveal">Campaign Results</div>
+        <h2 class="section-title reveal">Real Numbers.<br>Real Clients.</h2>
+        <p class="section-sub reveal">Every screenshot is from a live campaign we managed. No mockups, no stock photos.</p>
       </div>
-      <div class="compare-row">
-        <div class="compare-cell feature">Results Within 7–14 Days</div>
-        <div class="compare-cell"><span class="c-no">✕</span> Months to ramp</div>
-        <div class="compare-cell"><span class="c-maybe">~</span> 60–90 days</div>
-        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> 7–14 days</div>
+      <div class="tabs reveal">
+        <button class="tab-btn active" data-tab="fb">Facebook Ads</button>
+        <button class="tab-btn" data-tab="google">Google Ads</button>
+        <button class="tab-btn" data-tab="ghl">GoHighLevel</button>
       </div>
-      <div class="compare-row">
-        <div class="compare-cell feature">No Extra Staff Required</div>
-        <div class="compare-cell"><span class="c-no">✕</span> Multiple hires</div>
-        <div class="compare-cell"><span class="c-maybe">~</span> Coordinator needed</div>
-        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Zero</div>
+    </div>
+
+    <!-- FB Ads Tab -->
+    <div class="tab-panel active" id="tab-fb">
+      <div class="results-gallery">
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/Facebook_Ads_for_Remodeling_Company.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/Facebook_Ads_for_Remodeling_Company.webp" alt="Facebook Ads – Remodeling Company" loading="lazy">
+          <div class="result-card-label">Remodeling Company</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads___Tree_Service_Business.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads___Tree_Service_Business.webp" alt="FB Ads – Tree Service" loading="lazy">
+          <div class="result-card-label">Tree Service Business</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Design_and_Remodel.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Design_and_Remodel.webp" alt="FB Ads – Design & Remodel" loading="lazy">
+          <div class="result-card-label">Design &amp; Remodel</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Mens_Health_Clinic.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Mens_Health_Clinic.webp" alt="FB Ads – Men's Health Clinic" loading="lazy">
+          <div class="result-card-label">Men's Health Clinic</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Business_Funding_Company.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Business_Funding_Company.webp" alt="FB Ads – Business Funding" loading="lazy">
+          <div class="result-card-label">Business Funding</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Flooring_Business.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Flooring_Business.webp" alt="FB Ads – Flooring Business" loading="lazy">
+          <div class="result-card-label">Flooring Business</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Kitchen_and_Bath_remodel.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Kitchen_and_Bath_remodel.webp" alt="FB Ads – Kitchen &amp; Bath" loading="lazy">
+          <div class="result-card-label">Kitchen &amp; Bath Remodel</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_KitchenandBathroom_New_Campaign.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_KitchenandBathroom_New_Campaign.webp" alt="FB Ads – Kitchen New Campaign" loading="lazy">
+          <div class="result-card-label">Kitchen &amp; Bathroom (New)</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Tax_Business_Coach.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Tax_Business_Coach.webp" alt="FB Ads – Tax Coach" loading="lazy">
+          <div class="result-card-label">Tax Business Coach</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Campaign_For_Restaurant.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/FB_Ads_Campaign_For_Restaurant.webp" alt="FB Ads – Restaurant" loading="lazy">
+          <div class="result-card-label">Restaurant Campaign</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/Auto_Details.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/Auto_Details.webp" alt="FB Ads – Auto Detailing" loading="lazy">
+          <div class="result-card-label">Auto Detailing</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/Local_Custom_Home_Builder.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/Local_Custom_Home_Builder.webp" alt="FB Ads – Home Builder" loading="lazy">
+          <div class="result-card-label">Custom Home Builder</div>
+        </div>
+        <div class="result-card" data-lb-group="fb" data-lb-src="images/fb-ads/2.%20FB%20Ads%20Results/Before_and_After.webp">
+          <img src="images/fb-ads/2.%20FB%20Ads%20Results/Before_and_After.webp" alt="Before &amp; After Results" loading="lazy">
+          <div class="result-card-label">Before &amp; After for a Therapy Clinic</div>
+        </div>
       </div>
-      <div class="compare-row">
-        <div class="compare-cell feature">Precision Ad Targeting</div>
-        <div class="compare-cell"><span class="c-maybe">~</span> Limited expertise</div>
-        <div class="compare-cell"><span class="c-maybe">~</span> Generic approach</div>
-        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Service business specialist</div>
+    </div>
+
+    <!-- Google Ads Tab -->
+    <div class="tab-panel" id="tab-google">
+      <div class="results-gallery">
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_KitchenandBathroom_Remodeling.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_KitchenandBathroom_Remodeling.webp" alt="Google Ads – Kitchen Remodeling" loading="lazy">
+          <div class="result-card-label">Kitchen &amp; Bathroom Remodeling</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_BeforeandAfter.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_BeforeandAfter.webp" alt="Google Ads – Before &amp; After" loading="lazy">
+          <div class="result-card-label">Before &amp; After</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_BeforeandAfter2_Insurance.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_BeforeandAfter2_Insurance.webp" alt="Google Ads – Insurance" loading="lazy">
+          <div class="result-card-label">Before &amp; After – Insurance</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads-result_countertops.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads-result_countertops.webp" alt="Google Ads – Countertops" loading="lazy">
+          <div class="result-card-label">Countertops</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_Earwax.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_Earwax.webp" alt="Google Ads – Earwax Clinic" loading="lazy">
+          <div class="result-card-label">Earwax Clinic</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_result_landscaping.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_result_landscaping.webp" alt="Google Ads – Landscaping" loading="lazy">
+          <div class="result-card-label">Landscaping</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_results_health_insurance.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_results_health_insurance.webp" alt="Google Ads – Health Insurance" loading="lazy">
+          <div class="result-card-label">Health Insurance</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads-How_I_Increased_the_Conversion_Rate_by_Optimizing_a_Form_Submission_Page.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads-How_I_Increased_the_Conversion_Rate_by_Optimizing_a_Form_Submission_Page.webp" alt="Increased Conversion Rate" loading="lazy">
+          <div class="result-card-label">+CVR via Form Optimization</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads-_Conversion_Rate.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads-_Conversion_Rate.webp" alt="Conversion Rate" loading="lazy">
+          <div class="result-card-label">Conversion Rate Lift</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_conversion_tracking.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_conversion_tracking.webp" alt="Conversion Tracking" loading="lazy">
+          <div class="result-card-label">Conversion Tracking Setup</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_enhanced_conversion_tracking.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_ads_enhanced_conversion_tracking.webp" alt="Enhanced Conversion Tracking" loading="lazy">
+          <div class="result-card-label">Enhanced Conversion Tracking</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_analytics_4_setup.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_analytics_4_setup.webp" alt="GA4 Setup" loading="lazy">
+          <div class="result-card-label">GA4 Setup</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Tag_Manager_Dashboard.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Tag_Manager_Dashboard.webp" alt="Google Tag Manager" loading="lazy">
+          <div class="result-card-label">Google Tag Manager</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_Remarketing_Paikos.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_Remarketing_Paikos.webp" alt="Remarketing" loading="lazy">
+          <div class="result-card-label">Remarketing Campaign</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_Anwar.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_Anwar.webp" alt="Google Ads Client" loading="lazy">
+          <div class="result-card-label">Financial Service</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_Faraz.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Google_Ads_Faraz.webp" alt="Google Ads Client Faraz" loading="lazy">
+          <div class="result-card-label">BTC ATM Service</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/Hannah-Increased_Conversions_by_39.13%.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/Hannah-Increased_Conversions_by_39.13%.webp" alt="Hannah +39% Conversions" loading="lazy">
+          <div class="result-card-label">Debt Collection Agency</div>
+        </div>
+        <div class="result-card" data-lb-group="google" data-lb-src="images/google-ads/1.%20Google%20Ads%20Results/FREE_AUDIT.webp">
+          <img src="images/google-ads/1.%20Google%20Ads%20Results/FREE_AUDIT.webp" alt="Free Audit" loading="lazy">
+          <div class="result-card-label">Free Account Audit</div>
+        </div>
       </div>
-      <div class="compare-row">
-        <div class="compare-cell feature">Automatic Appointment Booking</div>
-        <div class="compare-cell"><span class="c-no">✕</span> Manual only</div>
-        <div class="compare-cell"><span class="c-no">✕</span> Not included</div>
-        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Fully automated</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell feature">Full Transparent Reporting</div>
-        <div class="compare-cell"><span class="c-maybe">~</span> Inconsistent</div>
-        <div class="compare-cell"><span class="c-maybe">~</span> Vanity metrics</div>
-        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Real ROI tracking</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell feature">Predictable Monthly Cost</div>
-        <div class="compare-cell"><span class="c-no">✕</span> High &amp; variable</div>
-        <div class="compare-cell"><span class="c-maybe">~</span> Retainer + extras</div>
-        <div class="compare-cell highlight-col"><span class="c-yes">✓</span> Clear &amp; fixed</div>
+    </div>
+
+    <!-- GHL Tab -->
+    <div class="tab-panel" id="tab-ghl">
+      <div class="results-gallery" style="margin-bottom:24px">
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Automation-Lead_to_Appointment.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Automation-Lead_to_Appointment.webp" alt="GHL Lead to Appointment Automation" loading="lazy">
+          <div class="result-card-label">Lead → Appointment Automation</div>
+        </div>
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Automation.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Automation.webp" alt="GHL Automation" loading="lazy">
+          <div class="result-card-label">GHL Automation Workflow</div>
+        </div>
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Dashboard.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Dashboard.webp" alt="GHL Dashboard" loading="lazy">
+          <div class="result-card-label">GHL Dashboard</div>
+        </div>
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Dynamic_location_changes.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Dynamic_location_changes.webp" alt="GHL Dynamic Location" loading="lazy">
+          <div class="result-card-label">Dynamic Location Changes</div>
+        </div>
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Inbound_Webhok.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GoHighLevel_Inbound_Webhok.webp" alt="GHL Inbound Webhook" loading="lazy">
+          <div class="result-card-label">Inbound Webhook</div>
+        </div>
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GHL_Meta_Ads_Offline_Tracking.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GHL_Meta_Ads_Offline_Tracking.webp" alt="GHL Meta Ads Offline Tracking" loading="lazy">
+          <div class="result-card-label">Meta Ads Offline Tracking</div>
+        </div>
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GHL_new_1.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GHL_new_1.webp" alt="GHL A2P Verification" loading="lazy">
+          <div class="result-card-label">GHL A2P Verification</div>
+        </div>
+        <div class="result-card" data-lb-group="ghl" data-lb-src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GHL_new_2.webp">
+          <img src="images/ghl/5.%20GHL%20Automations%20%26%20Integration/GHL_new_2.webp" alt="GHL Meta Offline Tracking" loading="lazy">
+          <div class="result-card-label">GHL Meta Offline Tracking</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── TESTIMONIALS ─── -->
-<section id="testimonials">
+<!-- ═══════════ LANDING PAGES ═══════════ -->
+<section class="section" id="landing-pages" style="background:var(--surface)">
   <div class="container">
-    <div class="reveal" style="text-align:center; margin-bottom:64px;">
-      <div class="sec-tag" style="justify-content:center;">Testimonials</div>
-      <h2 class="sec-title">What Our Clients Say</h2>
+    <div class="section-label reveal">Landing Pages &amp; Funnels</div>
+    <h2 class="section-title reveal">Built to Convert,<br>Not Just Look Good.</h2>
+    <p class="section-sub reveal" style="margin-bottom:40px">Every funnel is designed around one goal: turning ad clicks into booked appointments.</p>
+    <div class="lp-gallery">
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Aesthetic_Clinic_Landing_Page.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Aesthetic_Clinic_Landing_Page.webp" alt="Aesthetic Clinic" loading="lazy">
+        <div class="lp-card-label">Aesthetic Clinic</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Business_Funding.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Business_Funding.webp" alt="Business Funding" loading="lazy">
+        <div class="lp-card-label">Business Funding</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Car_wash_website.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Car_wash_website.webp" alt="Car Wash" loading="lazy">
+        <div class="lp-card-label">Car Wash</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Financial_Coach.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Financial_Coach.webp" alt="Financial Coach" loading="lazy">
+        <div class="lp-card-label">Financial Coach</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/AI_and_Marketing_Funnel.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/AI_and_Marketing_Funnel.webp" alt="AI Marketing Funnel" loading="lazy">
+        <div class="lp-card-label">AI &amp; Marketing Funnel</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Mother_Performance_Clinic_Funnel.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Mother_Performance_Clinic_Funnel.webp" alt="Performance Clinic" loading="lazy">
+        <div class="lp-card-label">Performance Clinic</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Motherhood_Landing_Page.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Motherhood_Landing_Page.webp" alt="Motherhood" loading="lazy">
+        <div class="lp-card-label">Motherhood Program</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Painitng_Landing_Page_For_FB_Ads.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Painitng_Landing_Page_For_FB_Ads.webp" alt="Painting Company" loading="lazy">
+        <div class="lp-card-label">Painting Company</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Premarital_Couple_Health_and_Beauty_Funnel.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Premarital_Couple_Health_and_Beauty_Funnel.webp" alt="Health &amp; Beauty Funnel" loading="lazy">
+        <div class="lp-card-label">Health &amp; Beauty</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Recruitement_Funnel.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Recruitement_Funnel.webp" alt="Recruitment Funnel" loading="lazy">
+        <div class="lp-card-label">Recruitment Funnel</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Senior_Care_Landing_Page.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Senior_Care_Landing_Page.webp" alt="Senior Care" loading="lazy">
+        <div class="lp-card-label">Senior Care</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Tax_Coach.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Tax_Coach.webp" alt="Tax Coach" loading="lazy">
+        <div class="lp-card-label">Tax Coach</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Therapy_Clinic.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Therapy_Clinic.webp" alt="Therapy Clinic" loading="lazy">
+        <div class="lp-card-label">Therapy Clinic</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Landing_page.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Landing_page.webp" alt="Landing Page" loading="lazy">
+        <div class="lp-card-label">Service Business</div>
+      </div>
+      <div class="lp-card" data-pv-src="images/landing-pages/4.%20Landing%20Pages/Funnel/Landing_page_2.webp">
+        <img src="images/landing-pages/4.%20Landing%20Pages/Funnel/Landing_page_2.webp" alt="Landing Page 2" loading="lazy">
+        <div class="lp-card-label">Local Business</div>
+      </div>
     </div>
+  </div>
+</section>
 
+<!-- ═══════════ AD CREATIVES ═══════════ -->
+<section class="section" id="creatives">
+  <div class="container">
+    <div class="section-label reveal">Ad Creatives</div>
+    <h2 class="section-title reveal">Scroll-Stopping Visuals<br>That Drive Clicks.</h2>
+    <p class="section-sub reveal" style="margin-bottom:48px">Designed in-house for maximum relevance and CTR across platforms.</p>
+    <div class="creatives-grid">
+      <!-- Col 1 -->
+      <div class="creatives-col">
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/AC_1.webp"><img src="images/creatives/3.%20Ads%20Creative/AC_1.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/EZ_1.webp"><img src="images/creatives/3.%20Ads%20Creative/EZ_1.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_1.webp"><img src="images/creatives/3.%20Ads%20Creative/ads_1.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/FC_1.webp"><img src="images/creatives/3.%20Ads%20Creative/FC_1.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/dr_cooling_AC_ads_1.webp"><img src="images/creatives/3.%20Ads%20Creative/dr_cooling_AC_ads_1.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_2.webp"><img src="images/creatives/3.%20Ads%20Creative/ads_2.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ad_1.webp"><img src="images/creatives/3.%20Ads%20Creative/ad_1.webp" alt="Ad Creative" loading="lazy"></div>
+      </div>
+      <!-- Col 2 -->
+      <div class="creatives-col">
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/AC_2.webp"><img src="images/creatives/3.%20Ads%20Creative/AC_2.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/Celebrity.webp"><img src="images/creatives/3.%20Ads%20Creative/Celebrity.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/SF_1.webp"><img src="images/creatives/3.%20Ads%20Creative/SF_1.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_1_f.webp"><img src="images/creatives/3.%20Ads%20Creative/ads_1_f.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_2_(1).webp"><img src="images/creatives/3.%20Ads%20Creative/ads_2_(1).webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/adimage1.webp"><img src="images/creatives/3.%20Ads%20Creative/adimage1.webp" alt="Ad Creative" loading="lazy"></div>
+      </div>
+      <!-- Col 3 -->
+      <div class="creatives-col">
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ADS_3_f2.webp"><img src="images/creatives/3.%20Ads%20Creative/ADS_3_f2.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/EZ_3.webp"><img src="images/creatives/3.%20Ads%20Creative/EZ_3.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/Home_Insurance_3.webp"><img src="images/creatives/3.%20Ads%20Creative/Home_Insurance_3.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_1_image_1_f.webp"><img src="images/creatives/3.%20Ads%20Creative/ads_1_image_1_f.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_3.webp"><img src="images/creatives/3.%20Ads%20Creative/ads_3.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ad_image2I.webp"><img src="images/creatives/3.%20Ads%20Creative/ad_image2I.webp" alt="Ad Creative" loading="lazy"></div>
+      </div>
+      <!-- Col 4 -->
+      <div class="creatives-col">
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/Ads_5.webp"><img src="images/creatives/3.%20Ads%20Creative/Ads_5.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/EZ_4.webp"><img src="images/creatives/3.%20Ads%20Creative/EZ_4.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/EZ_5.webp"><img src="images/creatives/3.%20Ads%20Creative/EZ_5.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_1_image_3_f.webp"><img src="images/creatives/3.%20Ads%20Creative/ads_1_image_3_f.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/ads_4_kf.webp"><img src="images/creatives/3.%20Ads%20Creative/ads_4_kf.webp" alt="Ad Creative" loading="lazy"></div>
+        <div class="creative-item" data-lb-group="creatives" data-lb-src="images/creatives/3.%20Ads%20Creative/dr_cooling_AC_ads_5.webp"><img src="images/creatives/3.%20Ads%20Creative/dr_cooling_AC_ads_5.webp" alt="Ad Creative" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ VIDEO TESTIMONIALS ═══════════ -->
+<section class="section video-section" id="testimonials">
+  <div class="container">
+    <div class="section-label reveal">Video Testimonials</div>
+    <h2 class="section-title reveal">Clients in Their Own Words.</h2>
+    <p class="section-sub reveal">Don't take our word for it — hear directly from the business owners we've worked with.</p>
+    <div class="video-grid">
+      <div class="video-card reveal">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/4GBA1OkSmn4" title="Mike – SkyeAI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-card-body">
+          <div class="video-card-info">
+            <div class="video-card-name">Mike</div>
+            <div class="video-card-role">Co-Founder, SkyeAI · AI &amp; Marketing Agency</div>
+          </div>
+          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
+        </div>
+      </div>
+      <div class="video-card reveal" style="transition-delay:.1s">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/rAwUN5JaRxM" title="Greg Viner – Local Online Expert" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-card-body">
+          <div class="video-card-info">
+            <div class="video-card-name">Greg Viner</div>
+            <div class="video-card-role">Founder, Local Online Expert · Marketing Agency</div>
+          </div>
+          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
+        </div>
+      </div>
+      <div class="video-card reveal" style="transition-delay:.2s">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/noqHX7gtcl0" title="Aaron – Mustard Growth" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-card-body">
+          <div class="video-card-info">
+            <div class="video-card-name">Aaron</div>
+            <div class="video-card-role">Founder, Mustard Growth</div>
+          </div>
+          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WRITTEN TESTIMONIALS ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label reveal">Written Reviews</div>
+    <h2 class="section-title reveal">What Clients Say.</h2>
     <div class="testi-grid">
+
       <div class="testi-card reveal">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p class="testi-text">"Mrinmoy is a talented paid search expert. He's been helping me set up, maintain, and optimise my Google Ads account. He has shown good initiative and strong communication skills — very reliable."</p>
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"Mrinmoy is a talented paid search expert, he has been helping me set up, maintain and optimize my Google Ads account. He has shown good initiative and strong communication skills. He is also very reliable and has a high amount of integrity. I highly recommend him to anyone looking for a solid Google Ads manager."</p>
         <div class="testi-author">
-          <div class="testi-avatar">V</div>
+          <div class="testi-avatar"><img src="images/testimonials/Point_22.webp" alt="Anwar Hasen"></div>
           <div>
-            <div class="testi-name">Verified Client</div>
-            <div class="testi-role">Google Ads Management</div>
+            <div class="testi-name">Anwar Hasen</div>
+            <div class="testi-biz">Point 22 · Marketing Agency</div>
           </div>
+          <span class="platform-badge">Upwork</span>
         </div>
       </div>
 
-      <div class="testi-card featured reveal">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p class="testi-text">"Mrinmoy is not only extremely talented and professional but he has exceeded both expectations and duties for every job he's worked on for us. He truly goes the extra mile to ensure success."</p>
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"Mrinmoy has been an indispensable asset to my business, expertly managing our Meta and Google Ads campaigns while seamlessly handling all backend operations on GoHighLevel. His strategic approach and technical expertise have significantly enhanced our advertising performance, making a tangible impact on our growth and success."</p>
         <div class="testi-author">
-          <div class="testi-avatar">J</div>
+          <div class="testi-avatar"><img src="images/testimonials/Mustard_Growth.webp" alt="Aaron DeBenedetto"></div>
+          <div>
+            <div class="testi-name">Aaron DeBenedetto</div>
+            <div class="testi-biz">Mustard Growth Marketing</div>
+          </div>
+          <span class="platform-badge">Upwork</span>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:.2s">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"This guy is the best! I highly recommend him for anything related to GHL, Google Ads and Facebook Ads. I've never hired someone for work like this before but I was beyond impressed with his cooperation and knowledge! I look forward to many projects with him."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="images/testimonials/Ultimate_Shield.webp" alt="Cobin Heiland"></div>
+          <div>
+            <div class="testi-name">Cobin Heiland</div>
+            <div class="testi-biz">Ultimate Shield · Marketing Agency</div>
+          </div>
+          <span class="platform-badge">Upwork</span>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"Mrinmoy truly impressed me with his intuitive understanding of how to build a successful paid campaign. He took the time to analyze our broader strategic objectives before jumping in, always offering his professional insights where he thought something could be improved. He then nurtured the new campaign hour by hour in its first week to ensure the highest ROI."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="images/testimonials/karimah.webp" alt="Karimah Whitaker"></div>
+          <div>
+            <div class="testi-name">Karimah Whitaker</div>
+            <div class="testi-biz">Gelcom · Marketing Agency</div>
+          </div>
+          <span class="platform-badge">Upwork</span>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"Mrinmoy is not only extremely talented and professional but he has exceeded both expectations and duties for every job he's worked on for us. Mrinmoy truly goes the extra mile to ensure success. I will be using Mrinmoy for many new projects in the near future. I highly recommend Mrinmoy as a very competent and professional resource for your project."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="images/testimonials/Orlando_Las_Vegas.webp" alt="Jeffrey Nahom"></div>
           <div>
             <div class="testi-name">Jeffrey Nahom</div>
-            <div class="testi-role">President, First Class Cruise</div>
+            <div class="testi-biz">Orlando Las Vegas · Tourism</div>
           </div>
+          <span class="platform-badge">Upwork</span>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:.2s">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"Mrinmoy did an exceptional job helping us create several Google Ads, Google Tag Manager, and Google Analytics accounts from scratch. His expertise was evident from the beginning, and he guided us through the setup process with ease."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="images/testimonials/Life_in_Motion.webp" alt="Heather Frigaard"></div>
+          <div>
+            <div class="testi-name">Heather Frigaard</div>
+            <div class="testi-biz">Life in Motion</div>
+          </div>
+          <span class="platform-badge">Upwork</span>
         </div>
       </div>
 
       <div class="testi-card reveal">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <p class="testi-text">"Mrinmoy has been fantastic in my business. He works as our Media Buyer and is a vital part of our company, offering insights and ideas. His creativity and ability to adjust are truly praiseworthy."</p>
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"Mrinmoy is an exceptional talent and a very hard worker. Mrinmoy helped us optimize our GHL account and created a variety of automations for us as well! Great work! Highly recommend!"</p>
         <div class="testi-author">
-          <div class="testi-avatar">V</div>
+          <div class="testi-avatar"><img src="images/testimonials/Brand_Clinic.webp" alt="Anthony El Chibani"></div>
           <div>
-            <div class="testi-name">Verified Client</div>
-            <div class="testi-role">Media Buying & Strategy</div>
+            <div class="testi-name">Anthony El Chibani</div>
+            <div class="testi-biz">Brand Clinic · Marketing Agency</div>
+          </div>
+          <span class="platform-badge">Upwork</span>
+        </div>
+      </div>
+
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-quote">"Been working with Mrinmoy for a bit now and honestly, he knows his stuff. What really stood out to me was how smooth everything ran on GoHighLevel — from the funnels to the automations. The ad campaigns had amazing ROI. He actually cared about the results and kept things clear the whole way through. If you're using GoHighLevel and need someone who actually gets it, this is your guy."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="images/testimonials/BNB_Boost.webp" alt="Sebastian"></div>
+          <div>
+            <div class="testi-name">Sebastian</div>
+            <div class="testi-biz">BNB Boost</div>
+          </div>
+          <span class="platform-badge">GHL</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="section" id="about" style="background:var(--surface)">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-visual reveal">
+        <div class="about-photo-wrap">
+          <img src="images/mrinmoy_profile.webp" alt="Mrinmoy Sadiq – Paid Ads Specialist">
+        </div>
+        <div class="about-stats-row">
+          <div class="about-stat">
+            <div class="about-stat-val">$2M<em>+</em></div>
+            <div class="about-stat-lbl">Ad Spend Managed</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-val">120<em>+</em></div>
+            <div class="about-stat-lbl">Campaigns Launched</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-val">5<em>+</em></div>
+            <div class="about-stat-lbl">Years Experience</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-val">5<em>★</em></div>
+            <div class="about-stat-lbl">Upwork Rating</div>
           </div>
         </div>
       </div>
+      <div class="about-content reveal" style="transition-delay:.15s">
+        <div class="section-label">About the Founder</div>
+        <h2 class="section-title">Hi, I'm Mrinmoy —<br>Founder of Infinix Online.</h2>
+        <p>I'm a <strong>Paid Ads &amp; GoHighLevel specialist</strong> based in the UK and the founder of Infinix Online. I started this agency to help service businesses fill their calendars with qualified appointments — not just more leads.</p>
+        <p>Over the past 5+ years I've built and managed campaigns across <strong>Facebook Ads, Google Ads, and GHL</strong> for clients in home services, healthcare, coaching, and more. I assembled a specialist team so every client gets dedicated expertise — not a generalist wearing five hats.</p>
+        <p>We don't do retainers with zero accountability. Every campaign is tracked, every result is reported, and every dollar is optimized.</p>
+        <div class="about-highlights">
+          <div class="about-highlight">
+            <div class="hl-icon">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            Top-Rated Freelancer on Upwork
+          </div>
+          <div class="about-highlight">
+            <div class="hl-icon">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            Google Ads Certified
+          </div>
+          <div class="about-highlight">
+            <div class="hl-icon">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            GoHighLevel Certified Partner
+          </div>
+          <div class="about-highlight">
+            <div class="hl-icon">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            15+ Industries Served
+          </div>
+        </div>
+        <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="btn btn-lime">Let's Talk Strategy</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ─── CTA ─── -->
-<section class="cta-section" id="contact">
+<!-- ═══════════ TOOL STACK ═══════════ -->
+<section class="section tools-section">
   <div class="container">
-    <div class="cta-inner reveal">
-      <div class="sec-tag" style="justify-content:center; margin-bottom:22px;">Free Strategy Session</div>
-      <h2>Ready to Fill<br><span class="grad-text">Your Calendar?</span></h2>
-      <p>Book a free strategy session. We'll analyse your business and show you exactly how we'd grow it — no commitment, no pressure, no fluff.</p>
-      <a href="mailto:hello@infinixonline.com" class="btn-primary" style="font-size:17px; padding:19px 42px;">
-        Book Your Free Strategy Session
-        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <p class="cta-note"><span>✦</span> No contracts. No pressure. Just a clear plan for your growth.</p>
+    <div class="section-label reveal">Tech Stack</div>
+    <h2 class="section-title reveal">Tools We Use Daily.</h2>
+    <p class="section-sub reveal">Every platform chosen for precision, not popularity.</p>
+    <div class="tools-grid">
+      <div class="tool-card reveal">
+        <div class="tool-icon" style="background:rgba(66,133,244,.12)">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><path d="M47.766 24.497c0-1.578-.137-3.096-.393-4.545H24.39v8.594h13.144c-.567 3.043-2.28 5.62-4.858 7.348l7.853 6.085c4.576-4.218 7.237-10.43 7.237-17.482z" fill="#4285F4"/><path d="M24.39 48c6.585 0 12.108-2.182 16.143-5.92l-7.852-6.086c-2.178 1.463-4.966 2.327-8.291 2.327-6.375 0-11.776-4.305-13.705-10.091L2.68 34.314C6.69 42.28 14.937 48 24.39 48z" fill="#34A853"/><path d="M10.685 28.23a14.265 14.265 0 01-.743-4.527c0-1.57.265-3.097.72-4.527l-8.006-6.084A23.957 23.957 0 000 24c0 3.862.932 7.516 2.68 10.813l8.005-6.583z" fill="#FBBC05"/><path d="M24.39 9.568c3.59 0 6.814 1.236 9.354 3.657l7.013-7.013C36.49 2.36 30.975 0 24.39 0 14.937 0 6.69 5.72 2.68 13.686l8.005 6.49C12.614 13.873 18.015 9.568 24.39 9.568z" fill="#EA4335"/></svg>
+        </div>
+        <div class="tool-name">Google Ads</div>
+        <div class="tool-cat">Paid Search</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.05s">
+        <div class="tool-icon" style="background:rgba(24,119,242,.12)">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none"><path d="M44 24c0 11.046-8.954 20-20 20S4 35.046 4 24 12.954 4 24 4s20 8.954 20 20z" fill="#1877F2"/><path d="M31.2 30.4l1.04-6.8H25.6V19.2c0-1.848.92-3.6 3.84-3.6H32V9.6S29.44 9.2 27 9.2c-5.44 0-9 3.32-9 9.32V23.6H12v6.8h6v16.32A20.28 20.28 0 0024 46.4a20.28 20.28 0 006-.28V30.4h1.2z" fill="#fff"/></svg>
+        </div>
+        <div class="tool-name">Meta Ads</div>
+        <div class="tool-cat">Paid Social</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.1s">
+        <div class="tool-icon"><img src="images/tech-stack/GHL.webp" alt="GoHighLevel" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">GoHighLevel</div>
+        <div class="tool-cat">CRM &amp; Automation</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.15s">
+        <div class="tool-icon"><img src="images/tech-stack/Google-Analytics.webp" alt="Google Analytics 4" style="width:44px;height:44px;object-fit:contain"></div>
+        <div class="tool-name">Google Analytics 4</div>
+        <div class="tool-cat">Analytics</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.2s">
+        <div class="tool-icon"><img src="images/tech-stack/Tag-manager-logo.webp" alt="Google Tag Manager" style="width:44px;height:44px;object-fit:contain"></div>
+        <div class="tool-name">Google Tag Manager</div>
+        <div class="tool-cat">Tracking</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.25s">
+        <div class="tool-icon"><img src="images/tech-stack/Meta-Conversion-API.webp" alt="Meta Conversion API" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">Meta Conversion API</div>
+        <div class="tool-cat">Conversion Tracking</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.3s">
+        <div class="tool-icon"><img src="images/tech-stack/Clickfunnel.webp" alt="ClickFunnels" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">ClickFunnels</div>
+        <div class="tool-cat">Funnel Builder</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.35s">
+        <div class="tool-icon"><img src="images/tech-stack/unbounce.svg" alt="Unbounce" style="width:44px;height:44px;object-fit:contain"></div>
+        <div class="tool-name">Unbounce</div>
+        <div class="tool-cat">Landing Pages</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.4s">
+        <div class="tool-icon"><img src="images/tech-stack/Zappier.webp" alt="Zapier" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">Zapier</div>
+        <div class="tool-cat">Integrations</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.45s">
+        <div class="tool-icon"><img src="images/tech-stack/HubSpot.webp" alt="HubSpot" style="width:44px;height:44px;object-fit:contain"></div>
+        <div class="tool-name">HubSpot</div>
+        <div class="tool-cat">CRM</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.5s">
+        <div class="tool-icon"><img src="images/tech-stack/WordPress.webp" alt="WordPress" style="width:44px;height:44px;object-fit:contain"></div>
+        <div class="tool-name">WordPress</div>
+        <div class="tool-cat">Web Development</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.55s">
+        <div class="tool-icon"><img src="images/tech-stack/Systeme.io.webp" alt="Systeme.io" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">Systeme.io</div>
+        <div class="tool-cat">Funnel Builder</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.6s">
+        <div class="tool-icon"><img src="images/tech-stack/Hotjar.svg" alt="Hotjar" style="width:44px;height:44px;object-fit:contain"></div>
+        <div class="tool-name">Hotjar</div>
+        <div class="tool-cat">Heatmaps &amp; UX</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.65s">
+        <div class="tool-icon"><img src="images/tech-stack/Microsoft-Clarity.webp" alt="Microsoft Clarity" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">Microsoft Clarity</div>
+        <div class="tool-cat">Behaviour Analytics</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.7s">
+        <div class="tool-icon"><img src="images/tech-stack/callrail-CTA.webp" alt="CallRail" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">CallRail</div>
+        <div class="tool-cat">Call Tracking</div>
+      </div>
+      <div class="tool-card reveal" style="transition-delay:.75s">
+        <div class="tool-icon"><img src="images/tech-stack/Google-Looker-Studio-Logo-Square-Insight-Platforms.webp" alt="Looker Studio" style="width:44px;height:44px;object-fit:contain;border-radius:8px"></div>
+        <div class="tool-name">Looker Studio</div>
+        <div class="tool-cat">Reporting</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
-<footer>
-  <div class="footer-wrap">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="/" class="logo-wrap">
-          <img src="logo.svg" alt="Infinix Online" class="logo-img logo-img-footer">
-        </a>
-        <p>AI-powered lead generation and paid ads for service businesses. Fill your calendar without hiring more staff.</p>
+<!-- ═══════════ TEAM ═══════════ -->
+<section class="section" id="team">
+  <div class="container">
+    <div class="section-label reveal">The Team</div>
+    <h2 class="section-title reveal">Specialists, Not Generalists.</h2>
+    <p class="section-sub reveal">Every client gets a dedicated expert for each channel — no one wears five hats.</p>
+    <div class="team-grid">
+
+      <!-- Mrinmoy -->
+      <div class="team-card" data-team-delay="0">
+        <div class="team-photo-wrap">
+          <div class="team-photo-glow"></div>
+          <img class="team-photo" src="images/team/mrinmoy_team.webp" alt="Mrinmoy Sadiq" style="object-position: center top">
+        </div>
+        <div class="team-body">
+          <div class="team-name">Mrinmoy Sadiq</div>
+          <div class="team-role">Founder &amp; Lead<br>Media Buyer</div>
+        </div>
       </div>
 
+      <!-- Mahir -->
+      <div class="team-card" data-team-delay="100">
+        <div class="team-photo-wrap">
+          <div class="team-photo-glow"></div>
+          <img class="team-photo" src="images/team/mahir.webp" alt="Mahir M. Nahi" style="object-position: 50% 12%; transform: scale(1.5); transform-origin: 50% 12%">
+        </div>
+        <div class="team-body">
+          <div class="team-name">Mahir M. Nahi</div>
+          <div class="team-role">Media Buyer &amp;<br>GHL Expert</div>
+        </div>
+      </div>
+
+      <!-- Shadman -->
+      <div class="team-card" data-team-delay="200">
+        <div class="team-photo-wrap">
+          <div class="team-photo-glow"></div>
+          <img class="team-photo" src="images/team/shadman.webp" alt="Shadman B. Utsash" style="object-position: 50% 8%; transform: scale(1.6); transform-origin: 50% 8%">
+        </div>
+        <div class="team-body">
+          <div class="team-name">Shadman B. Utsash</div>
+          <div class="team-role">Media Buyer</div>
+        </div>
+      </div>
+
+      <!-- Ankur -->
+      <div class="team-card" data-team-delay="300">
+        <div class="team-photo-wrap">
+          <div class="team-photo-glow"></div>
+          <img class="team-photo" src="images/team/ankur.webp" alt="Ankur Biswas" style="object-position: center top">
+        </div>
+        <div class="team-body">
+          <div class="team-name">Ankur Biswas</div>
+          <div class="team-role">Graphic Designer &amp;<br>Funnel Builder</div>
+        </div>
+      </div>
+
+      <!-- Mohiuddin -->
+      <div class="team-card" data-team-delay="400">
+        <div class="team-photo-wrap">
+          <div class="team-photo-glow"></div>
+          <img class="team-photo" src="images/team/mohiuddin.webp" alt="Mohiuddin" style="object-position: center top">
+        </div>
+        <div class="team-body">
+          <div class="team-name">Mohiuddin</div>
+          <div class="team-role">Tracking Specialist</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="section cta-section" id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="section-label" style="justify-content:center; margin-bottom:20px">Get Started</div>
+      <h2>Ready to <em>Fill Your Calendar</em><br>with Qualified Leads?</h2>
+      <p>Book a free 30-minute strategy call. We'll review your current setup, identify quick wins, and build a roadmap for scaling your ad spend profitably.</p>
+      <div class="cta-actions">
+        <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="btn btn-lime" style="padding:16px 36px; font-size:16px">
+          Book Your Free Strategy Call
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#results" class="btn btn-outline" style="padding:16px 32px; font-size:16px">View Results First</a>
+      </div>
+      <p class="cta-note">No contracts. No retainer traps. Just results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="logo.svg" alt="Infinix Online" class="logo-img">
+        <p>Precision paid ads and GHL automation for service businesses that want real, measurable growth.</p>
+      </div>
       <div class="footer-col">
         <h4>Navigation</h4>
         <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#results">Campaign Results</a></li>
+          <li><a href="#landing-pages">Landing Pages</a></li>
+          <li><a href="#creatives">Ad Creatives</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#contact">Book a Call</a></li>
+          <li><a href="#about">About</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Legal</h4>
         <ul>
@@ -1399,18 +1674,14 @@
           <li><a href="refund.html">Refund Policy</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Contact</h4>
         <div class="footer-address">
           Suite A, 82 James Carter Road<br>
-          Mildenhall, Bury St. Edmunds<br>
-          England, United Kingdom<br>
-          IP28 7DE
+          Mildenhall, Bury St. Edmunds<br>England, United Kingdom<br>IP28 7DE
         </div>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>© 2025 Infinix Online. All rights reserved.</p>
       <div class="footer-legal">
@@ -1423,40 +1694,166 @@
   </div>
 </footer>
 
-<script>
-  /* ── Nav scroll ── */
-  const navbar = document.getElementById('navbar');
-  const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+<!-- ═══════════ LIGHTBOX ═══════════ -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose">×</button>
+    <button class="lb-nav lb-prev" id="lbPrev">‹</button>
+    <img src="" alt="" id="lbImg">
+    <button class="lb-nav lb-next" id="lbNext">›</button>
+  </div>
+</div>
 
-  /* ── Mobile menu ── */
-  const menu = document.getElementById('mobileMenu');
-  const ham  = document.getElementById('hamburger');
-  function toggleMenu() {
-    const open = menu.classList.toggle('open');
-    ham.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-  function closeMenu() {
-    menu.classList.remove('open');
-    ham.classList.remove('open');
+<!-- ═══════════ PAGE VIEWER ═══════════ -->
+<div class="pv-modal" id="pvModal">
+  <button class="pv-close" id="pvClose">×</button>
+  <button class="pv-nav pv-prev" id="pvPrev">‹</button>
+  <div class="pv-inner" id="pvInner">
+    <img src="" alt="" id="pvImg">
+  </div>
+  <button class="pv-nav pv-next" id="pvNext">›</button>
+</div>
+
+<script>
+/* ─── NAV TOGGLE ─── */
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+navToggle.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+/* ─── TABS ─── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+/* ─── LIGHTBOX ─── */
+let lbImages = [];
+let lbIndex = 0;
+
+function openLightbox(src, group) {
+  const cards = document.querySelectorAll('[data-lb-group="' + group + '"]');
+  lbImages = Array.from(cards).map(c => c.dataset.lbSrc);
+  lbIndex = lbImages.indexOf(src);
+  showLbImage();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showLbImage() {
+  const img = document.getElementById('lbImg');
+  img.src = lbImages[lbIndex];
+  img.alt = 'Result ' + (lbIndex + 1);
+}
+document.querySelectorAll('[data-lb-group]').forEach(card => {
+  card.addEventListener('click', () => {
+    openLightbox(card.dataset.lbSrc, card.dataset.lbGroup);
+  });
+});
+document.getElementById('lbClose').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('lbPrev').addEventListener('click', (e) => {
+  e.stopPropagation();
+  lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+  showLbImage();
+});
+document.getElementById('lbNext').addEventListener('click', (e) => {
+  e.stopPropagation();
+  lbIndex = (lbIndex + 1) % lbImages.length;
+  showLbImage();
+});
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('lightbox')) {
+    document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
+});
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length; showLbImage(); }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbImages.length; showLbImage(); }
+  if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+});
 
-  /* ── Scroll reveal ── */
-  const revealEls = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const siblings = [...entry.target.parentElement.children]
-        .filter(c => c.classList.contains('reveal'));
-      const idx = siblings.indexOf(entry.target);
-      setTimeout(() => entry.target.classList.add('visible'), idx * 90);
-      obs.unobserve(entry.target);
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(el => obs.observe(el));
+/* ─── PAGE VIEWER (Landing Pages) ─── */
+let pvImages = [];
+let pvIndex = 0;
+
+const pvCards = document.querySelectorAll('[data-pv-src]');
+pvCards.forEach((card, i) => {
+  card.addEventListener('click', () => {
+    pvImages = Array.from(pvCards).map(c => c.dataset.pvSrc);
+    pvIndex = i;
+    showPvImage();
+    document.getElementById('pvModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+function showPvImage() {
+  const img = document.getElementById('pvImg');
+  img.src = pvImages[pvIndex];
+  document.getElementById('pvModal').scrollTop = 0;
+}
+document.getElementById('pvClose').addEventListener('click', () => {
+  document.getElementById('pvModal').classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('pvPrev').addEventListener('click', () => {
+  pvIndex = (pvIndex - 1 + pvImages.length) % pvImages.length;
+  showPvImage();
+});
+document.getElementById('pvNext').addEventListener('click', () => {
+  pvIndex = (pvIndex + 1) % pvImages.length;
+  showPvImage();
+});
+document.getElementById('pvModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('pvModal')) {
+    document.getElementById('pvModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('pvModal').classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') { pvIndex = (pvIndex - 1 + pvImages.length) % pvImages.length; showPvImage(); }
+  if (e.key === 'ArrowRight') { pvIndex = (pvIndex + 1) % pvImages.length; showPvImage(); }
+  if (e.key === 'Escape') { document.getElementById('pvModal').classList.remove('open'); document.body.style.overflow = ''; }
+});
+
+/* ─── SCROLL REVEAL ─── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ── Team card staggered entrance ── */
+const teamObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.teamDelay || 0);
+      setTimeout(() => {
+        entry.target.classList.add('in-view');
+      }, delay);
+      teamObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.team-card').forEach(el => teamObserver.observe(el));
+
 </script>
 </body>
 </html>
