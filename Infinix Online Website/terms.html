@@ -29,12 +29,7 @@
       background: rgba(7,7,15,.88); backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--card-border);
     }
-    .logo-wrap { display: flex; align-items: center; gap: 13px; text-decoration: none; }
-    .logo-icon { flex-shrink: 0; filter: drop-shadow(0 0 10px rgba(139,92,246,.5)); }
-    .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
-    .logo-name { font-size: 17px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: #fff; }
-    .logo-name em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .logo-sub { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted-d); }
+    .logo-img { height: 40px; width: auto; }
     .nav-home { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
     .nav-home:hover { color: #fff; }
 
@@ -89,22 +84,10 @@
 <body>
 
 <nav>
-  <a href="/" class="logo-wrap">
-    <svg class="logo-icon" width="38" height="22" viewBox="-26 -14 52 28" fill="none">
-      <defs>
-        <linearGradient id="lg" x1="-26" y1="-14" x2="26" y2="14" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#a78bfa"/><stop offset="1" stop-color="#60a5fa"/>
-        </linearGradient>
-      </defs>
-      <path d="M0,-3 C2,-12 20,-13 22,0 C20,13 2,12 0,3 C-2,-12 -20,-13 -22,0 C-20,13 -2,12 0,3 C-2,-12 -20,-13 -22,0"
-            stroke="url(#lg)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <div class="logo-text">
-      <span class="logo-name">INFIN<em>IX</em></span>
-      <span class="logo-sub">ONLINE</span>
-    </div>
+  <a href="index.html">
+    <img src="logo.svg" alt="Infinix Online" class="logo-img">
   </a>
-  <a href="/" class="nav-home">← Back to Home</a>
+  <a href="index.html" class="nav-home">← Back to Home</a>
 </nav>
 
 <div class="page-wrap">
@@ -191,7 +174,7 @@
       Suite A, 82 James Carter Road<br>
       Mildenhall, Bury St. Edmunds<br>
       England, United Kingdom, IP28 7DE<br>
-      Email: <a href="mailto:hello@infinixonline.com" style="color:var(--primary-l);text-decoration:none;">hello@infinixonline.com</a></p>
+      Email: <a href="mailto:mrinmoy@infinixonline.com" style="color:var(--primary-l);text-decoration:none;">mrinmoy@infinixonline.com</a></p>
     </div>
 
   </div>

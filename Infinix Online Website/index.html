@@ -65,21 +65,80 @@ ul { list-style: none; }
 /* ─── BUTTONS ─── */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 28px; border-radius: 8px;
-  font-size: 15px; font-weight: 600; transition: all .2s;
+  padding: 14px 28px; border-radius: 100px;
+  font-size: 15px; font-weight: 700;
+  cursor: pointer; position: relative; text-decoration: none;
+  transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s;
+  isolation: isolate;
 }
-.btn-primary {
-  background: var(--purple); color: #fff;
-}
-.btn-primary:hover { background: var(--purple-lt); transform: translateY(-1px); }
+
+/* ── Lime / primary CTA button ── */
 .btn-lime {
-  background: var(--lime); color: #07090f;
+  /* 1-px gradient border via box-shadow + background clip trick */
+  background: linear-gradient(#07090f, #07090f) padding-box,
+              linear-gradient(135deg, #b6ef45, #9fd936) border-box;
+  border: 1.5px solid transparent;
+  color: #b6ef45;
+  box-shadow: 0 0 20px rgba(182,239,69,.15), 0 4px 20px rgba(0,0,0,.4);
+  overflow: hidden;
 }
-.btn-lime:hover { background: var(--lime-dk); transform: translateY(-1px); }
+/* inner label keeps text sharp */
+.btn-lime span, .btn-lime svg { position: relative; z-index: 1; }
+/* radial glow overlay — appears on hover */
+.btn-lime::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(75% 100% at 50% 0%,
+    rgba(182,239,69,.55) 0%, rgba(182,239,69,0) 75%);
+  opacity: 0; transition: opacity .45s; z-index: -1; pointer-events: none;
+}
+.btn-lime:hover::before { opacity: 1; }
+.btn-lime:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(182,239,69,.3), 0 8px 28px rgba(0,0,0,.5);
+  color: #fff;
+}
+
+/* ── Outline / secondary button ── */
 .btn-outline {
-  border: 1.5px solid var(--border); color: var(--text);
+  background: linear-gradient(#07090f, #0d1020) padding-box,
+              linear-gradient(135deg, rgba(108,78,242,.6), rgba(139,111,247,.4), rgba(108,78,242,.6)) border-box;
+  border: 1.5px solid transparent;
+  color: var(--text);
+  box-shadow: 0 0 16px rgba(108,78,242,.08), 0 4px 16px rgba(0,0,0,.3);
+  overflow: hidden;
 }
-.btn-outline:hover { border-color: var(--purple-lt); color: var(--purple-lt); }
+.btn-outline span, .btn-outline svg { position: relative; z-index: 1; }
+.btn-outline::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(75% 100% at 50% 0%,
+    rgba(108,78,242,.4) 0%, rgba(108,78,242,0) 75%);
+  opacity: 0; transition: opacity .45s; z-index: -1; pointer-events: none;
+}
+.btn-outline:hover::before { opacity: 1; }
+.btn-outline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(108,78,242,.25), 0 8px 24px rgba(0,0,0,.4);
+  color: #fff;
+}
+
+/* ── Primary (purple) ── */
+.btn-primary {
+  background: linear-gradient(#07090f, #07090f) padding-box,
+              linear-gradient(135deg, var(--purple), var(--purple-lt)) border-box;
+  border: 1.5px solid transparent;
+  color: var(--purple-lt); overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(75% 100% at 50% 0%,
+    rgba(108,78,242,.5) 0%, rgba(108,78,242,0) 75%);
+  opacity: 0; transition: opacity .45s; z-index: -1; pointer-events: none;
+}
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary:hover { transform: translateY(-2px); color: #fff; }
 
 /* ═══════════════════════════════════════════════
    NAV
@@ -105,7 +164,7 @@ ul { list-style: none; }
   transition: color .2s;
 }
 .nav-links a:hover { color: var(--text); }
-.nav-cta .btn { padding: 10px 22px; font-size: 14px; }
+.nav-cta .btn { padding: 10px 22px; font-size: 14px; font-weight: 700; }
 .nav-toggle {
   display: none; flex-direction: column; gap: 5px;
   width: 30px; padding: 4px 0;
@@ -138,28 +197,28 @@ ul { list-style: none; }
   content: '';
   position: absolute; top: -160px; left: 50%; transform: translateX(-50%);
   width: 1000px; height: 700px;
-  background: radial-gradient(ellipse, rgba(108,78,242,.2) 0%, transparent 65%);
-  pointer-events: none;
+  background: radial-gradient(ellipse, rgba(108,78,242,.22) 0%, transparent 65%);
+  pointer-events: none; z-index: 1;
 }
 .hero::after {
   content: '';
   position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%);
   width: 800px; height: 400px;
-  background: radial-gradient(ellipse, rgba(182,239,69,.06) 0%, transparent 70%);
-  pointer-events: none;
+  background: radial-gradient(ellipse, rgba(182,239,69,.07) 0%, transparent 70%);
+  pointer-events: none; z-index: 1;
 }
 /* side glows */
 .hero-glow-l {
   position: absolute; top: 30%; left: -120px;
   width: 400px; height: 400px;
-  background: radial-gradient(ellipse, rgba(108,78,242,.1) 0%, transparent 70%);
-  pointer-events: none;
+  background: radial-gradient(ellipse, rgba(108,78,242,.12) 0%, transparent 70%);
+  pointer-events: none; z-index: 1;
 }
 .hero-glow-r {
   position: absolute; top: 40%; right: -120px;
   width: 400px; height: 400px;
-  background: radial-gradient(ellipse, rgba(182,239,69,.07) 0%, transparent 70%);
-  pointer-events: none;
+  background: radial-gradient(ellipse, rgba(182,239,69,.08) 0%, transparent 70%);
+  pointer-events: none; z-index: 1;
 }
 .hero-inner { position: relative; z-index: 1; }
 .hero-badge {
@@ -353,23 +412,56 @@ ul { list-style: none; }
    VIDEO TESTIMONIALS
 ═══════════════════════════════════════════════ */
 .video-section { background: var(--surface); }
+/* ── VIDEO TESTIMONIALS ── */
 .video-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
   margin-top: 48px;
 }
 .video-card {
-  border-radius: var(--radius); overflow: hidden;
+  border-radius: 16px; overflow: hidden;
   border: 1px solid var(--border); background: var(--card);
-  transition: transform .2s, border-color .2s;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s, box-shadow .3s;
+  cursor: pointer;
 }
-.video-card:hover { transform: translateY(-4px); border-color: var(--purple); }
-.video-embed {
-  position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+.video-card:hover { transform: translateY(-6px); border-color: rgba(108,78,242,.5); box-shadow: 0 16px 48px rgba(0,0,0,.5), 0 0 32px rgba(108,78,242,.15); }
+
+/* Thumbnail area */
+.video-thumb {
+  position: relative; aspect-ratio: 16/9; overflow: hidden;
+  background: #0a0d1a;
 }
-.video-embed iframe {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  border: none;
+.video-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
 }
+.video-card:hover .video-thumb img { transform: scale(1.05); }
+
+/* Dark gradient overlay */
+.video-thumb-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(7,9,15,.75) 0%, rgba(7,9,15,.1) 50%, transparent 100%);
+  transition: background .3s;
+}
+.video-card:hover .video-thumb-overlay {
+  background: linear-gradient(to top, rgba(7,9,15,.6) 0%, rgba(108,78,242,.08) 50%, transparent 100%);
+}
+
+/* Play button */
+.video-play-btn {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255,255,255,.3);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .3s, background .3s, border-color .3s;
+}
+.video-card:hover .video-play-btn {
+  transform: translate(-50%,-50%) scale(1.12);
+  background: rgba(108,78,242,.55);
+  border-color: rgba(108,78,242,.7);
+}
+.video-play-btn svg { margin-left: 4px; }
+
 .video-card-body { padding: 16px; display: flex; align-items: center; gap: 10px; }
 .video-card-info { flex: 1; }
 .video-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
@@ -381,6 +473,38 @@ ul { list-style: none; }
   padding: 3px 9px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
 }
 .verified-badge svg { flex-shrink: 0; }
+
+/* ── VIDEO MODAL ── */
+.video-modal {
+  display: none; position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,.88); backdrop-filter: blur(10px);
+  align-items: center; justify-content: center;
+  animation: vmFadeIn .2s ease;
+}
+.video-modal.open { display: flex; }
+@keyframes vmFadeIn { from { opacity:0 } to { opacity:1 } }
+.video-modal-inner {
+  position: relative; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,.8);
+  animation: vmSlideUp .3s cubic-bezier(.22,1,.36,1);
+  max-height: 90vh; max-width: 90vw;
+  background: #000;
+}
+.video-modal-inner.landscape { width: 90vw; max-width: 960px; aspect-ratio: 16/9; }
+.video-modal-inner.portrait  { height: 85vh; max-width: 480px; aspect-ratio: 9/16; }
+@keyframes vmSlideUp { from { transform: translateY(32px); opacity:0 } to { transform:translateY(0); opacity:1 } }
+.video-modal-inner video {
+  width: 100%; height: 100%; display: block; background: #000; object-fit: contain;
+}
+.video-modal-close {
+  position: fixed; top: 20px; right: 20px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+  color: #fff; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .2s; z-index: 10001;
+}
+.video-modal-close:hover { background: rgba(255,255,255,.2); }
 
 /* ═══════════════════════════════════════════════
    WRITTEN TESTIMONIALS
@@ -743,7 +867,7 @@ footer {
   .about-inner { grid-template-columns: 1fr; gap: 48px; }
   .about-visual { max-width: 480px; }
   .testi-grid { grid-template-columns: 1fr 1fr; }
-  .video-grid { grid-template-columns: 1fr 1fr; }
+  .video-grid { grid-template-columns: 1fr 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .creatives-col:last-child { display: none; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
@@ -754,7 +878,7 @@ footer {
   .nav-links, .nav-cta { display: none; }
   .nav-toggle { display: flex; }
   .testi-grid { grid-template-columns: 1fr; }
-  .video-grid { grid-template-columns: 1fr; }
+  .video-grid { grid-template-columns: 1fr 1fr; }
   .creatives-col:nth-child(3), .creatives-col:last-child { display: none; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; text-align: center; }
@@ -776,7 +900,18 @@ footer {
   .about-stats-row { grid-template-columns: 1fr 1fr; }
   .team-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
 }
+
+/* ── HERO SPARKLES ── */
+#hero-particles {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+#hero-particles canvas { position: absolute; inset: 0; }
+
   </style>
+  <!-- tsParticles CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" defer></script>
 </head>
 <body>
 
@@ -815,6 +950,7 @@ footer {
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero">
+  <div id="hero-particles"></div>
   <div class="hero-glow-l"></div>
   <div class="hero-glow-r"></div>
   <div class="container">
@@ -1242,9 +1378,15 @@ footer {
     <h2 class="section-title reveal">Clients in Their Own Words.</h2>
     <p class="section-sub reveal">Don't take our word for it — hear directly from the business owners we've worked with.</p>
     <div class="video-grid">
-      <div class="video-card reveal">
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/4GBA1OkSmn4" title="Mike – SkyeAI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+      <!-- Mike -->
+      <div class="video-card reveal" data-video="images/videos/mike.mp4">
+        <div class="video-thumb">
+          <img src="images/videos/mike_thumb.webp" alt="Mike testimonial" loading="lazy">
+          <div class="video-thumb-overlay"></div>
+          <div class="video-play-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
         </div>
         <div class="video-card-body">
           <div class="video-card-info">
@@ -1254,9 +1396,15 @@ footer {
           <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
-      <div class="video-card reveal" style="transition-delay:.1s">
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/rAwUN5JaRxM" title="Greg Viner – Local Online Expert" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+      <!-- Greg -->
+      <div class="video-card reveal" style="transition-delay:.1s" data-video="images/videos/greg.mp4" data-orientation="portrait">
+        <div class="video-thumb">
+          <img src="images/videos/greg_thumb.webp" alt="Greg Viner testimonial" loading="lazy">
+          <div class="video-thumb-overlay"></div>
+          <div class="video-play-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
         </div>
         <div class="video-card-body">
           <div class="video-card-info">
@@ -1266,9 +1414,15 @@ footer {
           <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
-      <div class="video-card reveal" style="transition-delay:.2s">
-        <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/noqHX7gtcl0" title="Aaron – Mustard Growth" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+      <!-- Aaron -->
+      <div class="video-card reveal" style="transition-delay:.2s" data-video="images/videos/aaron.mp4" data-orientation="portrait">
+        <div class="video-thumb">
+          <img src="images/videos/aaron_thumb.webp" alt="Aaron testimonial" loading="lazy">
+          <div class="video-thumb-overlay"></div>
+          <div class="video-play-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
         </div>
         <div class="video-card-body">
           <div class="video-card-info">
@@ -1278,9 +1432,72 @@ footer {
           <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
+
+      <!-- Marcus -->
+      <div class="video-card reveal" style="transition-delay:.3s" data-video="images/videos/marcus.mp4">
+        <div class="video-thumb">
+          <img src="images/videos/marcus_thumb.webp" alt="Marcus testimonial" loading="lazy">
+          <div class="video-thumb-overlay"></div>
+          <div class="video-play-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="video-card-body">
+          <div class="video-card-info">
+            <div class="video-card-name">Marcus</div>
+            <div class="video-card-role">Verified Client</div>
+          </div>
+          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
+        </div>
+      </div>
+
+      <!-- Austin -->
+      <div class="video-card reveal" style="transition-delay:.4s" data-video="images/videos/austin.mp4">
+        <div class="video-thumb">
+          <img src="images/videos/austin_thumb.webp" alt="Austin Miller testimonial" loading="lazy">
+          <div class="video-thumb-overlay"></div>
+          <div class="video-play-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="video-card-body">
+          <div class="video-card-info">
+            <div class="video-card-name">Austin Miller</div>
+            <div class="video-card-role">Verified Client</div>
+          </div>
+          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
+        </div>
+      </div>
+
+      <!-- Mike & SkyeAI full version -->
+      <div class="video-card reveal" style="transition-delay:.5s" data-video="images/videos/mike_skyeai.mp4">
+        <div class="video-thumb">
+          <img src="images/videos/mike_skyeai_thumb.webp" alt="Mike SkyeAI full testimonial" loading="lazy">
+          <div class="video-thumb-overlay"></div>
+          <div class="video-play-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="video-card-body">
+          <div class="video-card-info">
+            <div class="video-card-name">Mike &amp; Mrinmoy</div>
+            <div class="video-card-role">Co-Founder, SkyeAI · Full Interview</div>
+          </div>
+          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+  <button class="video-modal-close" id="videoModalClose">×</button>
+  <div class="video-modal-inner">
+    <video id="videoModalPlayer" controls playsinline></video>
+  </div>
+</div>
 
 <!-- ═══════════ WRITTEN TESTIMONIALS ═══════════ -->
 <section class="section">
@@ -1678,7 +1895,8 @@ footer {
         <h4>Contact</h4>
         <div class="footer-address">
           Suite A, 82 James Carter Road<br>
-          Mildenhall, Bury St. Edmunds<br>England, United Kingdom<br>IP28 7DE
+          Mildenhall, Bury St. Edmunds<br>England, United Kingdom<br>IP28 7DE<br><br>
+          <a href="mailto:mrinmoy@infinixonline.com" style="color:var(--purple-lt);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--purple-lt)'">mrinmoy@infinixonline.com</a>
         </div>
       </div>
     </div>
@@ -1839,6 +2057,94 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ── Video Modal ── */
+const videoModal = document.getElementById('videoModal');
+const videoPlayer = document.getElementById('videoModalPlayer');
+const videoModalClose = document.getElementById('videoModalClose');
+
+const videoModalInner = document.querySelector('.video-modal-inner');
+
+document.querySelectorAll('.video-card[data-video]').forEach(card => {
+  card.addEventListener('click', () => {
+    const src = card.dataset.video;
+    const orientation = card.dataset.orientation === 'portrait' ? 'portrait' : 'landscape';
+    videoModalInner.classList.remove('portrait', 'landscape');
+    videoModalInner.classList.add(orientation);
+    videoPlayer.src = src;
+    videoPlayer.currentTime = 0;
+    videoModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    videoPlayer.play().catch(() => {});
+  });
+});
+
+function closeVideoModal() {
+  videoModal.classList.remove('open');
+  videoPlayer.pause();
+  videoPlayer.src = '';
+  document.body.style.overflow = '';
+}
+videoModalClose.addEventListener('click', closeVideoModal);
+videoModal.addEventListener('click', e => { if (e.target === videoModal) closeVideoModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideoModal(); });
+
+/* ── Hero Sparkles ── */
+function initSparkles() {
+  if (typeof tsParticles === 'undefined') return;
+  tsParticles.load("hero-particles", {
+    background: { color: { value: "transparent" } },
+    fullScreen: { enable: false },
+    fpsLimit: 60,
+    particles: {
+      number: {
+        value: 160,
+        density: { enable: true, area: 900 }
+      },
+      color: { value: ["#ffffff", "#b6ef45", "#8b6ff7"] },
+      shape: { type: "circle" },
+      opacity: {
+        value: { min: 0.05, max: 0.75 },
+        animation: {
+          enable: true,
+          speed: 1.2,
+          minimumValue: 0.05,
+          sync: false
+        }
+      },
+      size: {
+        value: { min: 0.5, max: 1.8 },
+        animation: { enable: false }
+      },
+      move: {
+        enable: true,
+        speed: { min: 0.08, max: 0.4 },
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: { default: "out" }
+      },
+      twinkle: {
+        particles: { enable: true, frequency: 0.08, opacity: 1 }
+      }
+    },
+    detectRetina: true,
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "bubble" },
+        resize: true
+      },
+      modes: {
+        bubble: { distance: 160, size: 2.5, duration: 2, opacity: 0.9 }
+      }
+    }
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => setTimeout(initSparkles, 300));
+} else {
+  setTimeout(initSparkles, 300);
+}
 
 /* ── Team card staggered entrance ── */
 const teamObserver = new IntersectionObserver((entries) => {
