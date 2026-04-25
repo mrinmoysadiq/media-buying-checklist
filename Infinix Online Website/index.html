@@ -533,56 +533,72 @@ ul { list-style: none; }
 /* ═══════════════════════════════════════════════
    WRITTEN TESTIMONIALS
 ═══════════════════════════════════════════════ */
-.testi-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+/* Scrolling columns layout */
+.testi-columns-wrap {
+  display: flex; gap: 20px;
+  max-height: 740px; overflow: hidden;
   margin-top: 48px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
 }
+.testi-col { flex: 1; min-width: 0; }
+.testi-col-track {
+  display: flex; flex-direction: column; gap: 20px;
+  animation: testi-col-scroll var(--col-dur, 20s) linear infinite;
+}
+.testi-col-track:hover { animation-play-state: paused; }
+@keyframes testi-col-scroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+.testi-col:nth-child(2) { display: none; }
+.testi-col:nth-child(3) { display: none; }
+@media (min-width: 768px) { .testi-col:nth-child(2) { display: block; } }
+@media (min-width: 1024px) { .testi-col:nth-child(3) { display: block; } }
+
 .testi-card {
   border: 1.5px solid transparent;
   background: linear-gradient(var(--card), var(--card)) padding-box,
     conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--purple) 72%, var(--lime) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
   animation: shine-border-spin 7s linear infinite;
-  border-radius: var(--radius); padding: 28px;
-  transition: transform .2s, box-shadow .2s;
+  border-radius: var(--radius); padding: 24px;
+  transition: box-shadow .2s;
 }
-.testi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(108,78,242,.2); }
-.testi-stars { display: flex; gap: 3px; margin-bottom: 16px; }
-.testi-stars span { color: var(--lime); font-size: 16px; }
+.testi-card:hover { box-shadow: 0 8px 32px rgba(108,78,242,.2); }
+.testi-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+.testi-stars span { color: var(--lime); font-size: 15px; }
 .testi-quote {
-  font-size: 15px; line-height: 1.7; color: var(--muted);
-  margin-bottom: 20px;
+  font-size: 14px; line-height: 1.75; color: var(--muted);
+  margin-bottom: 18px;
 }
 .testi-author {
   display: flex; align-items: center; gap: 12px;
-  border-top: 1px solid var(--border); padding-top: 16px;
+  border-top: 1px solid var(--border); padding-top: 14px;
 }
 .testi-avatar {
-  width: 42px; height: 42px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%;
   background: linear-gradient(135deg, var(--purple), var(--purple-lt));
   display: flex; align-items: center; justify-content: center;
   font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0;
   overflow: hidden;
 }
-.testi-avatar img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
+.testi-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .testi-name {
-  font-size: 14px; font-weight: 700; color: var(--text);
+  font-size: 13px; font-weight: 700; color: var(--text);
   display: flex; align-items: center; gap: 6px;
 }
 .testi-name::after {
   content: '✓';
   display: inline-flex; align-items: center; justify-content: center;
-  width: 16px; height: 16px; border-radius: 50%;
+  width: 15px; height: 15px; border-radius: 50%;
   background: rgba(182,239,69,.15); border: 1px solid rgba(182,239,69,.35);
-  color: var(--lime); font-size: 9px; font-weight: 900;
-  flex-shrink: 0;
+  color: var(--lime); font-size: 9px; font-weight: 900; flex-shrink: 0;
 }
-.testi-biz { font-size: 12px; color: var(--muted); }
+.testi-biz { font-size: 11px; color: var(--muted); }
 .platform-badge {
-  margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: .05em;
+  margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: .05em;
   text-transform: uppercase; color: var(--lime); background: rgba(182,239,69,.1);
-  border: 1px solid rgba(182,239,69,.2); padding: 3px 8px; border-radius: 5px;
+  border: 1px solid rgba(182,239,69,.2); padding: 3px 8px; border-radius: 5px; flex-shrink: 0;
 }
 
 /* ═══════════════════════════════════════════════
@@ -1534,109 +1550,192 @@ footer {
   <div class="container">
     <div class="section-label reveal">Written Reviews</div>
     <h2 class="section-title reveal">What Clients Say.</h2>
-    <div class="testi-grid">
 
-      <div class="testi-card reveal">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"Mrinmoy is a talented paid search expert, he has been helping me set up, maintain and optimize my Google Ads account. He has shown good initiative and strong communication skills. He is also very reliable and has a high amount of integrity. I highly recommend him to anyone looking for a solid Google Ads manager."</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/Point_22.webp" alt="Anwar Hasen"></div>
-          <div>
-            <div class="testi-name">Anwar Hasen</div>
-            <div class="testi-biz">Point 22 · Marketing Agency</div>
+    <div class="testi-columns-wrap">
+
+      <!-- Column 1 (3 cards × 2 for seamless loop) -->
+      <div class="testi-col">
+        <div class="testi-col-track" style="--col-dur:22s">
+          <!-- original -->
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy is a talented paid search expert, he has been helping me set up, maintain and optimize my Google Ads account. He has shown good initiative and strong communication skills. He is also very reliable and has a high amount of integrity. I highly recommend him to anyone looking for a solid Google Ads manager."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Point_22.webp" alt="Anwar Hasen"></div>
+              <div><div class="testi-name">Anwar Hasen</div><div class="testi-biz">Point 22 · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
           </div>
-          <span class="platform-badge">Upwork</span>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy has been an indispensable asset to my business, expertly managing our Meta and Google Ads campaigns while seamlessly handling all backend operations on GoHighLevel. His strategic approach and technical expertise have significantly enhanced our advertising performance, making a tangible impact on our growth and success."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Mustard_Growth.webp" alt="Aaron DeBenedetto"></div>
+              <div><div class="testi-name">Aaron DeBenedetto</div><div class="testi-biz">Mustard Growth Marketing</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"This guy is the best! I highly recommend him for anything related to GHL, Google Ads and Facebook Ads. I've never hired someone for work like this before but I was beyond impressed with his cooperation and knowledge! I look forward to many projects with him."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Ultimate_Shield.webp" alt="Cobin Heiland"></div>
+              <div><div class="testi-name">Cobin Heiland</div><div class="testi-biz">Ultimate Shield · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <!-- duplicate for loop -->
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy is a talented paid search expert, he has been helping me set up, maintain and optimize my Google Ads account. He has shown good initiative and strong communication skills. He is also very reliable and has a high amount of integrity. I highly recommend him to anyone looking for a solid Google Ads manager."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Point_22.webp" alt="Anwar Hasen"></div>
+              <div><div class="testi-name">Anwar Hasen</div><div class="testi-biz">Point 22 · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy has been an indispensable asset to my business, expertly managing our Meta and Google Ads campaigns while seamlessly handling all backend operations on GoHighLevel. His strategic approach and technical expertise have significantly enhanced our advertising performance, making a tangible impact on our growth and success."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Mustard_Growth.webp" alt="Aaron DeBenedetto"></div>
+              <div><div class="testi-name">Aaron DeBenedetto</div><div class="testi-biz">Mustard Growth Marketing</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"This guy is the best! I highly recommend him for anything related to GHL, Google Ads and Facebook Ads. I've never hired someone for work like this before but I was beyond impressed with his cooperation and knowledge! I look forward to many projects with him."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Ultimate_Shield.webp" alt="Cobin Heiland"></div>
+              <div><div class="testi-name">Cobin Heiland</div><div class="testi-biz">Ultimate Shield · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="testi-card reveal" style="transition-delay:.1s">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"Mrinmoy has been an indispensable asset to my business, expertly managing our Meta and Google Ads campaigns while seamlessly handling all backend operations on GoHighLevel. His strategic approach and technical expertise have significantly enhanced our advertising performance, making a tangible impact on our growth and success."</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/Mustard_Growth.webp" alt="Aaron DeBenedetto"></div>
-          <div>
-            <div class="testi-name">Aaron DeBenedetto</div>
-            <div class="testi-biz">Mustard Growth Marketing</div>
+      <!-- Column 2 (3 cards × 2) -->
+      <div class="testi-col">
+        <div class="testi-col-track" style="--col-dur:28s">
+          <!-- original -->
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy truly impressed me with his intuitive understanding of how to build a successful paid campaign. He took the time to analyze our broader strategic objectives before jumping in, always offering his professional insights where he thought something could be improved. He then nurtured the new campaign hour by hour in its first week to ensure the highest ROI."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/karimah.webp" alt="Karimah Whitaker"></div>
+              <div><div class="testi-name">Karimah Whitaker</div><div class="testi-biz">Gelcom · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
           </div>
-          <span class="platform-badge">Upwork</span>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy is not only extremely talented and professional but he has exceeded both expectations and duties for every job he's worked on for us. Mrinmoy truly goes the extra mile to ensure success. I will be using Mrinmoy for many new projects in the near future. I highly recommend Mrinmoy as a very competent and professional resource for your project."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Orlando_Las_Vegas.webp" alt="Jeffrey Nahom"></div>
+              <div><div class="testi-name">Jeffrey Nahom</div><div class="testi-biz">Orlando Las Vegas · Tourism</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy did an exceptional job helping us create several Google Ads, Google Tag Manager, and Google Analytics accounts from scratch. His expertise was evident from the beginning, and he guided us through the setup process with ease."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Life_in_Motion.webp" alt="Heather Frigaard"></div>
+              <div><div class="testi-name">Heather Frigaard</div><div class="testi-biz">Life in Motion</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <!-- duplicate -->
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy truly impressed me with his intuitive understanding of how to build a successful paid campaign. He took the time to analyze our broader strategic objectives before jumping in, always offering his professional insights where he thought something could be improved. He then nurtured the new campaign hour by hour in its first week to ensure the highest ROI."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/karimah.webp" alt="Karimah Whitaker"></div>
+              <div><div class="testi-name">Karimah Whitaker</div><div class="testi-biz">Gelcom · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy is not only extremely talented and professional but he has exceeded both expectations and duties for every job he's worked on for us. Mrinmoy truly goes the extra mile to ensure success. I will be using Mrinmoy for many new projects in the near future. I highly recommend Mrinmoy as a very competent and professional resource for your project."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Orlando_Las_Vegas.webp" alt="Jeffrey Nahom"></div>
+              <div><div class="testi-name">Jeffrey Nahom</div><div class="testi-biz">Orlando Las Vegas · Tourism</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy did an exceptional job helping us create several Google Ads, Google Tag Manager, and Google Analytics accounts from scratch. His expertise was evident from the beginning, and he guided us through the setup process with ease."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Life_in_Motion.webp" alt="Heather Frigaard"></div>
+              <div><div class="testi-name">Heather Frigaard</div><div class="testi-biz">Life in Motion</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="testi-card reveal" style="transition-delay:.2s">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"This guy is the best! I highly recommend him for anything related to GHL, Google Ads and Facebook Ads. I've never hired someone for work like this before but I was beyond impressed with his cooperation and knowledge! I look forward to many projects with him."</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/Ultimate_Shield.webp" alt="Cobin Heiland"></div>
-          <div>
-            <div class="testi-name">Cobin Heiland</div>
-            <div class="testi-biz">Ultimate Shield · Marketing Agency</div>
+      <!-- Column 3 (2 cards × 2 + 1 repeat to pad) -->
+      <div class="testi-col">
+        <div class="testi-col-track" style="--col-dur:19s">
+          <!-- original -->
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy is an exceptional talent and a very hard worker. Mrinmoy helped us optimize our GHL account and created a variety of automations for us as well! Great work! Highly recommend!"</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Brand_Clinic.webp" alt="Anthony El Chibani"></div>
+              <div><div class="testi-name">Anthony El Chibani</div><div class="testi-biz">Brand Clinic · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
           </div>
-          <span class="platform-badge">Upwork</span>
-        </div>
-      </div>
-
-      <div class="testi-card reveal">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"Mrinmoy truly impressed me with his intuitive understanding of how to build a successful paid campaign. He took the time to analyze our broader strategic objectives before jumping in, always offering his professional insights where he thought something could be improved. He then nurtured the new campaign hour by hour in its first week to ensure the highest ROI."</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/karimah.webp" alt="Karimah Whitaker"></div>
-          <div>
-            <div class="testi-name">Karimah Whitaker</div>
-            <div class="testi-biz">Gelcom · Marketing Agency</div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Been working with Mrinmoy for a bit now and honestly, he knows his stuff. What really stood out to me was how smooth everything ran on GoHighLevel — from the funnels to the automations. The ad campaigns had amazing ROI. He actually cared about the results and kept things clear the whole way through. If you're using GoHighLevel and need someone who actually gets it, this is your guy."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/BNB_Boost.webp" alt="Sebastian"></div>
+              <div><div class="testi-name">Sebastian</div><div class="testi-biz">BNB Boost</div></div>
+              <span class="platform-badge">GHL</span>
+            </div>
           </div>
-          <span class="platform-badge">Upwork</span>
-        </div>
-      </div>
-
-      <div class="testi-card reveal" style="transition-delay:.1s">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"Mrinmoy is not only extremely talented and professional but he has exceeded both expectations and duties for every job he's worked on for us. Mrinmoy truly goes the extra mile to ensure success. I will be using Mrinmoy for many new projects in the near future. I highly recommend Mrinmoy as a very competent and professional resource for your project."</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/Orlando_Las_Vegas.webp" alt="Jeffrey Nahom"></div>
-          <div>
-            <div class="testi-name">Jeffrey Nahom</div>
-            <div class="testi-biz">Orlando Las Vegas · Tourism</div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy truly impressed me with his intuitive understanding of how to build a successful paid campaign. He took the time to analyze our broader strategic objectives before jumping in, always offering his professional insights where he thought something could be improved."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Proxel_Solutions.webp" alt="Proxel Solutions"></div>
+              <div><div class="testi-name">Proxel Solutions</div><div class="testi-biz">Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
           </div>
-          <span class="platform-badge">Upwork</span>
-        </div>
-      </div>
-
-      <div class="testi-card reveal" style="transition-delay:.2s">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"Mrinmoy did an exceptional job helping us create several Google Ads, Google Tag Manager, and Google Analytics accounts from scratch. His expertise was evident from the beginning, and he guided us through the setup process with ease."</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/Life_in_Motion.webp" alt="Heather Frigaard"></div>
-          <div>
-            <div class="testi-name">Heather Frigaard</div>
-            <div class="testi-biz">Life in Motion</div>
+          <!-- duplicate -->
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy is an exceptional talent and a very hard worker. Mrinmoy helped us optimize our GHL account and created a variety of automations for us as well! Great work! Highly recommend!"</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Brand_Clinic.webp" alt="Anthony El Chibani"></div>
+              <div><div class="testi-name">Anthony El Chibani</div><div class="testi-biz">Brand Clinic · Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
           </div>
-          <span class="platform-badge">Upwork</span>
-        </div>
-      </div>
-
-      <div class="testi-card reveal">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"Mrinmoy is an exceptional talent and a very hard worker. Mrinmoy helped us optimize our GHL account and created a variety of automations for us as well! Great work! Highly recommend!"</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/Brand_Clinic.webp" alt="Anthony El Chibani"></div>
-          <div>
-            <div class="testi-name">Anthony El Chibani</div>
-            <div class="testi-biz">Brand Clinic · Marketing Agency</div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Been working with Mrinmoy for a bit now and honestly, he knows his stuff. What really stood out to me was how smooth everything ran on GoHighLevel — from the funnels to the automations. The ad campaigns had amazing ROI. He actually cared about the results and kept things clear the whole way through. If you're using GoHighLevel and need someone who actually gets it, this is your guy."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/BNB_Boost.webp" alt="Sebastian"></div>
+              <div><div class="testi-name">Sebastian</div><div class="testi-biz">BNB Boost</div></div>
+              <span class="platform-badge">GHL</span>
+            </div>
           </div>
-          <span class="platform-badge">Upwork</span>
-        </div>
-      </div>
-
-      <div class="testi-card reveal" style="transition-delay:.1s">
-        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <p class="testi-quote">"Been working with Mrinmoy for a bit now and honestly, he knows his stuff. What really stood out to me was how smooth everything ran on GoHighLevel — from the funnels to the automations. The ad campaigns had amazing ROI. He actually cared about the results and kept things clear the whole way through. If you're using GoHighLevel and need someone who actually gets it, this is your guy."</p>
-        <div class="testi-author">
-          <div class="testi-avatar"><img src="images/testimonials/BNB_Boost.webp" alt="Sebastian"></div>
-          <div>
-            <div class="testi-name">Sebastian</div>
-            <div class="testi-biz">BNB Boost</div>
+          <div class="testi-card">
+            <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            <p class="testi-quote">"Mrinmoy truly impressed me with his intuitive understanding of how to build a successful paid campaign. He took the time to analyze our broader strategic objectives before jumping in, always offering his professional insights where he thought something could be improved."</p>
+            <div class="testi-author">
+              <div class="testi-avatar"><img src="images/testimonials/Proxel_Solutions.webp" alt="Proxel Solutions"></div>
+              <div><div class="testi-name">Proxel Solutions</div><div class="testi-biz">Marketing Agency</div></div>
+              <span class="platform-badge">Upwork</span>
+            </div>
           </div>
-          <span class="platform-badge">GHL</span>
         </div>
       </div>
 
