@@ -175,9 +175,9 @@ ul { list-style: none; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: linear-gradient(rgba(108,78,242,.1), rgba(108,78,242,.1)) padding-box,
-    conic-gradient(from var(--shine-angle), rgba(108,78,242,.2) 0%, rgba(108,78,242,.2) 40%, #6c4ef2 55%, #b6ef45 65%, #8b6ff7 75%, rgba(108,78,242,.2) 85%) border-box;
+    conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--purple) 72%, var(--lime) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
   border: 1.5px solid transparent;
-  animation: shine-border-spin 4s linear infinite;
+  animation: shine-border-spin 6s linear infinite;
   color: var(--purple-lt); font-size: 13px; font-weight: 600;
   padding: 6px 14px; border-radius: 100px; margin-bottom: 28px;
 }
@@ -222,22 +222,26 @@ ul { list-style: none; }
   margin-top: 60px; text-align: left;
 }
 .hero-service-card {
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--border);
   background: var(--card);
-  border-radius: 14px; padding: 24px;
-  transition: transform .25s, box-shadow .25s;
+  border-radius: 12px; padding: 24px 24px 22px;
+  transition: border-color .25s, transform .2s;
+  position: relative;
 }
-.hero-service-card:hover {
-  transform: translateY(-3px); box-shadow: 0 8px 32px rgba(108,78,242,.2);
-  border-color: transparent;
-  background: linear-gradient(var(--card), var(--card)) padding-box,
-    conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--purple) 72%, var(--lime) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
-  animation: shine-border-spin 6s linear infinite;
+.hero-service-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  border-radius: 12px 12px 0 0;
+  background: linear-gradient(90deg, var(--purple), var(--lime));
+  opacity: 0; transition: opacity .25s;
 }
+.hero-service-card:hover { transform: translateY(-2px); border-color: rgba(108,78,242,.35); }
+.hero-service-card:hover::after { opacity: 1; }
 .hs-icon {
-  width: 44px; height: 44px; border-radius: 11px;
+  width: 36px; height: 36px;
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 14px; font-size: 20px;
+  margin-bottom: 14px;
 }
 .hs-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
 .hs-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
@@ -318,15 +322,15 @@ ul { list-style: none; }
 }
 .result-card {
   border-radius: var(--radius); overflow: hidden;
-  border: 1.5px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--card);
   cursor: pointer; transition: transform .2s, box-shadow .2s;
 }
 .result-card:hover {
-  transform: translateY(-4px); box-shadow: 0 8px 32px rgba(108,78,242,.25);
+  transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.4);
   border-color: transparent;
   background: linear-gradient(var(--card), var(--card)) padding-box,
-    conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--purple) 72%, var(--lime) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
+    conic-gradient(from var(--shine-angle), #1e2440 0%, #1e2440 50%, #6c4ef2 63%, #b6ef45 75%, #8b6ff7 87%, #1e2440 94%) border-box;
   animation: shine-border-spin 6s linear infinite;
 }
 .result-card img { width: 100%; height: 220px; object-fit: cover; }
@@ -344,17 +348,15 @@ ul { list-style: none; }
 .lp-gallery::-webkit-scrollbar { height: 4px; }
 .lp-gallery::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 .lp-card {
-  flex: 0 0 260px; border-radius: var(--radius); overflow: hidden;
-  border: 1.5px solid var(--border);
+  flex: 0 0 260px; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border);
   background: var(--card);
-  cursor: pointer; transition: transform .2s, box-shadow .2s;
+  cursor: pointer; transition: transform .2s, box-shadow .2s, border-color .2s;
 }
 .lp-card:hover {
-  transform: translateY(-4px); box-shadow: 0 8px 32px rgba(182,239,69,.15);
-  border-color: transparent;
-  background: linear-gradient(var(--card), var(--card)) padding-box,
-    conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--lime) 72%, var(--purple) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
-  animation: shine-border-spin 6s linear infinite;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 36px rgba(0,0,0,.4);
+  border-color: rgba(182,239,69,.4);
 }
 .lp-card img { width: 100%; height: 340px; object-fit: cover; object-position: top; }
 .lp-card-label {
@@ -399,18 +401,16 @@ ul { list-style: none; }
   margin-top: 48px;
 }
 .video-card {
-  border-radius: 16px; overflow: hidden;
-  border: 1.5px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--border);
   background: var(--card);
-  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s, border-color .3s;
   cursor: pointer;
 }
 .video-card:hover {
-  transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.5), 0 0 32px rgba(108,78,242,.2);
-  border-color: transparent;
-  background: linear-gradient(var(--card), var(--card)) padding-box,
-    conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--purple) 72%, var(--lime) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
-  animation: shine-border-spin 6s linear infinite;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.45);
+  border-color: rgba(108,78,242,.5);
 }
 
 /* Thumbnail area */
@@ -521,17 +521,15 @@ ul { list-style: none; }
 @media (min-width: 1024px) { .testi-col:nth-child(3) { display: block; } }
 
 .testi-card {
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   background: var(--card);
-  border-radius: var(--radius); padding: 24px;
-  transition: box-shadow .2s;
+  border-radius: 8px; padding: 22px;
+  transition: border-left-color .25s, box-shadow .25s;
 }
 .testi-card:hover {
-  box-shadow: 0 8px 32px rgba(108,78,242,.2);
-  border-color: transparent;
-  background: linear-gradient(var(--card), var(--card)) padding-box,
-    conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--purple) 72%, var(--lime) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
-  animation: shine-border-spin 6s linear infinite;
+  border-left-color: var(--purple);
+  box-shadow: 0 4px 24px rgba(0,0,0,.35);
 }
 .testi-stars { display: flex; gap: 3px; margin-bottom: 14px; }
 .testi-stars span { color: var(--lime); font-size: 15px; }
@@ -660,7 +658,7 @@ ul { list-style: none; }
 }
 .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .cta-note {
-  margin-top: 36px; font-size: 13px; color: var(--muted);
+  margin-top: 52px; font-size: 13px; color: var(--muted);
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 .cta-note::before { content: '✓'; color: var(--lime); font-weight: 700; }
@@ -790,28 +788,18 @@ footer {
 }
 .team-card {
   position: relative;
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   background: var(--card);
-  border-radius: 20px; overflow: hidden;
+  border-radius: 12px; overflow: hidden;
   text-align: center;
-  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s;
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s, border-color .3s;
   cursor: default;
 }
-.team-card::before {
-  content: '';
-  position: absolute; inset: 0; border-radius: 20px;
-  background: linear-gradient(135deg, rgba(108,78,242,.08) 0%, rgba(182,239,69,.04) 100%);
-  opacity: 0; transition: opacity .35s;
-  pointer-events: none; z-index: 1;
-}
 .team-card:hover {
-  transform: translateY(-8px); box-shadow: 0 0 40px rgba(108,78,242,.3), 0 20px 60px rgba(0,0,0,.4);
-  border-color: transparent;
-  background: linear-gradient(var(--card), var(--card)) padding-box,
-    conic-gradient(from var(--shine-angle), var(--border) 0%, var(--border) 60%, var(--purple) 72%, var(--lime) 82%, var(--purple-lt) 92%, var(--border) 97%) border-box;
-  animation: shine-border-spin 6s linear infinite;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+  border-color: rgba(108,78,242,.4);
 }
-.team-card:hover::before { opacity: 1; }
 
 /* Photo wrapper with glow */
 .team-photo-wrap {
@@ -988,7 +976,7 @@ footer {
       </div>
       <div class="hero-services">
         <div class="hero-service-card">
-          <div class="hs-icon" style="background:rgba(24,119,242,.15)">
+          <div class="hs-icon">
             <!-- Meta / Facebook f logo -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
               <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
@@ -998,7 +986,7 @@ footer {
           <div class="hs-desc">Scroll-stopping creatives and hyper-targeted campaigns that book appointments, not just clicks.</div>
         </div>
         <div class="hero-service-card">
-          <div class="hs-icon" style="background:rgba(66,133,244,.15)">
+          <div class="hs-icon">
             <!-- Google G logo -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -1011,7 +999,7 @@ footer {
           <div class="hs-desc">Search, Display, and Remarketing campaigns built to capture high-intent buyers at the right moment.</div>
         </div>
         <div class="hero-service-card">
-          <div class="hs-icon" style="background:rgba(108,78,242,.15)">
+          <div class="hs-icon">
             <!-- Automation / workflow icon -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple-lt)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
