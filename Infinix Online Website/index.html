@@ -583,39 +583,44 @@ ul { list-style: none; }
 }
 .about-visual { position: relative; }
 .about-photo-wrap {
-  border-radius: 20px; overflow: hidden;
+  border-radius: 16px; overflow: hidden;
   border: 1px solid var(--border);
   background: var(--card);
-  box-shadow: 0 40px 80px rgba(0,0,0,.4), 0 0 0 1px rgba(108,78,242,.1);
 }
 .about-photo-wrap img { width: 100%; display: block; }
 .about-stats-row {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-  margin-top: 20px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  overflow: hidden;
 }
 .about-stat {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px;
+  padding: 16px 10px;
   text-align: center;
+  border-right: 1px solid var(--border);
 }
-.about-stat-val { font-size: 28px; font-weight: 800; color: var(--text); }
+.about-stat:last-child { border-right: none; }
+.about-stat-val { font-size: 22px; font-weight: 800; color: var(--text); line-height: 1; }
 .about-stat-val em { font-style: normal; color: var(--lime); }
-.about-stat-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.about-stat-lbl { font-size: 10px; color: var(--muted); margin-top: 5px; letter-spacing: .2px; line-height: 1.3; }
 .about-content h2 { margin-bottom: 20px; }
 .about-content p {
   font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 16px;
 }
 .about-content p strong { color: var(--text); }
-.about-highlights { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
-.about-highlight {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 15px; color: var(--text);
+.about-highlights {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px 24px; margin: 28px 0;
 }
-.hl-icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: rgba(108,78,242,.15); border: 1px solid rgba(108,78,242,.3);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+.about-highlight {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 14px; color: var(--muted); line-height: 1.45;
+}
+.about-highlight::before {
+  content: '—'; color: var(--lime); font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -1738,30 +1743,10 @@ footer {
         <p>Over the past 5+ years I've built and managed campaigns across <strong>Facebook Ads, Google Ads, and GHL</strong> for clients in home services, healthcare, coaching, and more. I assembled a specialist team so every client gets dedicated expertise — not a generalist wearing five hats.</p>
         <p>We don't do retainers with zero accountability. Every campaign is tracked, every result is reported, and every dollar is optimized.</p>
         <div class="about-highlights">
-          <div class="about-highlight">
-            <div class="hl-icon">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            Top-Rated Freelancer on Upwork
-          </div>
-          <div class="about-highlight">
-            <div class="hl-icon">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            Google Ads Certified
-          </div>
-          <div class="about-highlight">
-            <div class="hl-icon">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            GoHighLevel Certified Partner
-          </div>
-          <div class="about-highlight">
-            <div class="hl-icon">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="#8b6ff7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            15+ Industries Served
-          </div>
+          <div class="about-highlight">Top-Rated Freelancer on Upwork</div>
+          <div class="about-highlight">Google Ads Certified</div>
+          <div class="about-highlight">GoHighLevel Certified Partner</div>
+          <div class="about-highlight">15+ Industries Served</div>
         </div>
         <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="btn btn-lime">Let's Talk Strategy</a>
       </div>
