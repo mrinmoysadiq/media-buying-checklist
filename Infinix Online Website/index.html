@@ -474,15 +474,15 @@ ul { list-style: none; }
 }
 .video-play-btn svg { margin-left: 4px; }
 
-.video-card-body { padding: 16px; display: flex; align-items: center; gap: 10px; }
-.video-card-info { flex: 1; }
-.video-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
-.video-card-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.video-card-body { padding: 14px 16px 16px; }
+.video-card-info { display: flex; flex-direction: column; }
+.video-card-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.video-card-role { font-size: 12px; color: var(--muted); line-height: 1.45; margin-bottom: 10px; }
 .verified-badge {
-  display: inline-flex; align-items: center; gap: 5px;
+  display: inline-flex; align-items: center; gap: 5px; align-self: flex-start;
   background: rgba(182,239,69,.1); border: 1px solid rgba(182,239,69,.25);
   color: var(--lime); font-size: 11px; font-weight: 700;
-  padding: 3px 9px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+  padding: 3px 9px; border-radius: 100px; white-space: nowrap;
 }
 .verified-badge svg { flex-shrink: 0; }
 
@@ -1421,8 +1421,8 @@ footer {
           <div class="video-card-info">
             <div class="video-card-name">Mike</div>
             <div class="video-card-role">Co-Founder, SkyeAI · AI &amp; Marketing Agency</div>
+            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
           </div>
-          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
 
@@ -1439,8 +1439,8 @@ footer {
           <div class="video-card-info">
             <div class="video-card-name">Greg Viner</div>
             <div class="video-card-role">Founder, Local Online Expert · Marketing Agency</div>
+            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
           </div>
-          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
 
@@ -1457,8 +1457,8 @@ footer {
           <div class="video-card-info">
             <div class="video-card-name">Aaron</div>
             <div class="video-card-role">Founder, Mustard Growth</div>
+            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
           </div>
-          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
 
@@ -1475,8 +1475,8 @@ footer {
           <div class="video-card-info">
             <div class="video-card-name">Marcus</div>
             <div class="video-card-role">Verified Client</div>
+            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
           </div>
-          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
 
@@ -1493,8 +1493,8 @@ footer {
           <div class="video-card-info">
             <div class="video-card-name">Austin Miller</div>
             <div class="video-card-role">Verified Client</div>
+            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
           </div>
-          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
 
@@ -1511,8 +1511,8 @@ footer {
           <div class="video-card-info">
             <div class="video-card-name">Mike &amp; Mrinmoy</div>
             <div class="video-card-role">Co-Founder, SkyeAI · Full Interview</div>
+            <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
           </div>
-          <span class="verified-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified</span>
         </div>
       </div>
 
