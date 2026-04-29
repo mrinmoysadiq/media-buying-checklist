@@ -149,17 +149,33 @@ ul { list-style: none; }
 .nav-toggle span {
   display: block; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s;
 }
+.mobile-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.55); z-index: 998;
+}
+.mobile-overlay.open { display: block; }
 .mobile-menu {
   display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
   background: var(--surface); border-bottom: 1px solid var(--border);
-  padding: 24px; z-index: 999; flex-direction: column; gap: 20px;
+  padding: 24px; z-index: 999; flex-direction: column; gap: 4px;
 }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
-  font-size: 16px; font-weight: 500; color: var(--muted); padding: 8px 0;
-  border-bottom: 1px solid var(--border);
+  font-size: 16px; font-weight: 500; color: var(--muted); padding: 12px 0;
+  border-bottom: 1px solid var(--border); text-decoration: none;
+  transition: color .2s;
 }
+.mobile-menu a:last-of-type { border-bottom: none; }
 .mobile-menu a:hover { color: var(--text); }
+.mob-cta {
+  display: block; margin-top: 16px;
+  padding: 13px 20px; border-radius: 100px;
+  border: 1.5px solid var(--lime) !important;
+  background: transparent; color: var(--lime) !important;
+  font-size: 15px; font-weight: 700; text-align: center;
+  transition: background .2s, color .2s !important;
+}
+.mob-cta:hover { background: var(--lime); color: #07090f !important; }
 
 /* ═══════════════════════════════════════════════
    HERO
@@ -946,6 +962,7 @@ footer {
   </div>
 </nav>
 
+<div class="mobile-overlay" id="mobileOverlay"></div>
 <div class="mobile-menu" id="mobileMenu">
   <a href="#results">Results</a>
   <a href="#landing-pages">Landing Pages</a>
@@ -953,7 +970,7 @@ footer {
   <a href="#testimonials">Testimonials</a>
   <a href="#about">About</a>
   <a href="#team">Team</a>
-  <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="btn btn-lime" style="width:fit-content">Book a Call</a>
+  <a href="https://calendly.com/mrinmoy-sadiq/30min" target="_blank" rel="noopener" class="mob-cta">Book a Call</a>
 </div>
 
 <!-- ═══════════ HERO ═══════════ -->
@@ -2011,12 +2028,22 @@ footer {
 /* ─── NAV TOGGLE ─── */
 const navToggle = document.getElementById('navToggle');
 const mobileMenu = document.getElementById('mobileMenu');
-navToggle.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
+const mobileOverlay = document.getElementById('mobileOverlay');
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  mobileOverlay.classList.remove('open');
+}
+navToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const opening = !mobileMenu.classList.contains('open');
+  mobileMenu.classList.toggle('open', opening);
+  mobileOverlay.classList.toggle('open', opening);
 });
 mobileMenu.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  a.addEventListener('click', closeMobileMenu);
 });
+mobileOverlay.addEventListener('click', closeMobileMenu);
 
 /* ─── TABS ─── */
 document.querySelectorAll('.tab-btn').forEach(btn => {
